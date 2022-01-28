@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+     <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,7 +10,7 @@
 <style>
 body{
     
-     background-image: url("images/back1.jpg");
+     background-image: url("images/b3.jpg");
         background-size: cover;
     }
     .set{
@@ -31,12 +33,12 @@ body{
 <body>
 
     <div class="set">
-    Your Wallet Amount:<%=session.getAttribute("venueBalance") %><br>
-    Amount deducted:<%=session.getAttribute("advanceAmount") %><br>
-    After deduction Wallet balance:<%=session.getAttribute("venuePayBalance") %>
-    <% String una=(String) session.getAttribute("booked");%>
-          <h2><%=una%></h2>
-          <% session.removeAttribute("booked"); %>
+     Your Wallet Amount:${venueBalance}<br>
+    Amount deducted:${advanceAmount}<br>
+    After deduction Wallet balance:${venuePayBalance}
+    <h2>${booked}</h2>
+    
+   
           <button class="button"> <a href=index.jsp> Back</a></button>
         </div>  
 

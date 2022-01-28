@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -84,15 +86,14 @@ h1{
            <label>Password</label>
            <input type="password" name="password" placeholder="" required><br>
           <button class="button">Submit</button><br>
-            <% String log=(String) session.getAttribute("login");
-        if(log!=null) 
-        {%>
-        <h3><%=log %></h3>
-        <% } %>
-       <% session.removeAttribute("login"); %>
+          
         </form>
     </div>
     </div>
         <p class="para">Not have an account?<a href="register.jsp">Sign up here</a></p>
+         <c:if test="${sessionScope.login !=null}">
+         <h3>${sessionScope.login}</h3>
+         </c:if>
+         <c:remove var="login" scope="session"/>
        
 </html>

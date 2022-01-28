@@ -1,13 +1,8 @@
-<%@page import="com.weddingplanner.daoimpl.UserDaoimpl"%>
-<%@page import="java.util.List"%>
-<%@page import="com.weddingplanner.module.Ratings"%>
-<%@page import="com.weddingplanner.daoimpl.RatingsDaoimpl"%>
-
-<%@page import="com.weddingplanner.module.Services"%>
-<%@page import="com.weddingplanner.daoimpl.ServicesDaoimpl"%>
 
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+	    <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+	
 <!DOCTYPE html>
 <html>
 <head>
@@ -67,7 +62,7 @@ button a {
     margin:auto;
   
     border-radius:6px ;
-    background-color: rgba(95, 166, 211, 0.5);
+    background-color: rgba(148, 170, 196, 0.5);
     
 
 }
@@ -94,54 +89,35 @@ button a {
 
 	</nav>
 
-	<%!ServicesDaoimpl serviceDaoImpl = new ServicesDaoimpl();
-	UserDaoimpl user = new UserDaoimpl();%>
-	<%
-	String serviceName = request.getParameter("serviceName");
-	session.setAttribute("serviceName", serviceName);
-
-	Services service = serviceDaoImpl.allService(serviceName);
-	int serviceId = serviceDaoImpl.findServiceId(serviceName);
-	double servicePackage = serviceDaoImpl.findPackage(serviceId);
-	int advanceServiceAmount = (int) (servicePackage * 1 / 2);
-	session.setAttribute("serviceId", serviceId);
-	session.setAttribute("servicePackage", servicePackage);
-	session.setAttribute("advanceServiceAmount", advanceServiceAmount);
-	%>
-
+	
 	<table>
 		<tbody>
 			<tr>
-				<td><img src="images/<%=service.getServiceImages()%>"
+			 <c:out  value="${chooseService}" />
+				<td><img src="images/${chooseService.serviceImages}"
 					alt="hall"></td>
 
-				<td><h1>
-						<%=service.getServiceName()%></h1> <br> <span> <i
-						class="fas fa-rupee-sign"></i><%=service.getServicePackage()%></span><br>
+				<td><h1>${chooseService.serviceName}</h1> <br> <span> 
+						<i class="fas fa-rupee-sign"></i>${chooseService.servicePackage}</span><br>
 				<br>
-				<br> <span class="desc"><%=service.getServiceDescription()%></span><br>
+				<br> <span class="desc">${chooseService.serviceDescription}</span><br>
 				<br>
 				<br> <span> For booking click here:
-						<button class="button">
+						<button class="button1">
 							<a href="bookservice.jsp">book</a>
 						</button>
-				</span> <%
- session.setAttribute("serviceName", service.getServiceName());
- %> </span> <br>
+				</span> 
+  </span> <br>
 				<br> <span>give ratings:
 						<button class="button1">
 							<a href="ratings.jsp">Rating</a>
 						</button>
 						<br>
 					<br>
-				</span> <%
- RatingsDaoimpl ratings = new RatingsDaoimpl();
- Ratings rating = new Ratings();
- List<Ratings> review = ratings.showReview(serviceName);
- rating.getServiceName();
- double rate = ratings.fetchRating(serviceName);
- ratings.showReview(rating.getServiceName());
- %> <span class="stars-outer"><%=rate%></span></td>
+				</span> 
+ 
+
+ <span class="stars-outer">${rate}</span></td>
 			
 
 			</tr>
@@ -154,29 +130,28 @@ button a {
 	    <tr>
 				<td><span>Ratings and Review of our customer</span></td>
 			</tr>
-			<%
-			for (Ratings giverating : review) {
-			%>
+			 <c:forEach items="${review}" var="showReview">
+			
            
 			<tr>
                <td>
                 <div class="customer">
                 <div class="name">
-					<%
-					String name = user.findUserName(giverating.getUserId());
-					%> <%=name%>&nbsp;&nbsp;&nbsp;
+                <jsp:useBean id="userName" class="com.weddingplanner.daoimpl.UserDaoimpl"/>
+           ${userName.findUserName(showReview.userId) }
+
+                
+					&nbsp;&nbsp;&nbsp;
 					
 					<div class="stars-outer">
-						<%=giverating.getRating()%>
+						${showReview.rating}
 					</div>
 					</div><br>
-					 <%=giverating.getReview()%></div></td>
+					 ${showReview.review}</div></td>
 				
 			</tr>
+			</c:forEach>
 			
-			<%
-			}
-			%>
 	</tbody>
 	
 	</table>

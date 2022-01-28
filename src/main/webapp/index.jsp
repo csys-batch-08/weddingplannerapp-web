@@ -24,14 +24,14 @@
 <body>
     <nav>
      <a href="login.jsp">Logout</a>
-        <a href="viewVenues.jsp">Venues</a>
-        <a href="viewService.jsp">Services</a>
+        <a href="viewVenuesServlet">Venues</a>
+        <a href="ViewServiceServlet">Services</a>
         <a href="rechargewallet.jsp">Wallet</a>
-        <a href="">About us</a>
+        <a href="AboutUs.jsp">About us</a>
         <a href="">Contact us</a>
-        <a href="userProfile.jsp">My Profile</a>
+        <a href="UserProfileServlet">My Profile</a>
        
-        <a href="MyBooking.jsp">My booking</a>
+        <a href="MyBookingServlet">My booking</a>
         
     </nav>
 </body>

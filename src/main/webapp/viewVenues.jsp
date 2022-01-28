@@ -3,7 +3,8 @@
 <%@page import="com.weddingplanner.daoimpl.VenuesDaoimpl"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-    
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+   
    
 <!DOCTYPE html>
 <html>
@@ -44,42 +45,35 @@
         </ul>
         <form action="filterCity" method="post">
         <input type="text" name="search" class="search" >  
-        <a  href="FilterCity.jsp"><button class="button">search</button></a>
+       <button class="button">search</button>
         </form>
         
 	</nav>
 	
 
 
-<%!VenuesDaoimpl venueDaoImpl = new VenuesDaoimpl();
-List<Venues> showVenue;%>
-<%showVenue=venueDaoImpl.showVenue();        
-%>
-<%int count=0;
-for(Venues venue: showVenue){
-   //System.out.println(venue.getVenueImages());
- %>  
-  
-  
+
+
+ <c:forEach items="${showVenue}" var="venue">
 
 <div class="venue">
       <div class="for-inline">
         <div class="image-container">
-             <a href="venue1.jsp?venueName=<%=venue.getVenueName()%>">
-              <img src="images/<%=venue.getVenueImages()%>" alt="hall" name="image"></a>
+             <a href="ChooseVenueServlet?venueName=${venue.venueName}">
+              <img src="images/${venue.venueImages }" alt="hall" name="image"></a>
             <div class="title">
-                <h2> <%=venue.getVenueName() %></h2>
+              <h2>  ${venue.venueName}</h2>
                 
            </div>
            <div class="pre">
-             <pre><i class="fas fa-map-marker-alt"></i> <%=venue.getVenueCity() %>          <i class="fas fa-hotel"></i> <%=venue.getVenueType() %></pre>
+             <pre><i class="fas fa-map-marker-alt"></i> ${venue.venueCity}         <i class="fas fa-hotel"></i> ${venue.venueType} </pre>
              </div>   
            </div>
        </div>
       </div>
 
-
-       <%} %>
+</c:forEach> 
+      
 
 <script>
 </script>

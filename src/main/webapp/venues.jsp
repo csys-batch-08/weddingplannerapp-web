@@ -49,7 +49,19 @@ form input{
     border-radius: 6px;
     outline:none;
 }
-
+.button{
+ padding:7px 50px;
+ border-radius:4px;
+ background-color:violet;
+ border:1px solid violet;
+ cursor:pointer;
+ display:inline-flex;
+ 
+}
+button a{
+    text-decoration:none;
+    color:black;
+}
                                          
        
 </style>
@@ -75,8 +87,10 @@ form input{
 <label>availability:</label>
 <input type="text" name="availability" pattern="[a-zA-Z]{3,}" required><br>
 <label>venue Image:</label>
-<input type="file" name="image" required><br>
-<input type="submit" value=submit>
+<input type="file" name="image" required><br><br>
+<button class="button"><a href="viewVenueAdmin.jsp">Back</a></button>
+		<button type="submit" class="button">Add</button>
+
 </form>
 </body>
 </html>

@@ -25,6 +25,13 @@
 	<servlet>
 		<description>
 		</description>
+		<display-name>addToService</display-name>
+		<servlet-name>addToService</servlet-name>
+		<servlet-class>com.weddingplanner.controller.addToService</servlet-class>
+	</servlet>
+	<servlet>
+		<description>
+		</description>
 		<display-name>MyBookServlet</display-name>
 		<servlet-name>MyBookServlet</servlet-name>
 		<servlet-class>com.weddingplanner.controller.MyBookServlet</servlet-class>

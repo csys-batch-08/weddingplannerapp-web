@@ -51,6 +51,7 @@ public class BookVenueServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
+	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		HttpSession session = request.getSession();
@@ -59,6 +60,7 @@ public class BookVenueServlet extends HttpServlet {
 		System.out.println(userId);
 		int venueId = (int) session.getAttribute("venueId");
 		String venuename = request.getParameter("venuename");
+		request.setAttribute("venuename", venuename);
 		int noOfGuest = Integer.parseInt(request.getParameter("noOfGuest"));
 		// String functionTiming = request.getParameter("functionTiming");
 		Double venuePackage = Double.parseDouble(request.getParameter("venuepackage"));

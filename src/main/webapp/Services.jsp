@@ -1,5 +1,4 @@
-<%@page import="java.sql.ResultSet"%>
-<%@page import="com.weddingplanner.daoimpl.ServicesDaoimpl"%>
+
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
    
@@ -48,6 +47,20 @@ form input{
     border-radius: 6px;
     outline:none;
 }
+.button{
+ padding:7px 50px;
+ border-radius:4px;
+ background-color:violet;
+ border:1px solid violet;
+ cursor:pointer;
+ display:inline-flex;
+ 
+}
+button a{
+    text-decoration:none;
+    color:black;
+}
+            
 
                                          
        
@@ -67,7 +80,8 @@ form input{
 <input type="text" name="description" pattern="[a-zA-Z]{3,}" required>
 <label>service Type image:</label>
 <input type="file" name="serviceTypeImage"><br><br>
-<input type="submit" value="submit">
+<button class="button"><a href="viewServicesAdmin.jsp">Back</a></button>
+<button type="submit" class="button">Add</button>
 </form>
 </body>
 </html>

@@ -144,6 +144,8 @@ public class VenuesDaoimpl implements VenuesDao {
 		ResultSet rs=stmt.executeQuery(validateQuery);
 		System.out.println("resultset");
 		while(rs.next()) {
+			VenuesDaoimpl venuedaoimpl=new VenuesDaoimpl();
+			int venueId=venuedaoimpl.findVenueId(rs.getString(2));
 		 venue=new Venues(rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6),rs.getLong(7),rs.getDouble(8),rs.getString(9),rs.getString(10));
 			System.out.println(venue);
 			

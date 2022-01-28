@@ -1,6 +1,6 @@
-<%@page import="com.weddingplanner.module.Venues"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,12 +10,12 @@
 <style>
  body
     {
-        background-image: url("images/back1.jpg");
+        background-image: url("images/b3.jpg");
         background-size: cover;
     }
  .login-box{
    width:390px;
-    height:500px;
+    height:550px;
     margin:auto;
     margin-top:30px;
     background-color:rgba(195, 160, 202, 0.589);
@@ -47,6 +47,19 @@ form input{
     border-radius: 6px;
     outline:none;
 }
+.button{
+ padding:7px 50px;
+ border-radius:4px;
+ background-color:rgba(131, 72, 143, 0.5);
+ border:1px solid violet;
+ cursor:pointer;
+ display:inline-flex;
+ 
+}
+button a{
+    text-decoration:none;
+    color:black;
+}
 
  
 </style>
@@ -54,20 +67,23 @@ form input{
 <body>
 
 
-    <%!Venues venue=new Venues(); %>
+   
 <form action="book" method="post"  class="login-box" >
          <h1>Book Venue</h1>
           <label>venue Name:</label>
-            <input type="text" id="name" class="text" name="venuename" value="<%=session.getAttribute("venueName")%>"  placeholder="" required>
+            <input type="text" id="name" class="text" name="venuename" value="${venuename}"  placeholder="" required>
             <label>No.of.guest:</label>
             <input type="text" id="number" class="text" name="noOfGuest" placeholder="" pattern="[0-9]+"  required>
             <label>venue Package:</label>
-            <input type="text" id="venuePackage" class="text" name="venuepackage" value="<%=session.getAttribute("venuepackage")%>"  placeholder="" required>
+            <input type="text" id="venuePackage" class="text" name="venuepackage" value="${venuepackage}"  placeholder="" required>
             <label>Advance Amount:</label>
-            <input type="text" id="advancePackage" class="text" name="advancepackage" value="<%=session.getAttribute("advanceAmount")%>"  placeholder="" required>
+            <input type="text" id="advancePackage" class="text" name="advancepackage" value="${advanceAmount}"  placeholder="" required>
             <label>Event date</label>
             <input type="date"  name="eventDate" id="datefield" required><br><br>
-            <input type="submit" value="Book">
+           
+            <button class="button"><a href="viewVenues.jsp">Back</a></button>
+             <button type="submit" class="button">Book</button>
+           
    </form>
 
 </body>

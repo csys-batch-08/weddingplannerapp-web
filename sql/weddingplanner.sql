@@ -115,7 +115,6 @@ CONSTRAINT PK_booking_services PRIMARY KEY(service_booking_id),
 CONSTRAINT FK_booking_services_user_details FOREIGN KEY (user_id) REFERENCES user_details(user_id),
 CONSTRAINT FK_booking_services_service_details FOREIGN KEY (service_id) REFERENCES service_details(service_id));
 select * from booking_services;
-
 --truncate table booking_services;
 select booking_date from booking_services where user_id=3032;
 
@@ -133,12 +132,12 @@ rating INT NOT NULL ,
 CONSTRAINT FK_user FOREIGN KEY(user_id) REFERENCES user_details(user_id));
 select * from rating_details;
 --truncate table rating_details;
-alter table rating_details add review varchar2(1000);
+--alter table rating_details add review varchar2(1000);
 --drop table rating_details;
 CREATE SEQUENCE rating_seq_id INCREMENT BY 1 START WITH 1; 
 
-
-drop table rating_details;
+delete from rating_details where rating_id=63;
+--drop table rating_details;
 
 
 select * from venue_details where lower(venue_city) like 'che%';

@@ -8,7 +8,7 @@
 <style>
 body{
     
-     background-image: url("images/back1.jpg");
+     background-image: url("images/b3.jpg");
         background-size: cover;
     }
     .set{
@@ -30,9 +30,8 @@ body{
 </head>
 <body>
 <div class="set">
-<% String validateDate=(String) session.getAttribute("dateCancelled");%>
-          <h2><%=validateDate%></h2>
-          <% session.removeAttribute("dateCancelled"); %>
+       <h2>${dateCancelled }</h2>
+
             <button><a href=MyBooking.jsp>Back</a></button>
 </div>
 

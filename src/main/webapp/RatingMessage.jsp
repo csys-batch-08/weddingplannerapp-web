@@ -8,7 +8,7 @@
 <style>
 body{
     
-     background-image: url("images/back1.jpg");
+     background-image: url("images/b3.jpg");
         background-size: cover;
     }
     .set{
@@ -30,9 +30,8 @@ body{
 </head>
 <body>
 <div class="set">
-<% String message=(String) session.getAttribute("ratingMessage");%>
-          <h2><%=message%></h2>
-          <% session.removeAttribute("ratingMessage"); %>
+           <h2>${ratingMessage}</h2>
+
           <button><a href="viewService.jsp">Back</a></button>
           </div>
 </body>

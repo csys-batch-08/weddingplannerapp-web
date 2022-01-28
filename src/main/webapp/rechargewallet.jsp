@@ -1,4 +1,4 @@
-<%@page import="com.weddingplanner.module.User"%>
+
 
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
@@ -12,7 +12,7 @@
 <style type="text/css">
  body
     {
-        background-image: url("images/back1.jpg");
+        background-image: url("images/b3.jpg");
         background-size: cover;
     }
    form{
@@ -23,7 +23,7 @@
     padding: 10px 30px;
     font-weight:bold;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: rgba(195, 160, 202, 0.589);
+    background-color: rgba(140, 160, 184, 0.5);
     
 }
 .text
@@ -38,7 +38,7 @@
 .button{
         	padding:10.5px 123px;
         	border: 1px solid #f5f58cc5;
-        	background-color:rgba(135, 70, 148, 0.589);
+        	background-color:rgba(80, 93, 109, 0.5);;
         	border-radius:4px;
         	color: black;
         	cursor: pointer; 	
@@ -46,30 +46,61 @@
  button:hover{
  opacity:0.5;
  }
-
-
+ 
+    *{
+	margin:0px;
+	padding:0px;
+	box-sizing: border-box;
+	font-family: 'Poppins', sans-serif;
+}
+nav{
+	width: 100%;
+	height: 50px;
+	background-color:rgba(102, 83, 83, 0.4);
+	line-height: 50px;
+	padding:0px 100px;
+}
+nav ul{
+	float: right;
+}
+nav ul li{
+	display: inline-block;
+	list-style: none;
+}
+nav ul li a{
+	color:#fff;
+	text-decoration: none;
+	font-size: 15px;
+	text-transform: uppercase;
+	padding:0px 32px;
+}
+nav ul li a:hover{
+	color:#c0d96f;
+}
+ 
 
    
  
 </style>
 </head>
 <body>
-<% int user = (int) session.getAttribute("id");%>
+
 <nav>
-     <a href="viewVenues.jsp">Venues</a>
-        <a href="viewService.jsp">Services</a>
-        <a href="">About us</a>
-        <a href="">Contact us</a>
-        <a href="login.jsp">Logout</a>
-       
-        <a href="myBooking.jsp">My booking</a>
-        
-    </nav>
+		<ul>
+           <li><a href="userProfile.jsp" >My profile</a></li>
+      	   <li><a href="">about us</a></li>
+		   <li><a href="">contact us</a></li>
+			<li><a href="viewVenues.jsp">Venues</a></li>
+			<li><a href="viewService.jsp">services</a></li>
+            <li><a href="MyBooking.jsp">my Bookings</a></li>
+        </ul>
+    
+</nav>
 
 <div class="form1">
 <div class="form2">
 <form action="rechargewallet" method="post">
-       <h2>Recharge Your Wallet..</h2><br>
+       <h2>Recharge Your Wallet</h2><br>
 
 
          <label for="emailid">Email address</label><br>

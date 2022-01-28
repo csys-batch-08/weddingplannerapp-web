@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>Wallet message</title>
 </head>
 <body>
 Total amount:<%=session.getAttribute("amount")%>

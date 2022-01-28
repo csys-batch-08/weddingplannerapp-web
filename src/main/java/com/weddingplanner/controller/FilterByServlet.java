@@ -1,6 +1,9 @@
 package com.weddingplanner.controller;
 
 import java.io.IOException;
+import java.util.List;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -10,6 +13,7 @@ import javax.servlet.http.HttpSession;
 
 import com.weddingplanner.daoimpl.ServicesDaoimpl;
 import com.weddingplanner.daoimpl.VenuesDaoimpl;
+import com.weddingplanner.module.Services;
 
 /**
  * Servlet implementation class FilterByServlet
@@ -41,12 +45,13 @@ public class FilterByServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		//doGet(request, response);
 		Double servicePackage=Double.parseDouble(request.getParameter("byPrice"));
-		System.out.println(servicePackage);
-		HttpSession session=request.getSession();
-		ServicesDaoimpl venue=new ServicesDaoimpl();
-		;
-		session.setAttribute("serviceBookPackage", servicePackage);
-		response.sendRedirect("FilterPrice.jsp");
+		 ServicesDaoimpl serviceDaoImpl = new ServicesDaoimpl();
+		    List<Services> serviceList=serviceDaoImpl.filterByPrice(servicePackage);
+
+		  request.setAttribute("servicePrice", serviceList);
+		  RequestDispatcher requestDispatcher=request.getRequestDispatcher("FilterPrice.jsp");
+			requestDispatcher.forward(request, response);
+		
 	}
 
 }

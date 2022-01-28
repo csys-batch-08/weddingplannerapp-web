@@ -72,14 +72,14 @@ public class LoginServlet extends HttpServlet {
 		   }
 		 else if(validUser != null) 
 		 {
-			 //out.println("WELCOME\t" + validAdmin.getUserName() + " as Admin!" );
+			
 			 RequestDispatcher rq=request.getRequestDispatcher("index.jsp");
 			 rq.forward(request, response);
          }
 		 else {
-			 session.setAttribute("login", "! invalid user");
-		RequestDispatcher rq=request.getRequestDispatcher("login.jsp");
-		 rq.forward(request, response);
+			 session.setAttribute("login", "invalid user!!");
+			 response.sendRedirect("login.jsp");
+		
 		 }
 		     
 			 

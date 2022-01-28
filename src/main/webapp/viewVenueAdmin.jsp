@@ -4,6 +4,8 @@
 <%@page import="com.weddingplanner.daoimpl.VenuesDaoimpl"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+        <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,6 +13,7 @@
 <title>All Venues</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+
 <style>
 *{
 	margin:0px;
@@ -25,6 +28,9 @@ body
     }
 table{
         margin-left:200px;
+        background-color:rgba(172, 209, 231, 0.5);
+        border-radius: 13px;
+        padding: 50px;
 
 }
 #allusers table,th,tr,td{
@@ -53,8 +59,7 @@ table{
 	font-weight:bold;
 	line-height: 50px;
 	padding:0px 100px;
-	position:fixed;
-	z-index: 1;
+	
 }
 nav .logo{
 	font-size: 20px;
@@ -87,7 +92,14 @@ nav ul li a:hover{
 nav ul li .active{
 	color:#c0d96f;
 } 
+h1{
+
+margin-left:520px;
+ } 
+ .button{
+      margin-left:350px;   
  
+ }
   
 </style>
 </head>
@@ -102,13 +114,10 @@ nav ul li .active{
          <li><a href="ViewServiceBooking.jsp">view service Booking</a></li>
         </ul>
         </nav>
-  <% VenuesDaoimpl venueDao = new VenuesDaoimpl();
-   List<Venues> venueList = new ArrayList<Venues>();
-   venueList = venueDao.showVenue();
-%> 
+  
 <div class="view"> 
 <table >
-	<h1><b >All Venue List</b></h1>
+	<h1>VenueList</h1>
 	<thead>
 	<tr>
   		<th >S.no</th>
@@ -124,33 +133,24 @@ nav ul li .active{
 	</thead>
 	<br><br>
 	<tbody>
-<%
-int i = 0;
-for (Venues viewVenues: venueList ) {
-i++;
+<c:forEach items="${venueListAdmin}" var="venueAdmin">
 
-%>
 <tr>
-
-
-<td><%=i%></td>
-<td><%=viewVenues.getVenueName()%></td>
-<td><%=viewVenues.getVenueArea()%></td>
-<td> <%=viewVenues.getVenueCity()%></td>
-<td> <%=viewVenues.getVenueVendorName()%></td>
-<td> <%=viewVenues.getContactNumber()%></td>
-<td><%=viewVenues.getVenueType()%></td>
-<td><%=viewVenues.getAvailability()%></td>
-<td><%=viewVenues.getVenuePackage()%></td>
+<td>${venueAdmin.venueName}</td>
+<td>${venueAdmin.venueArea}</td>
+<td>${venueAdmin.venueCity}</td>
+<td>${venueAdmin.venueVendorName}</td>
+<td>${venueAdmin.contactNumber}</td>
+<td>${venueAdmin.venueType}</td>
+<td>${venueAdmin.availability}</td>
+<td>${venueAdmin.venuePackage}</td>
 </tr>
+</c:forEach>
 
-<%
-}
-%>
 </tbody>
           </table><br>
-<button type="button"><a href="venues.jsp" style="text-decoration:none">Add Venue</a></button>
-<button type="button"><a href="updateVenue.jsp" style="text-decoration:none">Update Venue</a></button>
+<button type="button" class="button"><a href="venues.jsp" style="text-decoration:none">Add Venue</a></button>
+<button type="button" class="button"><a href="updateVenue.jsp" style="text-decoration:none">Update Venue</a></button>
 
 </div>
 	

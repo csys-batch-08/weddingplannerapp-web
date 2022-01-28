@@ -1,8 +1,8 @@
-<%@page import="com.weddingplanner.module.Services"%>
-<%@page import="java.util.List"%>
-<%@page import="com.weddingplanner.daoimpl.ServicesDaoimpl"%>
+
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+    <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -58,30 +58,23 @@
        
 	</nav>
 	
-    <%!ServicesDaoimpl serviceDaoImpl = new ServicesDaoimpl();
-    List<Services> serviceList;%>
-	<%
-	String serviceType = request.getParameter("serviceType");
-	session.setAttribute("serviceType", serviceType);%>
-	
-	<% serviceList=serviceDaoImpl.showServiceList(serviceType);%>
+    
 	 
 <table>
 <tbody>
 	<tr>
-	<% int count=0;
-	for(Services service: serviceList){
-	   			
-	   	%>
+	<c:set var="count" value="1"/>
+	<c:forEach items="${serviceShow}" var="servicelist">
+	
 	   	<td>
 	   	<table id="service">
 	   	<tbody>
 	   		<tr>
-	   	 <td><a href="service1.jsp?serviceName=<%=service.getServiceName()%>"><img src="images/<%=service.getServiceImages()%>" alt="hall"></a>
+	   	 <td><a href="ChooseServiceServlet?serviceName=${servicelist.serviceName }"><img src="images/${servicelist.serviceImages}" alt="hall"></a>
 	   	    
 	   	  
-	   	   <span><%=service.getServiceName() %><br></span>
-	   	   <span>package:<%=service.getServicePackage() %></span></td>
+	   	   <span>${servicelist.serviceName}<br></span>
+	   	   <span>package:${servicelist.servicePackage}</span></td>
 	   	   
 	   	   
 	   	  
@@ -92,12 +85,19 @@
 	   	</tbody>
 	   	</table>
 	   	</td>
-	   	<%count++;
-	   	   if(count==3){%>
+	   	<c:choose>
+	   	    <c:when test="${count==3}">
+	   	       <c:set var="count" value="1"/>
+	   	
 	   	</tr>
 	   	<tr>
-	   	<%count=0;
-	   	}}%>
+	   	</c:when>
+	   	<c:otherwise>
+	   	   <c:set var="count" value="${count+1}"/>
+	   	</c:otherwise>
+	   	</c:choose>
+	   	
+	   	</c:forEach>
 	   </tr>
 </tbody>
 </table>

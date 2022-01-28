@@ -1,8 +1,8 @@
-<%@page import="com.weddingplanner.module.Services"%>
-<%@page import="java.util.List"%>
-<%@page import="com.weddingplanner.daoimpl.ServicesDaoimpl"%>
+
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -102,31 +102,22 @@ nav ul li .active{
        
 	
       </nav>
-    <%!ServicesDaoimpl serviceDaoImpl = new ServicesDaoimpl();
-    List<Services> serviceList;%>
-	<%
-	Double servicePackage = (Double)session.getAttribute("serviceBookPackage");
-	System.out.println(servicePackage);
-	session.setAttribute("serviceType", servicePackage);%>
-	
-	<% serviceList=serviceDaoImpl.filterByPrice(servicePackage);%>
-	 
+   
 <table>
 <tbody>
 	<tr>
-	<% int count=0;
-	for(Services service: serviceList){
-	   				System.out.println(service.getServiceTypeImage());
-	   	%>
+	<c:set var="count" value="1"/>
+	<c:forEach items="${servicePrice}" var="servicePriceList">
+	
 	   	<td>
 	   	<table id="service">
 	   	<tbody>
 	   		<tr>
-	   	 <td><a href="service1.jsp?serviceName=<%=service.getServiceName()%>"><img src="images/<%=service.getServiceImages()%>" alt="hall"></a></td>
+	   	 <td><a href="service1.jsp?serviceName=${servicePriceList.serviceName}"><img src="images/${servicePriceList.serviceImages }" alt="hall"></a></td>
 	   	 <td>    
 	   	  <div class="service1">
-	   	   service name:<%=service.getServiceName() %>
-	   	   service package:<%=service.getServicePackage() %>
+	   	   service name:${servicePriceList.serviceName}
+	   	   service package:${servicePriceList.servicePackage}
 	   	   
 	   	   
 	   	  </div>
@@ -137,12 +128,19 @@ nav ul li .active{
 	   	</tbody>
 	   	</table>
 	   	</td>
-	   	<%count++;
-	   	   if(count==3){%>
+	   	<c:choose>
+	   	  <c:when test="${count==4}">
+	   	  <c:set var="count" value="1"/>
+	   	
 	   	</tr>
 	   	<tr>
-	   	<%count=0;
-	   	}}%>
+	   	</c:when>
+	   	<c:otherwise>
+	   	  <c:set var="count" value="${count+1}"/>
+	   	</c:otherwise>
+	   	</c:choose>
+	   	</c:forEach>
+	   	
 	   </tr>
 </tbody>
 </table>   

@@ -43,6 +43,7 @@ public class RatingsDaoimpl {
 			pst.setString(1,serviceName);
 			ResultSet rs = pst.executeQuery();
 			while(rs.next()) {
+				
 				System.out.println(rs.getDouble(1));
 				return rs.getDouble(1);
 				
@@ -62,6 +63,8 @@ public class RatingsDaoimpl {
 			Statement stmt=con.createStatement();
 			ResultSet rs=stmt.executeQuery(viewQuery);
 			while(rs.next()) {
+				UserDaoimpl userdaoimpl=new UserDaoimpl();
+				String userName=userdaoimpl.findUserName(rs.getInt(2));
 				Ratings rating=new Ratings(rs.getInt(2),rs.getString(3),rs.getInt(4),rs.getString(5));
 			venueList.add(rating);
 			}

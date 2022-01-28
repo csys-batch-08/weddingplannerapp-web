@@ -1,13 +1,13 @@
-<%@page import="com.weddingplanner.module.Venues"%>
-<%@page import="java.util.List"%>
-<%@page import="com.weddingplanner.daoimpl.VenuesDaoimpl"%>
+
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+    
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>venueCity</title>
 <link rel="stylesheet" href="style1.css">
 <script src="https://kit.fontawesome.com/ae23c8822d.js" crossorigin="anonymous"></script>
 <style>
@@ -40,33 +40,28 @@
         <a href="myBooking.jsp">My booking</a>
         
     </nav>
-<% String city=(String)session.getAttribute("filterCity");
-VenuesDaoimpl venues=new VenuesDaoimpl();
-List<Venues> showVenue=venues.findCity(city);
-%>
-<% for(Venues venue: showVenue){
-   //System.out.println(venue.getVenueImages());
-                	%>  
+<c:set var="i" value="0"/>
+<c:forEach items="${searchCity}" var="filterVenueCity">
+<c:set var="i"  value="${i+1}"/>
 
           
 <div class="venue">
       <div class="for-inline">
         <div class="image-container">
-             <a href="venue1.jsp?venueName=<%=venue.getVenueName()%>">
-               <img src="images/<%=venue.getVenueImages()%>" alt="hall"></a>
+             <a href="ChooseVenueServlet?venueName=${filterVenueCity.venueName}"><img src="images/${filterVenueCity.venueImages}" alt="hall"></a>
             <div class="title">
-                <h2> venue name: <%=venue.getVenueName() %></h2>
+                <h2> venue name:${filterVenueCity.venueName }</h2>
                 
            </div>
-              <pre><i class="fas fa-map-marker-alt"></i> <%=venue.getVenueCity() %>   <i class="fas fa-hotel"></i> <%=venue.getVenueType() %></pre>
+              <pre><i class="fas fa-map-marker-alt"></i> ${filterVenueCity.venueCity }   <i class="fas fa-hotel"></i> ${filterVenueCity.venueType}</pre>
         
            </div>
        </div>
       </div>
      
-
+</c:forEach>
         
-             <%}%>  
+             
 
 </body>
 </html>

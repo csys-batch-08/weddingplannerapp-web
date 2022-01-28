@@ -8,12 +8,12 @@
 <style>
 body
     {
-        background-image: url("images/back1.jpg");
+        background-image: url("images/b3.jpg");
         background-size: cover;
     }
  .login-box{
    width:390px;
-    height:280px;
+    height:380px;
     margin:auto;
     margin-top:30px;
     background-color:rgba(195, 160, 202, 0.589);
@@ -45,6 +45,19 @@ form input{
     border-radius: 6px;
     outline:none;
 }
+.button{
+ padding:7px 50px;
+ border-radius:4px;
+ background-color:rgba(131, 72, 143, 0.5);
+ border:1px solid violet;
+ cursor:pointer;
+ display:inline-flex;
+ 
+}
+button a{
+    text-decoration:none;
+    color:black;
+}
 
  
 </style>
@@ -53,15 +66,18 @@ form input{
    <form action="ratings" method="post" class="login-box">
    <h1>Ratings</h1>
    <label>service name</label>
-      <input type="text" id="name"  name="venuename" value="<%=session.getAttribute("serviceName")%>"  placeholder="" required>
+      <input type="text" id="name"  name="venuename" value="${serviceName}"  placeholder="" required>
      <label>Rating</label>
      <div class="form-group">
-          <input type="text" name="rating" pattern = "[0-5]+" placeholder="give out of 5" required><br><br>
+          <input type="text" name="rating" pattern = "[0-5]+" placeholder="give out of 5" required><br>
 
         </div>
       <label>Review</label>
-      <input type="text" name="review" placeholder="write review" required>
-      <input type="submit" value ="submit">
+      <input type="text" name="review" placeholder="write review" required><br><br>
+      <button class="button"><a href="viewService.jsp">Back</a></button>
+             <button type="submit" class="button">Ok</button>
+           
+     
    </form>
 
 </body>

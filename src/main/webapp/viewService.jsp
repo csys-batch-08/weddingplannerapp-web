@@ -3,6 +3,7 @@
 <%@page import="com.weddingplanner.daoimpl.ServicesDaoimpl"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -56,24 +57,20 @@
 </style>
 </head>
 <body>
-<%!
-ServicesDaoimpl serviceDaoImpl = new ServicesDaoimpl();
-List<Services> showservices ;%>
-<%showservices=serviceDaoImpl.showServiceType(); 
-%>
+
 
 <nav>
 		<ul>
            <li><a href="userProfile.jsp" >My profile</a></li>
 		   <li><a href="">about us</a></li>
 		   <li><a href="">contact us</a></li>
-			<li><a href="viewVenues.jsp">Venues</a></li>
+			<li><a href="viewVenuesServlet">Venues</a></li>
 			<li><a href="viewService.jsp">services</a></li>
             <li><a href="MyBooking.jsp">my Bookings</a></li>
         </ul>
           <form action="filterPrice" method="post" >
       <input type="text" name="byPrice" class="search">  
-      <a  href="FilterPrice.jsp"><button class="button">search</button></a>
+      <button class="button">search</button>
       </form>
         
 	</nav>
@@ -81,17 +78,15 @@ List<Services> showservices ;%>
 <tbody>
 	   <tr>
          
-         
-				<% int count=0;
-					for(Services service: showservices){
-	   			
-                	%>
+           <c:set var="count" value="1"/>
+           <c:forEach items="${viewServices}" var="services">
+				
                     <td>
                         <table>
                             <tbody>
                                 <tr>
-                                    <td><a href="ShowService.jsp?serviceType=<%=service.getServiceType()%>"><img src="images/<%=service.getServiceTypeImage()%>" alt="hall"></a></td>  
-                                   <span>  <%=service.getServiceType() %></span> 
+                                    <td><a href="ShowServiceServlet?serviceType=${services.serviceType}"><img src="images/${services.serviceTypeImage}" alt="hall"></a></td>  
+                                   <span>${services.serviceType}</span> 
                                                                       
                                     </td>
                                 </tr>
@@ -99,11 +94,17 @@ List<Services> showservices ;%>
                         </table>  
                             
                     </td>
-                       <% count ++;
-                       if(count==4){ %> 
+                      <c:choose>
+                      <c:when test="${count==4}">
+                      <c:set var="count" value="1"/>
                     	   </tr>
                     	   <tr>              
-                     <%count=0; }}%>  
+                     </c:when>
+                     <c:otherwise>
+                     <c:set var="count" value="${count+1}"/>
+                     </c:otherwise> 
+                     </c:choose> 
+                     </c:forEach>
                        
                 </tr>
 </tbody>

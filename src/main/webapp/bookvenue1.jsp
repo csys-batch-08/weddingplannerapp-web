@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+ <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,8 +15,7 @@ text-align:center;
 </style>
 </head>
 <body>
-    <% String una=(String) session.getAttribute("unavaliable");%>
-          <h2><%=una%></h2>
-          <% session.removeAttribute("unavaliable"); %>
+       ${unavaliable}
+   
 </body>
 </html>

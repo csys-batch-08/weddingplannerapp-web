@@ -8,7 +8,7 @@
 <style>
 body{
     
-     background-image: url("images/back1.jpg");
+     background-image: url("images/b3.jpg");
         background-size: cover;
     }
     .set{
@@ -32,13 +32,11 @@ body{
 <body>
 
     <div class="set">
-Your Wallet Amount:<%=session.getAttribute("cancelWallet") %><br>
+    Your Wallet Amount:${cancelWallet }<br>
    20% of amount is deducted
-    After refund Wallet balance:<%=session.getAttribute("RefundBalance") %><br>
-<% String booked=(String) session.getAttribute("serviceCancelled");%>
-          <h2><%=booked%></h2>
-          <% session.removeAttribute("serviceCancelled"); %>
-           <button><a href=viewService.jsp>Back</a></button> 
+    After refund Wallet balance:${RefundBalance }<br>
+    <h2>${serviceCancelled}</h2>
+   <button><a href=viewService.jsp>Back</a></button> 
             </div>
 </body>
 </html>

@@ -19,53 +19,45 @@ import com.weddingplanner.daoimpl.UserDaoimpl;
 import com.weddingplanner.module.BookingServices;
 import com.weddingplanner.module.BookingVenues;
 
-/**
- * Servlet implementation class BookVenueServlet
- */
+
 @WebServlet("/addToService")
 
 public class addToService extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
+   
     public addToService() {
         super();
-        // TODO Auto-generated constructor stub
+       
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
+	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		//response.getWriter().append("Served at: ").append(request.getContextPath());
-		doPost(request, response);
+		
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
+	
+	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("add service");
+	
 		HttpSession session=request.getSession();
 		int userId=(int)session.getAttribute("id");
 		System.out.println(userId);
 		int serviceId=(int) session.getAttribute("serviceId");
-		System.out.println(serviceId);
-		String servicename = (String) session.getAttribute("serviceName");
-		System.out.println(servicename);
+	    System.out.println(serviceId);
+		String servicename = request.getParameter("servicename");
+	
         LocalDate eventDate=LocalDate.parse(request.getParameter("date"));
 
-        System.out.println(eventDate);
-		Double servicePackage=(Double) session.getAttribute("servicePackage");
+       
+		Double servicePackage=Double.parseDouble(request.getParameter("servicepackage"));
 		int advanceAmount = Integer.parseInt(request.getParameter("advancepackageService"));
+		
 
 		//LocalDate eventDat=LocalDate.parse(eventDate);
         BookingServicesDaoimpl book=new BookingServicesDaoimpl();
         boolean flag = book.checkDate(servicename, eventDate);
-         if(flag==false) {
+         if(!flag) {
         	 
         	 UserDaoimpl userdao=new UserDaoimpl();
 

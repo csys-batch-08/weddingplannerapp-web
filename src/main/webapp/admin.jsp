@@ -65,11 +65,11 @@ nav ul li .active{
     <nav>
     	
         <ul>
-         <li><a href="viewVenueAdmin.jsp">View venues</a></li>
-         <li><a href="viewServicesAdmin.jsp">View services</a></li>
-         <li><a href="viewUser.jsp">view users</a></li>
-         <li><a href="ViewAllBookings.jsp">view venue Booking</a></li>
-         <li><a href="ViewServiceBooking.jsp">view service Booking</a></li>
+         <li><a href="viewVenueAdminServlet">View venues</a></li>
+         <li><a href="ViewServiceAdminServlet">View services</a></li>
+         <li><a href="ViewUserAdminServlet">view users</a></li>
+         <li><a href="ViewVenueBookingServlet">view venue Booking</a></li>
+         <li><a href="ViewServiceBookingServlet">view service Booking</a></li>
         </ul>
         </nav>
         <div class="image">

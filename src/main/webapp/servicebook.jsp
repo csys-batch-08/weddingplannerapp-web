@@ -9,7 +9,7 @@
 <style>
  body
     {
-        background-image: url("images/back1.jpg");
+        background-image: url("images/b3.jpg");
         background-size: cover;
     }
     nav a{
@@ -39,12 +39,11 @@
 
    
     <div class="set">
-     Your Wallet Amount:<%=session.getAttribute("userWalletBalance") %><br>
-    Amount deducted:<%=session.getAttribute("servicePackage") %><br>
-    After deduction Wallet balance:<%=session.getAttribute("servicePayBalance") %>
- <% String booked=(String) session.getAttribute("servicebooked");%>
-          <h2><%=booked%></h2>
-          <% session.removeAttribute("servicebooked"); %>
+    Your Wallet Amount:${userWalletBalance }<br>
+    Amount deducted:${servicePackage}<br>
+    After deduction Wallet balance:${servicePayBalance}
+          <h2>${servicebooked }</h2>
+     
           <button class="button"> <a href=index.jsp> Back</a></button>
           
     </div>     

@@ -3,26 +3,9 @@
 <%@page import="com.weddingplanner.daoimpl.VenuesDaoimpl"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-    <%!
-VenuesDaoimpl venueDaoImpl = new VenuesDaoimpl();
-List<Venues> showVenue;%>
-<%/*  String venueName=(String)session.getAttribute("venuename");
-showVenue=venueDaoImpl.allVenue(venueName); */
- String venuename=request.getParameter("venueName");
-
-Venues venue= venueDaoImpl.allVenue(venuename);
- 
- int venueId=venueDaoImpl.findVenueId(venue.getVenueName());
- 
- double venuepackage=venueDaoImpl.findPackage(venueId);
- int advanceAmount=(int)(venuepackage*1/2);
- 
- session.setAttribute("venuename",venuename );
- session.setAttribute("venueId", venueId);
- session.setAttribute("venuepackage", venuepackage);
- session.setAttribute("advanceAmount", advanceAmount);
- 
-%>
+    <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    
+    
 
 
 <!DOCTYPE html>
@@ -87,22 +70,26 @@ a{
         </ul>
         
 	</nav>
+	
     <table>
     <tbody>
     <tr>
-   <td><img src="images/<%=venue.getVenueImages()%>" alt="hall"></td>
+     <c:out  value="${venueShow}" />
     
-            <td> <h1> <%=venue.getVenueName() %></h1>
-              <pre><i class="fas fa-map-marker-alt"></i> <%=venue.getVenueArea()%>,<%=venue.getVenueCity() %>                <i class="fas fa-hotel"></i> <%=venue.getVenueType() %></pre>
-             <pre><i class="fas fa-phone"></i> <%=venue.getContactNumber() %>                           <i class="fas fa-rupee-sign"></i><%=venue.getVenuePackage() %> </pre>  <br>
-            venue vendor name:<%=venue.getVenueVendorName() %><br><br>
-             <%
-		session.setAttribute("venueName",venue.getVenueName() );
-		%>
+   <td><img src="images/${venueShow.venueImages}" alt="hall"></td>
+    
+            <td> <h1> ${venueShow.venueName}</h1>
+              <pre><i class="fas fa-map-marker-alt"></i>${venueShow.venueArea},${venueShow.venueCity}                <i class="fas fa-hotel"></i> ${venueShow.venueType}</pre>
+             <pre><i class="fas fa-phone"></i> ${venueShow.contactNumber}                           <i class="fas fa-rupee-sign"></i>${venueShow.venuePackage} </pre>  <br>
+            venue vendor name:${venueShow.venueVendorName}<br><br>
+             
 		
         For booking click here: <button class="button"><a href="bookvenue.jsp">book</a></button></td>
+     
         </tr>
+       
   </tbody>          
-  </table>                            
+  </table>  
+                        
 </body>
 </html>

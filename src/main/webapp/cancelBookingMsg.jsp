@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,7 +9,7 @@
 <style>
 body{
     
-     background-image: url("images/back1.jpg");
+     background-image: url("images/b3.jpg");
         background-size: cover;
     }
     .set{
@@ -30,13 +31,11 @@ body{
 </head>
 <body>
 <div class="set">
-    Your Wallet Amount:<%=session.getAttribute("cancelVenue") %><br>
+ Your Wallet Amount:${cancelVenue}<br>
    20% of amount is deducted
-    After refund Wallet balance:<%=session.getAttribute("cancelRefundVenue") %>
-<% String una=(String) session.getAttribute("cancelled");%>
-          <h2><%=una%></h2>
-          <% session.removeAttribute("cancelled"); %>
-          <button><a href="viewVenues.jsp">Back</a></button>
+    After refund Wallet balance:${cancelRefundVenue }
+          <h2>${cancelled}</h2>
+    <button><a href="viewVenues.jsp">Back</a></button>
  </div>        
           
 </body>

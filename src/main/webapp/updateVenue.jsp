@@ -45,7 +45,19 @@ form input{
     border-radius: 6px;
     outline:none;
 }
-
+.button{
+ padding:7px 50px;
+ border-radius:4px;
+ background-color:violet;
+ border:1px solid violet;
+ cursor:pointer;
+ display:inline-flex;
+ 
+}
+button a{
+    text-decoration:none;
+    color:black;
+}
  
 
 </style>
@@ -62,7 +74,9 @@ form input{
     <input type="file" name="venueImage"><br>
     <label>venue package:</label>
     <input type="number" name="venuePackage"><br><br>
-    <input type="submit" value="Update">
+    <button class="button"><a href="viewVenueAdmin.jsp">Back</a></button>
+    <button type="submit" class="button">Update</button>
+   
    </form>
 
 </body>

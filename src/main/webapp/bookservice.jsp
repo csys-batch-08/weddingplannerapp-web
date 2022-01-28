@@ -1,6 +1,3 @@
-<%@page import="com.weddingplanner.module.Venues"%>
-<%@page import="java.util.List"%>
-<%@page import="com.weddingplanner.daoimpl.VenuesDaoimpl"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
     
@@ -16,12 +13,12 @@
 <style>
   body
     {
-        background-image: url("images/back1.jpg");
+        background-image: url("images/b3.jpg");
         background-size: cover;
     }
  .login-box{
    width:390px;
-    height:350px;
+    height:450px;
     margin:auto;
     margin-top:30px;
     background-color:rgba(195, 160, 202, 0.589);
@@ -53,26 +50,40 @@ form input{
     border-radius: 6px;
     outline:none;
 }
-
+.button{
+ padding:7px 50px;
+ border-radius:4px;
+ background-color:rgba(131, 72, 143, 0.5);
+ border:1px solid violet;
+ cursor:pointer;
+ display:inline-flex;
+ 
+}
+button a{
+    text-decoration:none;
+    color:black;
+}
  
   </style>
 </head>
 <body>
-<form action="addToService" class="login-box">
+<form action="addToService" class="login-box" method="post">
 		
 		
 		
     <h1>Book service</h1>
           <label>service Name:</label>
-            <input type="text" id="name" class="text" name="venuename" value="<%=session.getAttribute("serviceName")%>"  placeholder="" required>
+            <input type="text" id="name" class="text" name="servicename" value="${serviceName}"  placeholder="" required>
             <label>service Package:</label>
-            <input type="text" id="venuePackage" class="text" name="venuepackage" value="<%=session.getAttribute("servicePackage")%>"  placeholder="" required>
+            <input type="text" id="venuePackage" class="text" name="servicepackage" value="${servicePackage}"  placeholder="" required>
             <label>Advance amount:</label>
-           <input type="text" id="advancePackage" class="text" name="advancepackageService" value="<%=session.getAttribute("advanceServiceAmount")%>"  placeholder="" required>
+           <input type="text" id="advancePackage" class="text" name="advancepackageService" value="${advanceServiceAmount}"  placeholder="" required>
 
              <label>Event date</label>
             <input type="date"  name="date" id="datefield" required><br><br>
-            <input type="submit" value="Book">
+            <button class="button"><a href="viewServices.jsp">Back</a></button>
+             <button type="submit" class="button">Book</button>
+           
             </form>
 </body>
 <script type="text/javascript">

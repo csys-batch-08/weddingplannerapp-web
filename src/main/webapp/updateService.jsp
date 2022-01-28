@@ -46,7 +46,20 @@ form input{
     outline:none;
 }
 
-
+.button{
+ padding:7px 50px;
+ border-radius:4px;
+ background-color:violet;
+ border:1px solid violet;
+ cursor:pointer;
+ display:inline-flex;
+ 
+}
+button a{
+    text-decoration:none;
+    color:black;
+}
+            
 
 </style>
 </head>
@@ -65,8 +78,9 @@ form input{
      
      <label>sevice type image</label>
      <input type="file" name="serviceTypeImage" required><br><br><br>
- 
-     <input type="submit" value= "Update">
+ <button class="button"><a href="viewServicesAdmin.jsp">Back</a></button>
+<button type="submit" class="button">Update</button>
+     
 </form>
 </body>
 </html>
