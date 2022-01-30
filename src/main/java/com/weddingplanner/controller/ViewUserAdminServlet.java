@@ -13,20 +13,24 @@ import javax.servlet.http.HttpServletResponse;
 import com.weddingplanner.daoimpl.UserDaoimpl;
 import com.weddingplanner.module.User;
 
-/**
- * Servlet implementation class ViewUserAdminServlet
- */
+
 @WebServlet("/ViewUserAdminServlet")
 public class ViewUserAdminServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
    
+	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		 UserDaoimpl userdao = new UserDaoimpl();
+		try {
+		UserDaoimpl userdao = new UserDaoimpl();
 		   List<User> userList = userdao.viewUser();
 		   request.setAttribute("userListAdmin", userList);
 		     RequestDispatcher requestDispatcher=request.getRequestDispatcher("viewUser.jsp");
 				requestDispatcher.forward(request, response);
+		}catch (Exception e) {
+			
+			e.printStackTrace();
+		}
 	
 	}
 

@@ -9,30 +9,36 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.weddingplanner.daoimpl.UserDaoimpl;
-import com.weddingplanner.module.User;
 
-/**
- * Servlet implementation class RechargeWallet
- */
+
+
+
 @WebServlet("/rechargewallet")
 public class RechargeWallet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
+	
     
+
+	private static final long serialVersionUID = 1L;
+
+	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		//doGet(request, response);
+		try {
+		
+			
 		HttpSession session = request.getSession();	
 		int userId=(int)session.getAttribute("id");
-		String email = (String) session.getAttribute("email");
+		
 		int amount = Integer.parseInt(request.getParameter("amount"));
 		session.setAttribute("amount", amount);
-		Long cardnumber = Long.parseLong(request.getParameter("cardnumber"));
-		int cvv = Integer.parseInt(request.getParameter("cvv"));
-		UserDaoimpl userdao = new UserDaoimpl();
-		int wallet = userdao.updatewallet(amount, userId);
-		session.setAttribute("recharged", "Your Wallet is sucessfully recharged");
-        response.sendRedirect("userProfile.jsp");
 		
-	}
+		UserDaoimpl userdao = new UserDaoimpl();
+		 userdao.updatewallet(amount, userId);
+		session.setAttribute("recharged", "Your Wallet is sucessfully recharged");
+        response.sendRedirect("UserProfileServlet");
+		
+	}catch(Exception e) {
+		e.printStackTrace();
 
+	}
+	}
 }

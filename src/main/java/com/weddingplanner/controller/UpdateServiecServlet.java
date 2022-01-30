@@ -8,39 +8,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.weddingplanner.daoimpl.ServicesDaoimpl;
-import com.weddingplanner.daoimpl.VenuesDaoimpl;
 import com.weddingplanner.module.Services;
-import com.weddingplanner.module.Venues;
 
-/**
- * Servlet implementation class UpdateServiecServlet
- */
+
+
 @WebServlet("/updateService")
 public class UpdateServiecServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public UpdateServiecServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
-
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		//response.getWriter().append("Served at: ").append(request.getContextPath());
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
+    
+	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		//doGet(request, response);
+		try {
 		String serviceName=request.getParameter("serviceName");
 	    Double servicePackage=Double.parseDouble(request.getParameter("servicePackage"));
 	    String serviceImage=request.getParameter("serviceImage");
@@ -52,6 +31,10 @@ public class UpdateServiecServlet extends HttpServlet {
 		ServicesDaoimpl serviceDao=new ServicesDaoimpl();
 		serviceDao.updateService(service);
 	    response.sendRedirect("viewServicesAdmin.jsp");
+		}catch(Exception e) {
+			e.printStackTrace();
+
+		}
 
 		
          

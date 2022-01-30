@@ -10,25 +10,48 @@ import java.util.List;
 
 import com.weddingplanner.dao.ServicesDao;
 import com.weddingplanner.module.Services;
-import com.weddingplanner.module.User;
-import com.weddingplanner.module.Venues;
 import com.weddingplanner.util.ConnectionUtil;
 
 public class ServicesDaoimpl implements ServicesDao {
 	public List<Services> showServices(){
-		List<Services> serviceList =new ArrayList<Services>();
-		String viewQuery="select * from service_details";
-		Connection con=ConnectionUtil.getDbConnection();
+		List<Services> serviceList =new ArrayList<>();
+		String viewQuery="select service_id,service_name,service_package,service_images,availability,service_type,service_description,service_type_images from service_details";
+		Connection connection=null;
+		Statement statement=null;
+		ResultSet resultSet=null;
 		try {
-			Statement stmt=con.createStatement();
-			ResultSet rs=stmt.executeQuery(viewQuery);
-			while(rs.next()) {
-			Services service=new Services(rs.getString(2),rs.getDouble(3),rs.getString(4),rs.getString(5));
+			connection=ConnectionUtil.getDbConnection();
+			statement=connection.createStatement();
+			resultSet=statement.executeQuery(viewQuery);
+			while(resultSet.next()) {
+			Services service=new Services(resultSet.getString(2),resultSet.getDouble(3),resultSet.getString(4),resultSet.getString(5));
 			serviceList.add(service);
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}
+		finally {
+			if (resultSet != null) {
+				try {
+					resultSet.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if (statement != null) {
+				try {
+					statement.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if (connection != null) {
+				try {
+					connection.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
 		}
 		
      return serviceList;
@@ -36,193 +59,219 @@ public class ServicesDaoimpl implements ServicesDao {
 	}
 	public void insertService(Services service) {
 		String insertQuery="insert into service_details(service_name,service_package,service_images,service_type,service_description,service_type_images)values(?,?,?,?,?,?)";
-	     ConnectionUtil conUtil=new ConnectionUtil();
-	     Connection con=conUtil.getDbConnection();
+	     Connection connection=null;
+	     PreparedStatement statement=null;
 	     try {
-			PreparedStatement prstmt=con.prepareStatement(insertQuery);
-			prstmt.setString(1, service.getServiceName());
-            prstmt.setDouble(2, service.getServicePackage());
-			prstmt.setString(3, service.getServiceImages());
-			prstmt.setString(4, service.getServiceType());
-			prstmt.setString(5,service.getServiceDescription() );
-			prstmt.setString(6,service.getServiceTypeImage() );
+	    	 connection=ConnectionUtil.getDbConnection();
+			statement=connection.prepareStatement(insertQuery);
+			statement.setString(1, service.getServiceName());
+			statement.setDouble(2, service.getServicePackage());
+			statement.setString(3, service.getServiceImages());
+			statement.setString(4, service.getServiceType());
+			statement.setString(5,service.getServiceDescription() );
+			statement.setString(6,service.getServiceTypeImage() );
 
-			prstmt.executeUpdate();
-			System.out.println("service added successfully");
+			statement.executeUpdate();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+	
 			e.printStackTrace();
 		}
-	}
-	
-	
-	 public void removeServices(String serviceName) {
-			String deleteQuery="delete from Service_details where service_name=?";
-			ConnectionUtil conUtil=new ConnectionUtil();
-			Connection con=conUtil.getDbConnection();
-			try {
-				PreparedStatement prstmt=con.prepareStatement(deleteQuery);
-				prstmt.setString(1,serviceName);
-				int noOfRows=prstmt.executeUpdate();
-				System.out.println(noOfRows+ "row deleted");
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		 }
-	 
-	 
-	 public int findServiceId() {
-		 String findVenue="select service_id from service_details where service_name='photography'";
-		 Connection con=ConnectionUtil.getDbConnection();
-			int serviceId=0;
-			Statement stmt;
-			try {
-				stmt = con.createStatement();
-				ResultSet rs=stmt.executeQuery(findVenue);
-				if(rs.next()) {
-					serviceId=rs.getInt(1);
+	     finally {
+				
+				if (statement != null) {
+					try {
+						statement.close();
+					} catch (SQLException e) {
+						e.printStackTrace();
+					}
 				}
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				if (connection != null) {
+					try {
+						connection.close();
+					} catch (SQLException e) {
+						e.printStackTrace();
+					}
+				}
 			}
-			
-		 return serviceId;
-	
 	}
+	
+	
+	 
+	 
+	 
+	 
 	 public  double findPackage(int serviceId)
 		{
 			String query="select service_package from service_details where service_id='"+serviceId+"'";
 			
-			Connection con=ConnectionUtil.getDbConnection();
-			Statement stmt;
+			Connection connection=null;
+			Statement statement=null;
+			ResultSet resultSet=null;
 			double servicePackage=0;
 			try {
-				stmt=con.createStatement();
+				connection=ConnectionUtil.getDbConnection();
+				statement=connection.createStatement();
 				
-				ResultSet rs=stmt.executeQuery(query);
+				resultSet=statement.executeQuery(query);
 				
-				if(rs.next())
+				if(resultSet.next())
 				{
-					servicePackage=rs.getDouble(1);
+					servicePackage=resultSet.getDouble(1);
 				}
 				
 				
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
-			}		
+			}	
+			finally {
+				if (resultSet != null) {
+					try {
+						resultSet.close();
+					} catch (SQLException e) {
+						e.printStackTrace();
+					}
+				}
+				if (statement != null) {
+					try {
+						statement.close();
+					} catch (SQLException e) {
+						e.printStackTrace();
+					}
+				}
+				if (connection != null) {
+					try {
+						connection.close();
+					} catch (SQLException e) {
+						e.printStackTrace();
+					}
+				}
+			}
 			
 			return servicePackage;
 			
 		}
-	 public int findMehandiId() {
-		 String findVenue="select service_id from service_details where service_name='Mehandi'";
-		 Connection con=ConnectionUtil.getDbConnection();
-			int serviceId=0;
-			Statement stmt;
-			try {
-				stmt = con.createStatement();
-				ResultSet rs=stmt.executeQuery(findVenue);
-				if(rs.next()) {
-					serviceId=rs.getInt(1);
-				}
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			
-		 return serviceId;
+	 
 	
-	}
-	 public int findMakeupId() {
-		 String findVenue="select service_id from service_details where service_name='Bridal Makeup'";
-		 Connection con=ConnectionUtil.getDbConnection();
-			int serviceId=0;
-			Statement stmt;
-			try {
-				stmt = con.createStatement();
-				ResultSet rs=stmt.executeQuery(findVenue);
-				if(rs.next()) {
-					serviceId=rs.getInt(1);
-				}
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			
-		 return serviceId;
-	
-	}
-	 public int findDecorationId() {
-		 String findVenue="select service_id from service_details where service_name='Decoration'";
-		 Connection con=ConnectionUtil.getDbConnection();
-			int serviceId=0;
-			Statement stmt;
-			try {
-				stmt = con.createStatement();
-				ResultSet rs=stmt.executeQuery(findVenue);
-				if(rs.next()) {
-					serviceId=rs.getInt(1);
-				}
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			
-		 return serviceId;
-	
-	}
+	 
 	 public int updateRatingProfile(int ratings) {
 			String updateQuery="update service_details set ratings=?";
-			Connection con=ConnectionUtil.getDbConnection();
-			PreparedStatement prstmt=null;
+			Connection connection=null;
+			PreparedStatement statement=null;
 			try {
-				prstmt=con.prepareStatement(updateQuery);
-                prstmt.setInt(1, ratings);
-				System.out.println("profile edited successfully");
+				connection=ConnectionUtil.getDbConnection();
+				statement=connection.prepareStatement(updateQuery);
+				statement.setInt(1, ratings);
 			} catch (SQLException e) {
-				// TODO Auto-generated cat;
 				e.printStackTrace();
 			}
+			finally {
+				
+				if (statement != null) {
+					try {
+						statement.close();
+					} catch (SQLException e) {
+						e.printStackTrace();
+					}
+				}
+				if (connection != null) {
+					try {
+						connection.close();
+					} catch (SQLException e) {
+						e.printStackTrace();
+					}
+				}
+			}
+			
 		 return ratings;
 		} 
 	 public int findServiceId(String serviceName) {
 		 String findVenue="select service_id from service_details where service_name='"+serviceName+"'";
-		 Connection con=ConnectionUtil.getDbConnection();
+		 Connection connection=null;
 			int serviceId=0;
-			Statement stmt;
+			Statement statement=null;
+			ResultSet resultSet=null;
 			try {
-				stmt = con.createStatement();
-				ResultSet rs=stmt.executeQuery(findVenue);
-				if(rs.next()) {
-					serviceId=rs.getInt(1);
+				connection=ConnectionUtil.getDbConnection();
+				statement = connection.createStatement();
+				resultSet=statement.executeQuery(findVenue);
+				if(resultSet.next()) {
+					serviceId=resultSet.getInt(1);
 				}
 			} catch (SQLException e) {
 
 				e.printStackTrace();
 			}
+			finally {
+				if (resultSet != null) {
+					try {
+						resultSet.close();
+					} catch (SQLException e) {
+						e.printStackTrace();
+					}
+				}
+				if (statement != null) {
+					try {
+						statement.close();
+					} catch (SQLException e) {
+						e.printStackTrace();
+					}
+				}
+				if (connection != null) {
+					try {
+						connection.close();
+					} catch (SQLException e) {
+						e.printStackTrace();
+					}
+				}
+			}
 			
 		 return serviceId;
 	 }
-	 public Services allService(String ServiceName) throws SQLException{
-		 //List<Venues> venuelist=new ArrayList<Venues>();
+	 public Services allService(String serviceName) {
 		
-		 String validateQuery="select * from service_details WHERE  service_name='"+ServiceName+"'";
-		 System.out.println(validateQuery);
-		 Connection con=ConnectionUtil.getDbConnection();
+		 String validateQuery="select service_id,service_name,service_package,service_images,availability,service_type,service_description,service_type_images from service_details WHERE  service_name='"+serviceName+"'";
+		 
+		 Connection connection=null;
 		 Services service=null;
-		
-			Statement stmt=con.createStatement();
-			ResultSet rs=stmt.executeQuery(validateQuery);
-			System.out.println("resultset");
-			while(rs.next()) {
-				ServicesDaoimpl servicedaoimpl=new ServicesDaoimpl();
-				int serviceId=servicedaoimpl.findServiceId(rs.getString(2));
-				 service=new Services(rs.getString(2),rs.getDouble(3),rs.getString(4),rs.getString(5),rs.getString(6),rs.getString(7),rs.getString(8));			
+		 Statement statement=null;
+			
+			ResultSet resultSet=null;
+			try {
+				connection=ConnectionUtil.getDbConnection();
+				statement=connection.createStatement();
+				resultSet = statement.executeQuery(validateQuery);
+				while(resultSet.next()) {
+					
+					 service=new Services(resultSet.getString(2),resultSet.getDouble(3),resultSet.getString(4),resultSet.getString(5),resultSet.getString(6),resultSet.getString(7),resultSet.getString(8));			
+					}
 				
+			} catch (SQLException e) {
+				e.printStackTrace();
 			}
+			finally {
+				if (resultSet != null) {
+					try {
+						resultSet.close();
+					} catch (SQLException e) {
+						e.printStackTrace();
+					}
+				}
+				if (statement != null) {
+					try {
+						statement.close();
+					} catch (SQLException e) {
+						e.printStackTrace();
+					}
+				}
+				if (connection != null) {
+					try {
+						connection.close();
+					} catch (SQLException e) {
+						e.printStackTrace();
+					}
+				}
+			}
+			
 			
 		
 		
@@ -232,100 +281,207 @@ public class ServicesDaoimpl implements ServicesDao {
 	 
 	 public void updateServiceAvailability(String availability) {
 			String updateQuery="update service_details set availability='No' where service_name=?";
-			Connection con=ConnectionUtil.getDbConnection();
-			PreparedStatement prstmt=null;
+			Connection connection=null;
+			PreparedStatement statement=null;
 			try {
-				prstmt=con.prepareStatement(updateQuery);
-				prstmt.setString(1, availability);
-				prstmt.executeUpdate();
-				prstmt.executeUpdate("commit");
-				System.out.println("profile edited successfully");
+				connection=ConnectionUtil.getDbConnection();
+				statement=connection.prepareStatement(updateQuery);
+				statement.setString(1, availability);
+				statement.executeUpdate();
+				statement.executeUpdate("commit");
 			} catch (SQLException e) {
-				// TODO Auto-generated cat;
 				e.printStackTrace();
 			}
+			finally {
+				
+				if (statement != null) {
+					try {
+						statement.close();
+					} catch (SQLException e) {
+						e.printStackTrace();
+					}
+				}
+				if (connection != null) {
+					try {
+						connection.close();
+					} catch (SQLException e) {
+						e.printStackTrace();
+					}
+				}
+			}
+			
+			
 	 }
 	 public void updateService(Services service) {
 			String updateQuery="update service_details set service_type=?,service_package=?,service_images=?,service_description=?,service_type_images=? where service_name=?";
-			Connection con=ConnectionUtil.getDbConnection();
-			PreparedStatement prstmt=null;
+			Connection connection=null;
+			PreparedStatement statement=null;
 			try {
-				prstmt=con.prepareStatement(updateQuery);
-				prstmt.setString(1, service.getServiceType());
-                prstmt.setDouble(2, service.getServicePackage());
-				prstmt.setString(3, service.getServiceImages());
-				prstmt.setString(4, service.getServiceDescription());
-				prstmt.setString(5, service.getServiceTypeImage());
-				prstmt.setString(6, service.getServiceName());
+				connection=ConnectionUtil.getDbConnection();
+				statement=connection.prepareStatement(updateQuery);
+				statement.setString(1, service.getServiceType());
+				statement.setDouble(2, service.getServicePackage());
+				statement.setString(3, service.getServiceImages());
+				statement.setString(4, service.getServiceDescription());
+				statement.setString(5, service.getServiceTypeImage());
+				statement.setString(6, service.getServiceName());
 				
-			    prstmt.executeUpdate();
-				prstmt.executeUpdate("commit");
-				System.out.println("profile edited successfully");
+				statement.executeUpdate();
+				statement.executeUpdate("commit");
 			} catch (SQLException e) {
-				// TODO Auto-generated cat;
 				e.printStackTrace();
 			}
+			finally {
+				
+				if (statement != null) {
+					try {
+						statement.close();
+					} catch (SQLException e) {
+						e.printStackTrace();
+					}
+				}
+				if (connection != null) {
+					try {
+						connection.close();
+					} catch (SQLException e) {
+						e.printStackTrace();
+					}
+				}
+			}
+			
+			
 	 }
 			public List<Services> showServiceType(){
-				List<Services> serviceList =new ArrayList<Services>();
+				List<Services> serviceList =new ArrayList<>();
 				String viewQuery="select distinct service_type,service_type_images from service_details ";
-				Connection con=ConnectionUtil.getDbConnection();
+				Connection connection=null;
+				Statement statement=null;
+				ResultSet resultSet=null;
 				try {
-					Statement stmt=con.createStatement();
-					ResultSet rs=stmt.executeQuery(viewQuery);
-					while(rs.next()) {
-					Services	service=new Services(rs.getString(1),rs.getString(2));	
+					connection=ConnectionUtil.getDbConnection();
+					statement=connection.createStatement();
+					resultSet=statement.executeQuery(viewQuery);
+					while(resultSet.next()) {
+					Services	service=new Services(resultSet.getString(1),resultSet.getString(2));	
 					serviceList.add(service);
 					}
 				} catch (SQLException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				
+				finally {
+					if (resultSet != null) {
+						try {
+							resultSet.close();
+						} catch (SQLException e) {
+							e.printStackTrace();
+						}
+					}
+					if (statement != null) {
+						try {
+							statement.close();
+						} catch (SQLException e) {
+							e.printStackTrace();
+						}
+					}
+					if (connection != null) {
+						try {
+							connection.close();
+						} catch (SQLException e) {
+							e.printStackTrace();
+						}
+					}
+				}
 		     return serviceList;
 	 }
 			public List<Services> showServiceList(String serviceType){
-				List<Services> serviceList =new ArrayList<Services>();
-				String viewQuery="select * from service_details where service_type=?";
-				Connection con=ConnectionUtil.getDbConnection();
-				;
+				List<Services> serviceList =new ArrayList<>();
+				String viewQuery="select service_id,service_name,service_package,service_images,availability,service_type,service_description,service_type_images from service_details where service_type=?";
+				Connection connection=null;
+				PreparedStatement statement=null;
+				ResultSet resultSet=null;
 
 				try {
-					PreparedStatement prstmt=con.prepareStatement(viewQuery);
-					prstmt.setString(1, serviceType);
-					ResultSet rs=prstmt.executeQuery();
-					while(rs.next()) {
-						Services service=new Services(rs.getString(2),rs.getDouble(3),rs.getString(4),rs.getString(5),rs.getString(6),rs.getString(7),rs.getString(8));
-;	
+					 connection=ConnectionUtil.getDbConnection();
+					statement=connection.prepareStatement(viewQuery);
+					statement.setString(1, serviceType);
+					resultSet=statement.executeQuery();
+					while(resultSet.next()) {
+						Services service=new Services(resultSet.getString(2),resultSet.getDouble(3),resultSet.getString(4),resultSet.getString(5),resultSet.getString(6),resultSet.getString(7),resultSet.getString(8));
 					serviceList.add(service);
 					}
 				} catch (SQLException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
+				}
+				finally {
+					if (resultSet != null) {
+						try {
+							resultSet.close();
+						} catch (SQLException e) {
+							e.printStackTrace();
+						}
+					}
+					if (statement != null) {
+						try {
+							statement.close();
+						} catch (SQLException e) {
+							e.printStackTrace();
+						}
+					}
+					if (connection != null) {
+						try {
+							connection.close();
+						} catch (SQLException e) {
+							e.printStackTrace();
+						}
+					}
 				}
 				
 		     return serviceList;
 	 }
 			public List<Services> filterByPrice(Double servicePackage) {
-				 List<Services> serviceList=new ArrayList<Services>();
-				 //System.out.println("helo"+venueCity);
-				 String query="select * from service_details where service_package=?";
-				 Connection con=ConnectionUtil.getDbConnection();
-					;
+				 List<Services> serviceList=new ArrayList<>();
+				 String query="select service_id,service_name,service_package,service_images,availability,service_type,service_description,service_type_images from service_details where service_package=?";
+				 Connection connection=null;
+				 PreparedStatement statement=null;
+				 ResultSet resultSet=null;
 
 					try {
-						PreparedStatement prstmt=con.prepareStatement(query);
-						prstmt.setDouble(1, servicePackage);
-						ResultSet rs=prstmt.executeQuery();
-						while(rs.next()) {
-							Services service=new Services(rs.getString(2),rs.getDouble(3),rs.getString(4),rs.getString(5),rs.getString(6),rs.getString(7),rs.getString(8));
+						connection=ConnectionUtil.getDbConnection();
+						statement=connection.prepareStatement(query);
+						statement.setDouble(1, servicePackage);
+						resultSet=statement.executeQuery();
+						while(resultSet.next()) {
+							Services service=new Services(resultSet.getString(2),resultSet.getDouble(3),resultSet.getString(4),resultSet.getString(5),resultSet.getString(6),resultSet.getString(7),resultSet.getString(8));
 	
 						serviceList.add(service);
 						}
 					} catch (SQLException e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
+					finally {
+						if (resultSet != null) {
+							try {
+								resultSet.close();
+							} catch (SQLException e) {
+								e.printStackTrace();
+							}
+						}
+						if (statement != null) {
+							try {
+								statement.close();
+							} catch (SQLException e) {
+								e.printStackTrace();
+							}
+						}
+						if (connection != null) {
+							try {
+								connection.close();
+							} catch (SQLException e) {
+								e.printStackTrace();
+							}
+						}
+					}
+					
 					
 			     return serviceList;
 		 }

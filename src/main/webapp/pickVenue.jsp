@@ -1,15 +1,13 @@
-<%@page import="com.weddingplanner.module.Venues"%>
-<%@page import="java.util.List"%>
-<%@page import="com.weddingplanner.daoimpl.VenuesDaoimpl"%>
+
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-    <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+ <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     
     
 
 
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="ISO-8859-1">
 <title>venues</title>
@@ -84,7 +82,7 @@ a{
             venue vendor name:${venueShow.venueVendorName}<br><br>
              
 		
-        For booking click here: <button class="button"><a href="bookvenue.jsp">book</a></button></td>
+        For booking click here: <button class="button"><a href="bookVenue.jsp">book</a></button></td>
      
         </tr>
        

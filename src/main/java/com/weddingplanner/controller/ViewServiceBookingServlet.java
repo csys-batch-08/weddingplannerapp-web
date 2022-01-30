@@ -13,18 +13,25 @@ import javax.servlet.http.HttpServletResponse;
 import com.weddingplanner.daoimpl.BookingServicesDaoimpl;
 import com.weddingplanner.module.BookingServices;
 
-/**
- * Servlet implementation class ViewServiceBookingServlet
- */
+
 @WebServlet("/ViewServiceBookingServlet")
 public class ViewServiceBookingServlet extends HttpServlet {
 	
+	
+	private static final long serialVersionUID = 1L;
+
+	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	 BookingServicesDaoimpl bookingdao = new BookingServicesDaoimpl();
+	 try {
+		BookingServicesDaoimpl bookingdao = new BookingServicesDaoimpl();
 		   List<BookingServices> serviceList = bookingdao.allServiceBooking();
 		   request.setAttribute("serviceBookingAdmin", serviceList);
-		     RequestDispatcher requestDispatcher=request.getRequestDispatcher("ViewServiceBooking.jsp");
+		     RequestDispatcher requestDispatcher=request.getRequestDispatcher("viewServiceBooking.jsp");
 				requestDispatcher.forward(request, response);
+	 }catch (Exception e) {
+			
+			e.printStackTrace();
+		}
 		
 	}
 

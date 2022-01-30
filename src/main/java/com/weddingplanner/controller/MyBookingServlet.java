@@ -17,19 +17,20 @@ import com.weddingplanner.daoimpl.BookingVenuesDaoimpl;
 import com.weddingplanner.module.BookingServices;
 import com.weddingplanner.module.BookingVenues;
 
-/**
- * Servlet implementation class MyBookingServlet
- */
+
 @WebServlet("/MyBookingServlet")
 public class MyBookingServlet extends HttpServlet {
 	
+	
+	private static final long serialVersionUID = 1L;
+
+	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
         BookingServicesDaoimpl service = new BookingServicesDaoimpl();
-		
+		try {
 		 int userId=(int)session.getAttribute("id");
-		 List<BookingServices> myService=service.MyBooking(userId);
-		 System.out.println(myService);
+		 List<BookingServices> myService=service.myBooking(userId);
 		request.setAttribute("booking", myService);
 		for (BookingServices bookService: myService ) {
 		String serviceBookingName=bookService.getServiceName();
@@ -46,7 +47,7 @@ public class MyBookingServlet extends HttpServlet {
 		request.setAttribute("status", status);
 		}
 		BookingVenuesDaoimpl venues = new BookingVenuesDaoimpl();
-		List<BookingVenues> myVenue=venues.MyBooking(userId);
+		List<BookingVenues> myVenue=venues.myBooking(userId);
 		request.setAttribute("bookingVenue", myVenue);
 		for (BookingVenues bookVenue: myVenue ) {
 		 String venueBookingName=bookVenue.getVenueName();
@@ -63,9 +64,13 @@ public class MyBookingServlet extends HttpServlet {
 		 request.setAttribute("venueStatus", venueStatus);
 		 
 		}
-		RequestDispatcher requestDispatcher=request.getRequestDispatcher("MyBooking.jsp");
+		RequestDispatcher requestDispatcher=request.getRequestDispatcher("myBooking.jsp");
 		requestDispatcher.forward(request, response);
+		}catch(Exception e) {
+			e.printStackTrace();
+
 		}
+	}
 		
 		
 		

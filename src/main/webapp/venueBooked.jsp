@@ -1,10 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+     <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="ISO-8859-1">
-<title>Venue</title>
+<title>booked</title>
 <style>
 body{
     
@@ -22,18 +24,23 @@ body{
     .button{
 		padding: 4px 7px;
 		border-radius: 4px;
-	}	   
+	}	
 	button a{
 	text-decoration:none;
-	}
-
+	}   
 </style>
 </head>
 <body>
-<div class="set">
-               ${notCancelled }
 
-            <button><a href=viewService.jsp>Back</a></button>
-</div>
+    <div class="set">
+     Your Wallet Amount:${venueBalance}<br>
+    Amount deducted:${advanceAmount}<br>
+    After deduction Wallet balance:${venuePayBalance}
+    <h2>${booked}</h2>
+    
+   
+          <button class="button"> <a href=home.jsp> Back</a></button>
+        </div>  
+
 </body>
 </html>

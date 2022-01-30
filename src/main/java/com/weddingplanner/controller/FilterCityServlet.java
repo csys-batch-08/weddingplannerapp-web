@@ -9,7 +9,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import com.weddingplanner.daoimpl.VenuesDaoimpl;
 import com.weddingplanner.module.Venues;
@@ -19,18 +18,23 @@ import com.weddingplanner.module.Venues;
 public class FilterCityServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     
+	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		try {
 		String city=request.getParameter("search");
 		
 		VenuesDaoimpl venue=new VenuesDaoimpl();
 		List<Venues> showVenue=venue.findCity(city);
 		
-		System.out.println(showVenue);
+
 		
 		request.setAttribute("searchCity",showVenue);
-		RequestDispatcher requestdispatcher= request.getRequestDispatcher("FilterCity.jsp");
+		RequestDispatcher requestdispatcher= request.getRequestDispatcher("filterCity.jsp");
 		requestdispatcher.forward(request, response);
+	}catch(Exception e) {
+		e.printStackTrace();
+
+	}
 	}
 
 }

@@ -1,11 +1,9 @@
-<%@page import="com.weddingplanner.module.Services"%>
-<%@page import="java.util.*"%>
-<%@page import="com.weddingplanner.daoimpl.ServicesDaoimpl"%>
+
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
  <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="ISO-8859-1">
 <title>View all services</title>
@@ -138,7 +136,7 @@ margin-left:520px;
 
 </tbody>
           </table><br>
-<button type="button" class="button"><a href="Services.jsp" style="text-decoration:none">Add Service</a></button>
+<button type="button" class="button"><a href="addServices.jsp" style="text-decoration:none">Add Service</a></button>
 <button type="button" class="button"><a href="updateService.jsp" style="text-decoration:none">Update Service</a></button>
 
 	

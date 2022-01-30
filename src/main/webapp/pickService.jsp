@@ -4,7 +4,7 @@
 	    <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 	
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="ISO-8859-1">
 <title>Book service</title>
@@ -104,7 +104,7 @@ button a {
 				<br>
 				<br> <span> For booking click here:
 						<button class="button1">
-							<a href="bookservice.jsp">book</a>
+							<a href="bookService.jsp">book</a>
 						</button>
 				</span> 
   </span> <br>

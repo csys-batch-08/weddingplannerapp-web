@@ -1,13 +1,9 @@
-
-<%@page import="com.weddingplanner.module.Venues"%>
-<%@page import="java.util.*"%>
-<%@page import="com.weddingplanner.daoimpl.VenuesDaoimpl"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
         <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="ISO-8859-1">
 <title>All Venues</title>
@@ -149,7 +145,7 @@ margin-left:520px;
 
 </tbody>
           </table><br>
-<button type="button" class="button"><a href="venues.jsp" style="text-decoration:none">Add Venue</a></button>
+<button type="button" class="button"><a href="addVenues.jsp" style="text-decoration:none">Add Venue</a></button>
 <button type="button" class="button"><a href="updateVenue.jsp" style="text-decoration:none">Update Venue</a></button>
 
 </div>

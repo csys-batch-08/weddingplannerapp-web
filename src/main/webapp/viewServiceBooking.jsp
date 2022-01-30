@@ -1,18 +1,13 @@
-<%@page import="com.weddingplanner.daoimpl.BookingVenuesDaoimpl"%>
-<%@page import="com.weddingplanner.module.BookingVenues"%>
-<%@page import="java.util.*"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-    <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+     <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="ISO-8859-1">
-<title>All Bookings</title>
+<title>Service Booking List</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-</head>
-<body>
 <style>
 *{
 	margin:0px;
@@ -106,7 +101,8 @@ margin-left:520px;
 </style>
 </head>
 <body>
-<nav>
+  <body>
+  <nav>
     	
         <ul>
          <li><a href="viewVenueAdmin.jsp">View venues</a></li>
@@ -118,14 +114,13 @@ margin-left:520px;
         </nav>
 
 <table class="table table-hover table-striped">
-	<h1><b>All Venue Booking List</b></h1>
+	<h1><b>service Booking List</b></h1>
 	<thead>
 	<tr>
-  		<th >S.no</th>
+  		
   		<th>User Id</th>
-		<th>Venue name</th>
-		<th>No Of Guest</th>
-		<th>Venue Package</th>
+		<th>service name</th>
+		<th>service package</th>
 		<th>Event Date</th>
 		<th>Booking Date</th>
 		<th>Status</th>
@@ -133,19 +128,18 @@ margin-left:520px;
 	</thead>
 	<br><br>
 <tbody>
-<c:forEach items="${venueBookingAdmin}" var="venueBooking">
+<c:forEach items="${serviceBookingAdmin}" var="serviceBookingAdmin">
 
 <tr>
 
 
 
-<td>${venueBooking.user_id }</td>
-<td>${venueBooking.venueName}</td>
-<td>${venueBooking.noOfGuest}</td>
-<td>${venueBooking.venuePackage}</td>
-<td> ${venueBooking.eventDate}</td>
-<td>${venueBooking.bookingDate}</td>
-<td>${venueBooking.status}</td>
+<td>${serviceBookingAdmin.userId}</td>
+<td>${serviceBookingAdmin.serviceName}</td>
+<td>${serviceBookingAdmin.servicePackage}</td>
+<td>${serviceBookingAdmin.eventDate}</td>
+<td>${serviceBookingAdmin.bookingDate}</td>
+<td>${serviceBookingAdmin.serviceStatus}</td>
 
 </tr>
 </c:forEach>
@@ -155,6 +149,6 @@ margin-left:520px;
 
     
 
-
+  
 </body>
 </html>

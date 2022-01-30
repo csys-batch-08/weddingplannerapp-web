@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="ISO-8859-1">
 <title>Service booked</title>
@@ -44,7 +44,7 @@
     After deduction Wallet balance:${servicePayBalance}
           <h2>${servicebooked }</h2>
      
-          <button class="button"> <a href=index.jsp> Back</a></button>
+          <button class="button"> <a href=home.jsp> Back</a></button>
           
     </div>     
 </body>

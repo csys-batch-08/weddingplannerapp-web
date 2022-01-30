@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="ISO-8859-1">
 <title>Venue</title>
@@ -32,7 +32,7 @@ body{
 <div class="set">
        <h2>${dateCancelled }</h2>
 
-            <button><a href=MyBooking.jsp>Back</a></button>
+            <a href=MyBooking.jsp><button>Back</button></a>
 </div>
 
 </body>

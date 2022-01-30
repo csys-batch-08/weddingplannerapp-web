@@ -1,24 +1,21 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-    
-   
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="ISO-8859-1">
-<title>Book service</title>
-<link rel="stylesheet" href="style.css">
-<script src="https://kit.fontawesome.com/ae23c8822d.js" crossorigin="anonymous"></script>
+<title>bookvenue</title>
 
 <style>
-  body
+ body
     {
         background-image: url("images/b3.jpg");
         background-size: cover;
     }
  .login-box{
    width:390px;
-    height:450px;
+    height:550px;
     margin:auto;
     margin-top:30px;
     background-color:rgba(195, 160, 202, 0.589);
@@ -63,28 +60,32 @@ button a{
     text-decoration:none;
     color:black;
 }
+
  
-  </style>
+</style>
 </head>
 <body>
-<form action="addToService" class="login-box" method="post">
-		
-		
-		
-    <h1>Book service</h1>
-          <label>service Name:</label>
-            <input type="text" id="name" class="text" name="servicename" value="${serviceName}"  placeholder="" required>
-            <label>service Package:</label>
-            <input type="text" id="venuePackage" class="text" name="servicepackage" value="${servicePackage}"  placeholder="" required>
-            <label>Advance amount:</label>
-           <input type="text" id="advancePackage" class="text" name="advancepackageService" value="${advanceServiceAmount}"  placeholder="" required>
 
-             <label>Event date</label>
-            <input type="date"  name="date" id="datefield" required><br><br>
-            <button class="button"><a href="viewServices.jsp">Back</a></button>
+
+   
+<form action="book" method="post"  class="login-box" >
+         <h1>Book Venue</h1>
+          <label>venue Name:</label>
+            <input type="text" id="name" class="text" name="venuename" value="${venuename}"  placeholder="" required>
+            <label>No.of.guest:</label>
+            <input type="text" id="number" class="text" name="noOfGuest" placeholder="" pattern="[0-9]+"  required>
+            <label>venue Package:</label>
+            <input type="text" id="venuePackage" class="text" name="venuepackage" value="${venuepackage}"  placeholder="" required>
+            <label>Advance Amount:</label>
+            <input type="text" id="advancePackage" class="text" name="advancepackage" value="${advanceAmount}"  placeholder="" required>
+            <label>Event date</label>
+            <input type="date"  name="eventDate" id="datefield" required><br><br>
+           
+            <a href="viewVenues.jsp"><button class="button">Back</button></a>
              <button type="submit" class="button">Book</button>
            
-            </form>
+   </form>
+
 </body>
 <script type="text/javascript">
 var today = new Date();
@@ -100,4 +101,5 @@ if(mm<10){
 today = yyyy+'-'+mm+'-'+dd;
 document.getElementById("datefield").setAttribute("min", today);
 </script>
+
 </html>

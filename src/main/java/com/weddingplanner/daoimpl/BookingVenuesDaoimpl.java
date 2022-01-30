@@ -8,83 +8,70 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import com.weddingplanner.dao.BookingVenueDao;
-import com.weddingplanner.module.BookingServices;
 import com.weddingplanner.module.BookingVenues;
-import com.weddingplanner.module.Venues;
 import com.weddingplanner.util.ConnectionUtil;
 
 public class BookingVenuesDaoimpl implements BookingVenueDao{
 	
 	public boolean bookVenue(BookingVenues bookVenues) {
-//		String bookQuery="insert into booking_venues (user_id,venue_id,venue_name,no_of_guest,function_time,event_date,venue_package) values(?,?,?,?,?,?,?)";
-//		ConnectionUtil conUtil=new ConnectionUtil();
-//	   	Connection con=conUtil.getDbConnection();
-//	   	PreparedStatement prstmt=null;
-//	   	UserDao.findUserId(bookQuery);
-//	    try {
-//			prstmt=con.prepareStatement(bookQuery);
-//			String emailId;
-//			prstmt.setInt(1, bookVenues.getUserId());
-//			prstmt.setInt(2, bookVenues.getVenueId());
-//			prstmt.setString(3, bookVenues.getVenueName());
-//			prstmt.setInt(4, bookVenues.getNoOfGuest());
-//			prstmt.setString(5, bookVenues.getFunctionTiming());
-//			prstmt.setString(6,bookVenues.getEventDate());
-//			prstmt.setDouble(7,bookVenues.getVenuePackage());
-//			prstmt.executeUpdate();
-//			System.out.println("Registered successfully");
-//		} catch (SQLException e) {
-//			e.printStackTrace();
-//			System.out.println("values not inserted");
-//			
-//		}
-		
-//   	 
-	String insert = "INSERT INTO Booking_venues (user_id,venue_id,venue_name,no_of_guest,event_date,venue_package,advance_amount) VALUES(?,?,?,?,?,?,?) ";
 
-	ConnectionUtil conUtil = new ConnectionUtil();
-	Connection con = conUtil.getDbConnection();
-	PreparedStatement prstmt = null;
+	String insert = "INSERT INTO Booking_venues (user_id,venue_id,venue_name,no_of_guest,event_date,venue_package,advance_amount) VALUES(?,?,?,?,?,?,?) ";
+	Connection connection = null;
+	PreparedStatement statement = null;
 	boolean flag=false;
 	try {
-		prstmt = con.prepareStatement(insert);
-		prstmt.setInt(1, bookVenues.getUser_id());
-		prstmt.setInt(2, bookVenues.getVenue_id());
-		prstmt.setString(3, bookVenues.getVenueName());
-		prstmt.setInt(4, bookVenues.getNoOfGuest());
+		connection = ConnectionUtil.getDbConnection();
+		statement = connection.prepareStatement(insert);
+		statement.setInt(1, bookVenues.getUserId());
+		statement.setInt(2, bookVenues.getVenueId());
+		statement.setString(3, bookVenues.getVenueName());
+		statement.setInt(4, bookVenues.getNoOfGuest());
 		
-		prstmt.setDate(5,  java.sql.Date.valueOf(bookVenues.getEventDate()));
-		prstmt.setDouble(6,bookVenues.getVenuePackage());
-		prstmt.setDouble(7,bookVenues.getAdvanceAmount());
-		if(prstmt.executeUpdate()>0);
+		statement.setDate(5,  java.sql.Date.valueOf(bookVenues.getEventDate()));
+		statement.setDouble(6,bookVenues.getVenuePackage());
+		statement.setDouble(7,bookVenues.getAdvanceAmount());
+		if(statement.executeUpdate()>0)
 		{
 		    flag=true;
 		}
-		System.out.println("Your venue Successfully booked");
 	} catch (SQLException e) {
-		// TODO Auto-generated catch block
 		e.printStackTrace();
-		System.out.println("Value not inserted in the table");
+	}
+	finally {
+		
+		if (statement != null) {
+			try {
+				statement.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		if (connection != null) {
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
 	}
 	return flag;
 	   	
 	}  
-	public boolean checkDate(String venuename,LocalDate eventdate) {
-		 String findVenue="select * from booking_venues where venue_name='"+venuename+"' and to_char(event_date,'yyyy-mm-dd')='"+eventdate+"'";
-		 System.out.println(findVenue);
-		 Connection con=ConnectionUtil.getDbConnection();
+	public boolean checkDate(String venuename,LocalDate eventDate) {
+		 String findVenue="select venue_booking_id,user_id,venue_id,venue_name,no_of_guest,booking_date,event_date,venue_package,status,advance_amount from booking_venues where  to_char(event_date,'yyyy-mm-dd')='"+eventDate+"' and venue_name='"+venuename+"'";
+		 Connection connection=null;
 			boolean flag=true;
-			Statement stmt;
+			Statement statement=null;
+			ResultSet resultSet=null;
 			try {
-				stmt = con.createStatement();
-				ResultSet rs=stmt.executeQuery(findVenue);
-				if(rs.next()) {
-					System.out.println("hlo"+rs.getString(4));
-					BookingVenues venue=new BookingVenues(rs.getInt(2),rs.getInt(3),rs.getString(4),rs.getInt(5),rs.getDate(7).toLocalDate(),rs.getDouble(8));
+				connection=ConnectionUtil.getDbConnection();
+				statement = connection.createStatement();
+				resultSet=statement.executeQuery(findVenue);
+				if(resultSet.next()) {
+					new BookingVenues(resultSet.getInt(2),resultSet.getInt(3),resultSet.getString(4),resultSet.getInt(5),resultSet.getDate(7).toLocalDate(),resultSet.getDouble(8));
 					
 				}
 				else {
@@ -92,83 +79,197 @@ public class BookingVenuesDaoimpl implements BookingVenueDao{
 				}
 				
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
+			}
+			finally {
+				if (resultSet != null) {
+					try {
+						resultSet.close();
+					} catch (SQLException e) {
+						e.printStackTrace();
+					}
+				}
+				if (statement != null) {
+					try {
+						statement.close();
+					} catch (SQLException e) {
+						e.printStackTrace();
+					}
+				}
+				if (connection != null) {
+					try {
+						connection.close();
+					} catch (SQLException e) {
+						e.printStackTrace();
+					}
+				}
 			}
 			
 		return flag;
 		
 	}
 	
-	 public void cancelBooking(int userId,String venueName,LocalDate event_date) {
+	 public void cancelBooking(int userId,String venueName,LocalDate eventDate) {
 			String updateQuery="update booking_venues set status='cancelled' where user_id=? and venue_name=? and event_date=?";
-			Connection con=ConnectionUtil.getDbConnection();
-			PreparedStatement prstmt=null;
+			Connection connection=null;
+			PreparedStatement statement=null;
 			try {
-				prstmt=con.prepareStatement(updateQuery);
-				prstmt.setInt(1, userId);
-				prstmt.setString(2, venueName);
-				prstmt.setDate(3,  java.sql.Date.valueOf(event_date));
-
-				prstmt.executeUpdate();
-				prstmt.executeUpdate("commit");
-				System.out.println("profile edited successfully");
+				connection=ConnectionUtil.getDbConnection();
+				statement=connection.prepareStatement(updateQuery);
+				statement.setInt(1, userId);
+				statement.setString(2, venueName);
+				statement.setDate(3,  java.sql.Date.valueOf(eventDate));
+                statement.executeUpdate();
+				statement.executeUpdate("commit");
 			} catch (SQLException e) {
-				// TODO Auto-generated cat;
 				e.printStackTrace();
 			}
+			finally {
+				
+				if (statement != null) {
+					try {
+						statement.close();
+					} catch (SQLException e) {
+						e.printStackTrace();
+					}
+				}
+				if (connection != null) {
+					try {
+						connection.close();
+					} catch (SQLException e) {
+						e.printStackTrace();
+					}
+				}
+			}
+			
+
 	 }
-	 public List<BookingVenues> MyBooking(int userId){
-			List<BookingVenues> venueList =new ArrayList<BookingVenues>();
-			String viewQuery="select * from Booking_venues where user_id='"+userId+"'";
-			Connection con=ConnectionUtil.getDbConnection();
+	 public List<BookingVenues> myBooking(int userId){
+			List<BookingVenues> venueList =new ArrayList<>();
+			String viewQuery="select venue_booking_id,user_id,venue_id,venue_name,no_of_guest,booking_date,event_date,venue_package,status,advance_amount from Booking_venues where user_id='"+userId+"'";
+			Connection connection=null;
+			Statement statement=null;
+			ResultSet resultSet=null;
 			try {
-				Statement stmt=con.createStatement();
-				ResultSet rs=stmt.executeQuery(viewQuery);
-				while(rs.next()) {
-					BookingVenues venue=new BookingVenues(rs.getInt(2),rs.getInt(3),rs.getString(4),rs.getInt(5),rs.getDate(7).toLocalDate(),rs.getDouble(8));
+				connection=ConnectionUtil.getDbConnection();
+				statement=connection.createStatement();
+				resultSet=statement.executeQuery(viewQuery);
+				while(resultSet.next()) {
+					BookingVenues venue=new BookingVenues(resultSet.getInt(2),resultSet.getInt(3),resultSet.getString(4),resultSet.getInt(5),resultSet.getDate(7).toLocalDate(),resultSet.getDouble(8));
 				venueList.add(venue);
 				}
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
+			}
+			finally {
+				if (resultSet != null) {
+					try {
+						resultSet.close();
+					} catch (SQLException e) {
+						e.printStackTrace();
+					}
+				}
+				if (statement != null) {
+					try {
+						statement.close();
+					} catch (SQLException e) {
+						e.printStackTrace();
+					}
+				}
+				if (connection != null) {
+					try {
+						connection.close();
+					} catch (SQLException e) {
+						e.printStackTrace();
+					}
+				}
 			}
 			
 	     return venueList;
 		}
 	 public LocalDate findVenueBookingDate(int userId) {
 		 String findVenue="select booking_Date from booking_venues where user_id='"+userId+"'";
-		 Connection con=ConnectionUtil.getDbConnection();
+		 Connection connection=null;
 			LocalDate bookDate=null;
-			Statement stmt;
+			Statement statement=null;
+			ResultSet resultSet=null;
 			try {
-				stmt = con.createStatement();
-				ResultSet rs=stmt.executeQuery(findVenue);
-				if(rs.next()) {
-					bookDate=rs.getDate(1).toLocalDate();
+				connection=ConnectionUtil.getDbConnection();
+				statement = connection.createStatement();
+				resultSet=statement.executeQuery(findVenue);
+				if(resultSet.next()) {
+					bookDate=resultSet.getDate(1).toLocalDate();
 				}
 			} catch (SQLException e) {
 
 				e.printStackTrace();
 			}
+			finally {
+				if (resultSet != null) {
+					try {
+						resultSet.close();
+					} catch (SQLException e) {
+						e.printStackTrace();
+					}
+				}
+				if (statement != null) {
+					try {
+						statement.close();
+					} catch (SQLException e) {
+						e.printStackTrace();
+					}
+				}
+				if (connection != null) {
+					try {
+						connection.close();
+					} catch (SQLException e) {
+						e.printStackTrace();
+					}
+				}
+			}
 			
 		 return bookDate;
 		 
 	 }
-	 public int findBookingVenueId(int userId,LocalDate eventDate,String venueName) {
-		 String findVenue="select venue_booking_id from booking_venues where user_id='"+userId+"' and to_char(event_date,'yyyy-mm-dd')='"+eventDate+"' and venue_name='"+venueName+"'";
-		 Connection con=ConnectionUtil.getDbConnection();
+	 public int findBookingVenueId(int userId,LocalDate eventDateBooking,String venueName) {
+		 String findVenue="select venue_booking_id from booking_venues where  to_char(event_date,'yyyy-mm-dd')='"+eventDateBooking+"' and  user_id='"+userId+"' and venue_name='"+venueName+"'";
+		 Connection connection=null;
 			int venueBookingId=0;
-			Statement stmt;
+			Statement statement=null;
+			ResultSet resultSet=null;
 			try {
-				stmt = con.createStatement();
-				ResultSet rs=stmt.executeQuery(findVenue);
-				if(rs.next()) {
-					venueBookingId=rs.getInt(1);
+				connection=ConnectionUtil.getDbConnection();
+				statement = connection.createStatement();
+		         resultSet=statement.executeQuery(findVenue);
+				if(resultSet.next()) {
+					venueBookingId=resultSet.getInt(1);
 				}
 			} catch (SQLException e) {
 
 				e.printStackTrace();
+			}
+			finally {
+				if (resultSet != null) {
+					try {
+						resultSet.close();
+					} catch (SQLException e) {
+						e.printStackTrace();
+					}
+				}
+				if (statement != null) {
+					try {
+						statement.close();
+					} catch (SQLException e) {
+						e.printStackTrace();
+					}
+				}
+				if (connection != null) {
+					try {
+						connection.close();
+					} catch (SQLException e) {
+						e.printStackTrace();
+					}
+				}
 			}
 			
 		 return venueBookingId;
@@ -178,55 +279,107 @@ public class BookingVenuesDaoimpl implements BookingVenueDao{
 	 public int validateCancelBooking(int venueBookingId) {
 		 String findVenue="select floor((event_date)- to_date(sysdate)) as no_of_days from booking_venues where venue_booking_id='"+venueBookingId+"'";
 		 		
-		 Connection con=ConnectionUtil.getDbConnection();
+		 Connection connection=null;
 			int noOfDays=0;
-			Statement stmt;
+			Statement statement = null;
+			ResultSet resultSet=null;
 			try {
-				stmt = con.createStatement();
-				ResultSet rs=stmt.executeQuery(findVenue);
-				if(rs.next()) {
-					noOfDays=rs.getInt(1);
+				connection=ConnectionUtil.getDbConnection();
+				statement = connection.createStatement();
+			    resultSet=statement.executeQuery(findVenue);
+				if(resultSet.next()) {
+					noOfDays=resultSet.getInt(1);
 				}
 			} catch (SQLException e) {
 
 				e.printStackTrace();
 			}
+			finally {
+				if (resultSet != null) {
+					try {
+						resultSet.close();
+					} catch (SQLException e) {
+						e.printStackTrace();
+					}
+				}
+				if (statement != null) {
+					try {
+						statement.close();
+					} catch (SQLException e) {
+						e.printStackTrace();
+					}
+				}
+				if (connection != null) {
+					try {
+						connection.close();
+					} catch (SQLException e) {
+						e.printStackTrace();
+					}
+				}
+			}
+
 			
-		 return venueBookingId;
+		 return noOfDays;
 		 
 	}
 	 public String findStatus(String venueName,LocalDate eventDate) {
 		 String findVenue="select status from booking_venues where venue_name='"+venueName+"' and to_char(event_date,'yyyy-mm-dd')='"+eventDate+"'";
-		 Connection con=ConnectionUtil.getDbConnection();
+		 Connection connection=null;
 			String status=null;
-			Statement stmt;
+			Statement statement = null;
+			ResultSet resultSet=null;
 			try {
-				stmt = con.createStatement();
-				ResultSet rs=stmt.executeQuery(findVenue);
-				if(rs.next()) {
-					status=rs.getString(1);
+				connection=ConnectionUtil.getDbConnection();
+				statement = connection.createStatement();
+				resultSet=statement.executeQuery(findVenue);
+				if(resultSet.next()) {
+					status=resultSet.getString(1);
 				}
 			} catch (SQLException e) {
 
 				e.printStackTrace();
 			}
+			finally {
+				if (resultSet != null) {
+					try {
+						resultSet.close();
+					} catch (SQLException e) {
+						e.printStackTrace();
+					}
+				}
+				if (statement != null) {
+					try {
+						statement.close();
+					} catch (SQLException e) {
+						e.printStackTrace();
+					}
+				}
+				if (connection != null) {
+					try {
+						connection.close();
+					} catch (SQLException e) {
+						e.printStackTrace();
+					}
+				}
+			}
+
 			
 		 return status;
 		 
 	 }
 	 
-	 public Boolean checkCancelBooking(int userId,String venueName,LocalDate eventdate) {
-		 String findVenue="select * from booking_venues where status='cancelled' and venue_name='"+venueName+"' and to_char(event_date,'yyyy-mm-dd')='"+eventdate+"'";
-		 System.out.println(findVenue);
-		 Connection con=ConnectionUtil.getDbConnection();
+	 public Boolean checkCancelBooking(String venueName,LocalDate eventdate) {
+		 String findVenue="select venue_booking_id,user_id,venue_id,venue_name,no_of_guest,booking_date,event_date,venue_package,status,advance_amount from booking_venues where status='cancelled' and venue_name='"+venueName+"' and to_char(event_date,'yyyy-mm-dd')='"+eventdate+"'";
+		 Connection connection=null;
 			boolean flag=true;
-			Statement stmt;
+			Statement statement = null;
+			ResultSet resultSet=null;
 			try {
-				stmt = con.createStatement();
-				ResultSet rs=stmt.executeQuery(findVenue);
-				if(rs.next()) {
-					System.out.println("hlo"+rs.getString(4));
-					BookingVenues venue=new BookingVenues(rs.getInt(2),rs.getInt(3),rs.getString(4),rs.getInt(5),rs.getDate(7).toLocalDate(),rs.getDouble(8));
+				connection=ConnectionUtil.getDbConnection();
+				statement = connection.createStatement();
+				resultSet=statement.executeQuery(findVenue);
+				if(resultSet.next()) {
+					new BookingVenues(resultSet.getInt(2),resultSet.getInt(3),resultSet.getString(4),resultSet.getInt(5),resultSet.getDate(7).toLocalDate(),resultSet.getDouble(8));
 					
 				}
 				else {
@@ -234,28 +387,75 @@ public class BookingVenuesDaoimpl implements BookingVenueDao{
 				}
 				
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
+			}
+			finally {
+				if (resultSet != null) {
+					try {
+						resultSet.close();
+					} catch (SQLException e) {
+						e.printStackTrace();
+					}
+				}
+				if (statement != null) {
+					try {
+						statement.close();
+					} catch (SQLException e) {
+						e.printStackTrace();
+					}
+				}
+				if (connection != null) {
+					try {
+						connection.close();
+					} catch (SQLException e) {
+						e.printStackTrace();
+					}
+				}
 			}
 			
 		return flag;
 		
 	}
 	 
-	 public List<BookingVenues> userVenueBooking(int userId){
-			List<BookingVenues> venueList =new ArrayList<BookingVenues>();
-			String viewQuery="select * from Booking_venues";
-			Connection con=ConnectionUtil.getDbConnection();
+	 public List<BookingVenues> userVenueBooking(){
+			List<BookingVenues> venueList =new ArrayList<>();
+			String viewQuery="select venue_booking_id,user_id,venue_id,venue_name,no_of_guest,booking_date,event_date,venue_package,status,advance_amount from Booking_venues";
+			Connection connection=null;
+			Statement statement=null;
+			ResultSet resultSet=null;
 			try {
-				Statement stmt=con.createStatement();
-				ResultSet rs=stmt.executeQuery(viewQuery);
-				while(rs.next()) {
-					BookingVenues venue=new BookingVenues(rs.getInt(2),rs.getInt(3),rs.getString(4),rs.getInt(5),rs.getDate(7).toLocalDate(),rs.getDouble(8));
+				connection=ConnectionUtil.getDbConnection();
+				statement=connection.createStatement();
+				resultSet=statement.executeQuery(viewQuery);
+				while(resultSet.next()) {
+					BookingVenues venue=new BookingVenues(resultSet.getInt(2),resultSet.getInt(3),resultSet.getString(4),resultSet.getInt(5),resultSet.getDate(7).toLocalDate(),resultSet.getDouble(8));
 				venueList.add(venue);
 				}
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
+			}
+			finally {
+				if (resultSet != null) {
+					try {
+						resultSet.close();
+					} catch (SQLException e) {
+						e.printStackTrace();
+					}
+				}
+				if (statement != null) {
+					try {
+						statement.close();
+					} catch (SQLException e) {
+						e.printStackTrace();
+					}
+				}
+				if (connection != null) {
+					try {
+						connection.close();
+					} catch (SQLException e) {
+						e.printStackTrace();
+					}
+				}
 			}
 			
 	     return venueList;
@@ -263,24 +463,50 @@ public class BookingVenuesDaoimpl implements BookingVenueDao{
 	 
 	 
 	 public List<BookingVenues> allBookings(){
-			List<BookingVenues> venueList =new ArrayList<BookingVenues>();
-			String viewQuery="select * from Booking_venues";
-			Connection con=ConnectionUtil.getDbConnection();
+			List<BookingVenues> venueList =new ArrayList<>();
+			String viewQuery="select venue_booking_id,user_id,venue_id,venue_name,no_of_guest,booking_date,event_date,venue_package,status,advance_amount from Booking_venues";
+			Connection connection=null;
+			Statement statement=null;
+			ResultSet resultSet=null;
 			try {
-				Statement stmt=con.createStatement();
-				ResultSet rs=stmt.executeQuery(viewQuery);
-				while(rs.next()) {
-					BookingVenues venue=new BookingVenues(rs.getInt(2),rs.getInt(3),rs.getString(4),rs.getInt(5),rs.getDate(6).toLocalDate(),rs.getDate(7).toLocalDate(),rs.getDouble(8),rs.getString(9));
+				connection=ConnectionUtil.getDbConnection();
+				statement=connection.createStatement();
+				resultSet=statement.executeQuery(viewQuery);
+				while(resultSet.next()) {
+					BookingVenues venue=new BookingVenues(resultSet.getInt(2),resultSet.getInt(3),resultSet.getString(4),resultSet.getInt(5),resultSet.getDate(6).toLocalDate(),resultSet.getDate(7).toLocalDate(),resultSet.getDouble(8),resultSet.getString(9));
 				venueList.add(venue);
 				}
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			finally {
+				if (resultSet != null) {
+					try {
+						resultSet.close();
+					} catch (SQLException e) {
+						e.printStackTrace();
+					}
+				}
+				if (statement != null) {
+					try {
+						statement.close();
+					} catch (SQLException e) {
+						e.printStackTrace();
+					}
+				}
+				if (connection != null) {
+					try {
+						connection.close();
+					} catch (SQLException e) {
+						e.printStackTrace();
+					}
+				}
+			}
+			
+		 
 			
 	     return venueList;
 		}
-	 
 
    	
 }  	

@@ -13,20 +13,27 @@ import javax.servlet.http.HttpServletResponse;
 import com.weddingplanner.daoimpl.ServicesDaoimpl;
 import com.weddingplanner.module.Services;
 
-/**
- * Servlet implementation class ViewServiceAdminServlet
- */
+
 @WebServlet("/ViewServiceAdminServlet")
 public class ViewServiceAdminServlet extends HttpServlet {
 	
+	
+	private static final long serialVersionUID = 1L;
+
+	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		 ServicesDaoimpl serviceDao = new ServicesDaoimpl();
+		try { 
+		ServicesDaoimpl serviceDao = new ServicesDaoimpl();
 		   List<Services> serviceList=serviceDao.showServices();
 		   request.setAttribute("serviceListAdmin", serviceList);
 		     RequestDispatcher requestDispatcher=request.getRequestDispatcher("viewServicesAdmin.jsp");
 				requestDispatcher.forward(request, response);
 		  
 		    
+	}catch (Exception e) {
+		
+		e.printStackTrace();
+	}
 	}
 
 	

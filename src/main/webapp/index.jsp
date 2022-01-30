@@ -1,38 +1,99 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+    
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="ISO-8859-1">
-<title>home</title>
- <style>
-    body
-    {
-        background-image: url("images/wedding4.jpg");
-        background-size: cover;
-    }
-    nav a{
-        float:right;            
-        text-decoration: none;
-        color:white;
-        padding-right: 17px;
-        font-size: 17px;
-        margin-top: 10px;
-    }
-    </style>
+<title>Login</title>
+<link rel="stylesheet" href="style1.css">
+<style>
+*{
+	margin:0px;
+	padding:0px;
+	box-sizing: border-box;
+	font-family: 'Poppins', sans-serif;
+}
+h3{
+text-align:center;
+}
+body{
+    background-image: url("images/login.jpeg");
+    background-size:1370px 653px;  
+}
+
+.login-box{
+    width:420px;
+    height:280px;
+    margin:auto;
+   margin-top: 150px;
+    border-radius:6px ;
+    background-color: rgba(95, 166, 211, 0.5);
+    
+}
+p a{
+   text-decoration:none;
+}
+form{
+    width:300px;
+    margin-left:80px;
+}
+form label{
+    display:flex;
+    margin-top:20px;
+    padding-right:100px;
+    font-size:18px;
+}
+form input{
+    
+    padding-right:90px;
+    margin-left:1px;
+	padding-top:10px;
+    border:none;
+    border:1px solid gray;
+    border-radius: 6px;
+    outline:none;
+}
+.button{
+    width: 250px;
+    height:35px;
+    margin-top: 20px;
+  
+    border:none;
+    background-color: rgba(53, 138, 190, 0.589);
+    color:black;
+    font-size:18px;
+    border-radius:5px;
+}
+button:hover
+{
+	opacity:0.5; 
+}
+h1{
+	text-align: center;
+}
+
+</style>
 </head>
-<body>
-    <nav>
-     <a href="login.jsp">Logout</a>
-        <a href="viewVenuesServlet">Venues</a>
-        <a href="ViewServiceServlet">Services</a>
-        <a href="rechargewallet.jsp">Wallet</a>
-        <a href="AboutUs.jsp">About us</a>
-        <a href="">Contact us</a>
-        <a href="UserProfileServlet">My Profile</a>
+<body class="bd">
+    <div class="login-box">
+    <div class="login">
+        <h1>Login</h1>
+        <form action="login" method="post">
+           <label>Email</label>
+           <input type="email" name="email" placeholder="" required>
+           <label>Password</label>
+           <input type="password" name="password" placeholder="" required><br>
+          <button class="button">Submit</button><br>
+          
+        </form>
+    </div>
+    </div>
+        <p class="para">Not have an account?<a href="register.jsp">Sign up here</a></p>
+         <c:if test="${sessionScope.login !=null}">
+         <h3>${sessionScope.login}</h3>
+         </c:if>
+         <c:remove var="login" scope="session"/>
        
-        <a href="MyBookingServlet">My booking</a>
-        
-    </nav>
-</body>
 </html>

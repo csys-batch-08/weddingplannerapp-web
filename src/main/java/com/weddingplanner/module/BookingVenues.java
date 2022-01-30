@@ -6,8 +6,8 @@ import java.util.Objects;
 
 public class BookingVenues {
 	
-	private int user_id;
-	private int venue_id;
+	private int userId;
+	private int venueId;
 	private String venueName;
 	private int noOfGuest;
 	private LocalDate bookingDate;
@@ -15,17 +15,21 @@ public class BookingVenues {
 	private double venuePackage;
 	private String status;
 	private int advanceAmount;
-	public int getUser_id() {
-		return user_id;
+	
+	
+	
+	
+	public int getUserId() {
+		return userId;
 	}
-	public void setUser_id(int user_id) {
-		this.user_id = user_id;
+	public void setUserId(int userId) {
+		this.userId = userId;
 	}
-	public int getVenue_id() {
-		return venue_id;
+	public int getVenueId() {
+		return venueId;
 	}
-	public void setVenue_id(int venue_id) {
-		this.venue_id = venue_id;
+	public void setVenueId(int venueId) {
+		this.venueId = venueId;
 	}
 	public String getVenueName() {
 		return venueName;
@@ -39,7 +43,12 @@ public class BookingVenues {
 	public void setNoOfGuest(int noOfGuest) {
 		this.noOfGuest = noOfGuest;
 	}
-	
+	public LocalDate getBookingDate() {
+		return bookingDate;
+	}
+	public void setBookingDate(LocalDate bookingDate) {
+		this.bookingDate = bookingDate;
+	}
 	public LocalDate getEventDate() {
 		return eventDate;
 	}
@@ -52,26 +61,12 @@ public class BookingVenues {
 	public void setVenuePackage(double venuePackage) {
 		this.venuePackage = venuePackage;
 	}
-	
-	
-	
-	public LocalDate getBookingDate() {
-		return bookingDate;
-	}
-	public void setBookingDate(LocalDate bookingDate) {
-		this.bookingDate = bookingDate;
-	}
 	public String getStatus() {
 		return status;
 	}
 	public void setStatus(String status) {
 		this.status = status;
 	}
-	
-	
-	
-	
-	
 	public int getAdvanceAmount() {
 		return advanceAmount;
 	}
@@ -81,22 +76,23 @@ public class BookingVenues {
 	
 	
 	
-	public BookingVenues(int user_id, int venue_id, String venueName, int noOfGuest, LocalDate eventDate,
+	public BookingVenues(int userId, int venueId, String venueName, int noOfGuest, LocalDate eventDate,
 			double venuePackage, int advanceAmount) {
 		super();
-		this.user_id = user_id;
-		this.venue_id = venue_id;
+		this.userId = userId;
+		this.venueId = venueId;
 		this.venueName = venueName;
 		this.noOfGuest = noOfGuest;
 		this.eventDate = eventDate;
 		this.venuePackage = venuePackage;
 		this.advanceAmount = advanceAmount;
 	}
-	public BookingVenues(int user_id, int venue_id, String venueName, int noOfGuest, LocalDate bookingDate,
+	
+	public BookingVenues(int userId, int venueId, String venueName, int noOfGuest, LocalDate bookingDate,
 			LocalDate eventDate, double venuePackage, String status) {
 		super();
-		this.user_id = user_id;
-		this.venue_id = venue_id;
+		this.userId = userId;
+		this.venueId = venueId;
 		this.venueName = venueName;
 		this.noOfGuest = noOfGuest;
 		this.bookingDate = bookingDate;
@@ -104,24 +100,25 @@ public class BookingVenues {
 		this.venuePackage = venuePackage;
 		this.status = status;
 	}
-	public BookingVenues(int user_id, int venue_id, String venueName, int noOfGuest,
-			LocalDate eventDate, double venuePackage) {
+	
+	public BookingVenues(int userId, int venueId, String venueName, int noOfGuest, LocalDate eventDate,
+			double venuePackage) {
 		super();
-		this.user_id = user_id;
-		this.venue_id = venue_id;
+		this.userId = userId;
+		this.venueId = venueId;
 		this.venueName = venueName;
 		this.noOfGuest = noOfGuest;
-		
 		this.eventDate = eventDate;
 		this.venuePackage = venuePackage;
 	}
 	public BookingVenues() {
 		super();
-		// TODO Auto-generated constructor stub
+		
 	}
 	@Override
 	public int hashCode() {
-		return Objects.hash(eventDate,  noOfGuest, user_id, venueName, venuePackage, venue_id);
+		return Objects.hash(advanceAmount, bookingDate, eventDate, noOfGuest, status, userId, venueId, venueName,
+				venuePackage);
 	}
 	@Override
 	public boolean equals(Object obj) {
@@ -132,21 +129,18 @@ public class BookingVenues {
 		if (getClass() != obj.getClass())
 			return false;
 		BookingVenues other = (BookingVenues) obj;
-		return Objects.equals(eventDate, other.eventDate)
-				&& noOfGuest == other.noOfGuest && user_id == other.user_id
+		return advanceAmount == other.advanceAmount && Objects.equals(bookingDate, other.bookingDate)
+				&& Objects.equals(eventDate, other.eventDate) && noOfGuest == other.noOfGuest
+				&& Objects.equals(status, other.status) && userId == other.userId && venueId == other.venueId
 				&& Objects.equals(venueName, other.venueName)
-				&& Double.doubleToLongBits(venuePackage) == Double.doubleToLongBits(other.venuePackage)
-				&& venue_id == other.venue_id;
+				&& Double.doubleToLongBits(venuePackage) == Double.doubleToLongBits(other.venuePackage);
 	}
 	@Override
 	public String toString() {
-		return "BookingVenues [user_id=" + user_id + ", venue_id=" + venue_id + ", venueName=" + venueName
-				+ ", noOfGuest=" + noOfGuest + ", eventDate=" + eventDate
-				+ ", venuePackage=" + venuePackage + "]";
+		return "BookingVenues [userId=" + userId + ", venueId=" + venueId + ", venueName=" + venueName + ", noOfGuest="
+				+ noOfGuest + ", bookingDate=" + bookingDate + ", eventDate=" + eventDate + ", venuePackage="
+				+ venuePackage + ", status=" + status + ", advanceAmount=" + advanceAmount + "]";
 	}
-	
-	
-	
 	
 	
 

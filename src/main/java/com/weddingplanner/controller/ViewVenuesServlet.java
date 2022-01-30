@@ -14,18 +14,23 @@ import com.weddingplanner.daoimpl.VenuesDaoimpl;
 import com.weddingplanner.module.Venues;
 
 
-@WebServlet("/viewVenuesServlet")
-public class viewVenuesServlet extends HttpServlet {
-	
-	
+@WebServlet("/ViewVenuesServlet")
+public class ViewVenuesServlet extends HttpServlet {
+
+	private static final long serialVersionUID = 1L;
+
 @Override
 protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         VenuesDaoimpl venueDaoImpl = new VenuesDaoimpl();
 		List<Venues> showVenue=venueDaoImpl.showVenue();
-		  
+		 try { 
 		request.setAttribute("showVenue", showVenue);
 		RequestDispatcher requestDispatcher=request.getRequestDispatcher("viewVenues.jsp");
 		requestDispatcher.forward(request,response);
+		 }catch (Exception e) {
+				
+				e.printStackTrace();
+			}
 
 		
 	}

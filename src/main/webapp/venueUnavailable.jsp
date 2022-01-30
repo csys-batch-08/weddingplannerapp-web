@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="ISO-8859-1">
 <title>Venue</title>
@@ -31,9 +31,8 @@ body{
 </style>
 <body>
 <div class="set">
-<% String booked=(String) session.getAttribute("unavailable");%>
-          <h2><%=booked%></h2>
-          <% session.removeAttribute("unavailable"); %>
+  ${unavailable}
+
             <button><a href=viewVenues.jsp>Back</a></button>
             </div>
 </body>

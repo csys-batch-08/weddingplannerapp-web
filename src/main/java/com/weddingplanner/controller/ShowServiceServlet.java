@@ -19,32 +19,26 @@ import com.weddingplanner.module.Services;
 public class ShowServiceServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public ShowServiceServlet() {
-        super();
-       
-    }
-
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
+    
+	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		try {
 		ServicesDaoimpl serviceDaoImpl = new ServicesDaoimpl();
 		HttpSession session = request.getSession();
 		String serviceType = request.getParameter("serviceType");
 	    List<Services> serviceList=serviceDaoImpl.showServiceList(serviceType);
 		session.setAttribute("serviceType", serviceType);
 		 request.setAttribute("serviceShow",serviceList);
-	     RequestDispatcher requestDispatcher=request.getRequestDispatcher("ShowService.jsp");
+	     RequestDispatcher requestDispatcher=request.getRequestDispatcher("showService.jsp");
 			requestDispatcher.forward(request, response);
 		
 		 
 		
-	}
+	}catch(Exception e) {
+		e.printStackTrace();
 
+	}
+	}
 	
 
 }

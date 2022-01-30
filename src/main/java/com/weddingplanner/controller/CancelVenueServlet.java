@@ -12,43 +12,22 @@ import javax.servlet.http.HttpSession;
 
 import com.weddingplanner.daoimpl.BookingVenuesDaoimpl;
 import com.weddingplanner.daoimpl.UserDaoimpl;
-import com.weddingplanner.module.BookingVenues;
 
-/**
- * Servlet implementation class CancelVenueServlet
- */
+
+
 @WebServlet("/cancelVenue")
 public class CancelVenueServlet extends HttpServlet {
+	
+
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public CancelVenueServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
+	@Override
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		//doGet(request, response);
+		try {
 		HttpSession session=request.getSession();
        int userId=(int) session.getAttribute("id");
        String venueName=(String)session.getAttribute("venueBookingName");
-       System.out.println(venueName);
 	   Double venuePackage=(Double) session.getAttribute("venueBookingPackage");
-	   System.out.println(venuePackage);
        BookingVenuesDaoimpl bookVenue=new BookingVenuesDaoimpl();
        LocalDate eventDate=(LocalDate)session.getAttribute("venueBookingEventDate");
       
@@ -56,8 +35,8 @@ public class CancelVenueServlet extends HttpServlet {
 
        int days=bookVenue.validateCancelBooking(bookingVenueid);
        UserDaoimpl userdao=new UserDaoimpl();
-       boolean flag=bookVenue.checkCancelBooking(userId, venueName, eventDate);
-       if(flag==false) {
+       boolean flag=bookVenue.checkCancelBooking( venueName, eventDate);
+       if(!flag) {
        if(days>0) {
     	   
        int walletBalance=0;
@@ -69,7 +48,7 @@ public class CancelVenueServlet extends HttpServlet {
 
 		
 		
-			int balance=userdao.updatewalletBalance(payWallet, userId);
+			
 			
 				bookVenue.cancelBooking(userId,venueName,eventDate);
 		         session.setAttribute("cancelled", "venue sucessfully cancelled");
@@ -80,16 +59,20 @@ public class CancelVenueServlet extends HttpServlet {
        else
        {
     	   session.setAttribute("notCancelled","Nope!You can't cancel the Booking" );
-    	   response.sendRedirect("CancelVenueDate.jsp");
+    	   response.sendRedirect("cancelVenueDate.jsp");
        }
 
 	
        }else {
     	   session.setAttribute("dateCancelled","You can't cancel the Booking ! You already cancel this Booking" );
-    	   response.sendRedirect("CancelDate.jsp");
+    	   response.sendRedirect("cancelDate.jsp");
     	   
        }
 
+	}catch(Exception e) {
+		e.printStackTrace();
+
+	}
 	}
 		         
 		

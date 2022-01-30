@@ -1,10 +1,7 @@
 package com.weddingplanner.controller;
 
 import java.io.IOException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.util.Date;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -15,74 +12,42 @@ import javax.servlet.http.HttpSession;
 
 import com.weddingplanner.daoimpl.BookingVenuesDaoimpl;
 import com.weddingplanner.daoimpl.UserDaoimpl;
-import com.weddingplanner.module.BookingDetails;
 import com.weddingplanner.module.BookingVenues;
-import com.weddingplanner.module.Services;
-
-
-
-/**
- * Servlet implementation class BookVenueServlet
- */
 @WebServlet("/book")
 
 public class BookVenueServlet extends HttpServlet {
+	
 	private static final long serialVersionUID = 1L;
 
-	/**
-	 * @see HttpServlet#HttpServlet()
-	 */
-	public BookVenueServlet() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		try {
 		HttpSession session = request.getSession();
-		SimpleDateFormat sdf = new SimpleDateFormat();
 		int userId = (int) session.getAttribute("id");
-		System.out.println(userId);
 		int venueId = (int) session.getAttribute("venueId");
 		String venuename = request.getParameter("venuename");
 		request.setAttribute("venuename", venuename);
 		int noOfGuest = Integer.parseInt(request.getParameter("noOfGuest"));
-		// String functionTiming = request.getParameter("functionTiming");
 		Double venuePackage = Double.parseDouble(request.getParameter("venuepackage"));
 		session.setAttribute("venueBookPackage", venuePackage);
 		int advanceAmount = Integer.parseInt(request.getParameter("advancepackage"));
 		session.setAttribute("advanceAmount", advanceAmount);
 		LocalDate eventDate = LocalDate.parse(request.getParameter("eventDate"));
 		session.setAttribute("eventdate", eventDate);
-		Services service = new Services();
 		BookingVenuesDaoimpl bookVenue = new BookingVenuesDaoimpl();
 		int bookingVenueId = bookVenue.findBookingVenueId(userId, eventDate,venuename);
-		session.setAttribute("bookingVenueId", bookVenue);
+		session.setAttribute("bookingVenueId", bookingVenueId);
 		boolean flag = bookVenue.checkDate(venuename, eventDate);
 
-		if (flag == false) {
+		if (!flag) {
 
 			UserDaoimpl userdao = new UserDaoimpl();
 
 			int walletBalance = 0;
 			walletBalance = userdao.walletbal(userId);
 			session.setAttribute("venueBalance", walletBalance);
-			int payWallet = (int) (walletBalance - advanceAmount);
+			int payWallet = (walletBalance - advanceAmount);
 			session.setAttribute("venuePayBalance", payWallet);
 
 			if (advanceAmount <= walletBalance) {
@@ -92,7 +57,7 @@ public class BookVenueServlet extends HttpServlet {
 					BookingVenues book = new BookingVenues(userId, venueId, venuename, noOfGuest, eventDate,venuePackage,advanceAmount);
 					bookVenue.bookVenue(book);
 					session.setAttribute("booked", "venue sucessfully booked");
-					response.sendRedirect("bookvenue2.jsp");
+					response.sendRedirect("venueBooked.jsp");
 
 				}
 
@@ -106,6 +71,10 @@ public class BookVenueServlet extends HttpServlet {
 			response.sendRedirect("venueUnavailable.jsp");
 			session.setAttribute("unavailable", "This venue already booked on this date");
 		}
+	}catch(Exception e) {
+		e.printStackTrace();
+
+	}
 	}
 
 }

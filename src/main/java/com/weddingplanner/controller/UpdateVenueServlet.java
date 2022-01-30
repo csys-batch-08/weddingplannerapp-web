@@ -10,36 +10,15 @@ import javax.servlet.http.HttpServletResponse;
 import com.weddingplanner.daoimpl.VenuesDaoimpl;
 import com.weddingplanner.module.Venues;
 
-/**
- * Servlet implementation class UpdateVenueServlet
- */
+
 @WebServlet("/update")
 public class UpdateVenueServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public UpdateVenueServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
-
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
+    
+	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		//doGet(request, response);
 		
+		try {
 		String venueName=request.getParameter("venueName");
 		String venueVendorName=request.getParameter("venueVendorName");
 		Long contactNumber=Long.parseLong(request.getParameter("contactNumber"));
@@ -49,6 +28,10 @@ public class UpdateVenueServlet extends HttpServlet {
 		VenuesDaoimpl venueDao=new VenuesDaoimpl();
 		venueDao.updateVenue(venue);
 	    response.sendRedirect("viewVenueAdmin");
+		}catch(Exception e) {
+			e.printStackTrace();
+
+		}
 
          
 	}

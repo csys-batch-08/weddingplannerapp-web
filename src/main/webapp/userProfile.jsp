@@ -1,13 +1,10 @@
-<%@page import="com.weddingplanner.module.User"%>
-<%@page import="java.sql.Array"%>
-<%@page import="com.weddingplanner.daoimpl.UserDaoimpl"%>
-<%@page import="java.util.*"%>
+
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
     <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="ISO-8859-1">
 <title>profile</title>
@@ -56,7 +53,7 @@ body
 		<h4>Email address :${viewUserProfile.emailId}</h4>
 		<h4>Wallet :${viewUserProfile.wallet}</h4>
 		<button class="button"><a href="index.jsp">Back</a></button>
-		<button class="button"><a href="UpdateUserProfile.jsp">Edit</a></button>
+		<button class="button"><a href="updateUserProfile.jsp">Edit</a></button>
 	
 </div>
 </c:forEach>

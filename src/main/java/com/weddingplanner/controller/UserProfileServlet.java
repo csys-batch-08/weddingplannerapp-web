@@ -14,20 +14,27 @@ import javax.servlet.http.HttpSession;
 import com.weddingplanner.daoimpl.UserDaoimpl;
 import com.weddingplanner.module.User;
 
-/**
- * Servlet implementation class UserProfileServlet
- */
+
 @WebServlet("/UserProfileServlet")
 public class UserProfileServlet extends HttpServlet {
 	
+	
+	private static final long serialVersionUID = 1L;
+
+	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session=request.getSession();
+		try {
 		int userId=(int)session.getAttribute("id");
 		UserDaoimpl userdao = new UserDaoimpl();
 	   List<User> userList = userdao.currentuserprofile(userId);
 	   request.setAttribute("userProfile", userList);
 	   RequestDispatcher requestDispatcher=request.getRequestDispatcher("userProfile.jsp");
 		requestDispatcher.forward(request, response);
+		}catch(Exception e) {
+			e.printStackTrace();
+
+		}
 	
 	
 	}

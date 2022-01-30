@@ -4,7 +4,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="ISO-8859-1">
 <title>searchByprice</title>
@@ -112,6 +112,7 @@ nav ul li .active{
 	   	<td>
 	   	<table id="service">
 	   	<tbody>
+	   	<th>
 	   		<tr>
 	   	 <td><a href="service1.jsp?serviceName=${servicePriceList.serviceName}"><img src="images/${servicePriceList.serviceImages }" alt="hall"></a></td>
 	   	 <td>    
@@ -125,6 +126,7 @@ nav ul li .active{
 
 	   		
 	   		</tr>
+	   		</th>
 	   	</tbody>
 	   	</table>
 	   	</td>

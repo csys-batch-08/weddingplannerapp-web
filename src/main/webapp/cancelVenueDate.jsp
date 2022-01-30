@@ -1,10 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="ISO-8859-1">
-<title>Ratings</title>
+<title>Venue</title>
 <style>
 body{
     
@@ -26,13 +26,14 @@ body{
 	button a{
 	text-decoration:none;
 	}
-    </style>
+
+</style>
 </head>
 <body>
 <div class="set">
-           <h2>${ratingMessage}</h2>
+               ${notCancelled }
 
-          <button><a href="viewService.jsp">Back</a></button>
-          </div>
+            <a href=viewService.jsp><button>Back</button></a>
+</div>
 </body>
 </html>

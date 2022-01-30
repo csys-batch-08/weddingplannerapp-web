@@ -8,71 +8,132 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.weddingplanner.module.BookingVenues;
+import com.weddingplanner.dao.RatingsDao;
 import com.weddingplanner.module.Ratings;
-import com.weddingplanner.module.Services;
-import com.weddingplanner.module.User;
-import com.weddingplanner.module.Venues;
+
 import com.weddingplanner.util.ConnectionUtil;
 
-public class RatingsDaoimpl {
+public class RatingsDaoimpl implements RatingsDao {
 	public void insertRating(Ratings rating) {
-		String insertQuery="insert into rating_details(user_id,service_name,rating,review)values(?,?,?,?)";
-	     ConnectionUtil conUtil=new ConnectionUtil();
-	     Connection con=conUtil.getDbConnection();
-	     try {
-			PreparedStatement prstmt=con.prepareStatement(insertQuery);
-			prstmt.setInt(1, rating.getUserId());
-			prstmt.setString(2, rating.getServiceName());
-			prstmt.setInt(3, rating.getRating());
-			prstmt.setString(4, rating.getReview());
+		String insertQuery = "insert into rating_details(user_id,service_name,rating,review)values(?,?,?,?)";
+		Connection connection = null;
+		PreparedStatement statement = null;
+		try {
+			connection = ConnectionUtil.getDbConnection();
+			statement = connection.prepareStatement(insertQuery);
+			statement.setInt(1, rating.getUserId());
+			statement.setString(2, rating.getServiceName());
+			statement.setInt(3, rating.getRating());
+			statement.setString(4, rating.getReview());
 
-			prstmt.executeUpdate();
-			System.out.println("thank you !!");
+			statement.executeUpdate();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} finally {
+
+			if (statement != null) {
+				try {
+					statement.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if (connection != null) {
+				try {
+					connection.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
 		}
 	}
+
 	public double fetchRating(String serviceName) {
-		ConnectionUtil conUtil=new ConnectionUtil();
-	     Connection con=conUtil.getDbConnection();
-		String query ="select trunc(avg(rating),2) from rating_details where service_name =?";
+		Connection connection = null;
+		String query = "select trunc(avg(rating),2) from rating_details where service_name =?";
+		PreparedStatement statement = null;
+		ResultSet resultSet = null;
 		try {
-			PreparedStatement pst =con.prepareStatement(query);
-			pst.setString(1,serviceName);
-			ResultSet rs = pst.executeQuery();
-			while(rs.next()) {
-				
-				System.out.println(rs.getDouble(1));
-				return rs.getDouble(1);
-				
+			connection = ConnectionUtil.getDbConnection();
+			statement = connection.prepareStatement(query);
+			statement.setString(1, serviceName);
+			resultSet = statement.executeQuery();
+			while (resultSet.next()) {
+
+				return resultSet.getDouble(1);
+
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} finally {
+			if (resultSet != null) {
+				try {
+					resultSet.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if (statement != null) {
+				try {
+					statement.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if (connection != null) {
+				try {
+					connection.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
 		}
+
 		return -1;
 	}
-	
-	public List<Ratings> showReview(String serviceName){
-		List<Ratings> venueList =new ArrayList<Ratings>();
-		String viewQuery="select * from rating_details where service_name='"+serviceName+"'";
-		Connection con=ConnectionUtil.getDbConnection();
+
+	public List<Ratings> showReview(String serviceName) {
+		List<Ratings> venueList = new ArrayList<>();
+		String viewQuery = "select rating_id,user_id,service_name,rating,review from rating_details where service_name='" + serviceName + "'";
+		Connection connection = null;
+		Statement statement = null;
+		ResultSet resultSet = null;
 		try {
-			Statement stmt=con.createStatement();
-			ResultSet rs=stmt.executeQuery(viewQuery);
-			while(rs.next()) {
-				UserDaoimpl userdaoimpl=new UserDaoimpl();
-				String userName=userdaoimpl.findUserName(rs.getInt(2));
-				Ratings rating=new Ratings(rs.getInt(2),rs.getString(3),rs.getInt(4),rs.getString(5));
-			venueList.add(rating);
+			connection = ConnectionUtil.getDbConnection();
+			statement = connection.createStatement();
+			resultSet = statement.executeQuery(viewQuery);
+			while (resultSet.next()) {
+
+				Ratings rating = new Ratings(resultSet.getInt(2), resultSet.getString(3), resultSet.getInt(4),
+						resultSet.getString(5));
+				venueList.add(rating);
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} finally {
+			if (resultSet != null) {
+				try {
+					resultSet.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if (statement != null) {
+				try {
+					statement.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if (connection != null) {
+				try {
+					connection.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
 		}
-		
-     return venueList;
+
+		return venueList;
 	}
 }
