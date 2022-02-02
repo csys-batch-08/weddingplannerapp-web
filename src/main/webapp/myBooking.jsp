@@ -183,7 +183,7 @@ ${statusVenue.findStatus(myBookingVenue.venueName,myBookingVenue.eventDate) }
 </td>
 
 
-<td><a href="cancelVenue?venueBookingId=${venueBookingId}"><button  class="button" id="lbl_hdn_text">cancel</button></a></td>
+<td><a href="cancelVenue?venueBookingId=${venueBookingId}"><button  class="button">cancel</button></a></td>
 
 
 
