@@ -87,7 +87,7 @@ button a{
 <input type="text" name="availability" pattern="[a-zA-Z]{3,}" required><br>
 <label>venue Image:</label>
 <input type="file" name="image" required><br><br>
-<button class="button"><a href="viewVenueAdmin.jsp">Back</a></button>
+<a href="viewVenueAdmin.jsp"><button class="button">Back</button></a>
 		<button type="submit" class="button">Add</button>
 
 </form>

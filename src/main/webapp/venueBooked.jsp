@@ -39,7 +39,7 @@ body{
     <h2>${booked}</h2>
     
    
-          <button class="button"> <a href=home.jsp> Back</a></button>
+          <a href=home.jsp><button class="button">  Back</button></a>
         </div>  
 
 </body>

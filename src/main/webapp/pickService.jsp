@@ -78,12 +78,12 @@ button a {
 <body>
 	<nav>
 		<ul>
-			<li><a href="userProfile.jsp">My profile</a></li>
-			<li><a href="">about us</a></li>
-			<li><a href="">contact us</a></li>
-			<li><a href="viewVenues.jsp">Venues</a></li>
-			<li><a href="viewService.jsp">services</a></li>
-			<li><a href="MyBooking.jsp">my Bookings</a></li>
+			<li><a href="ViewVenuesServlet">Venues</a></li>
+        <li><a href="ViewServiceServlet">Services</a></li>
+        <li><a href="aboutUs.jsp">About us</a></li>
+        <li><a href="contactUs.jsp">Contact us</a></li>
+        <li><a href="UserProfileServlet">My Profile</a></li>
+        <li><a href="MyBookingServlet">My booking</a></li>
 		</ul>
 
 
@@ -91,14 +91,15 @@ button a {
 
 	
 	<table>
+	<caption></caption>
 		<tbody>
 			<tr>
-			 <c:out  value="${chooseService}" />
-				<td><img src="images/${chooseService.serviceImages}"
-					alt="hall"></td>
+			 <c:set var="chooseService" scope="session" value="${chooseService}" />
+				<th id="head"><img src="images/${chooseService.serviceImages}"
+					alt="hall"></th>
 
 				<td><h1>${chooseService.serviceName}</h1> <br> <span> 
-						<i class="fas fa-rupee-sign"></i>${chooseService.servicePackage}</span><br>
+						<em class="fas fa-rupee-sign"></em>${chooseService.servicePackage}</span><br>
 				<br>
 				<br> <span class="desc">${chooseService.serviceDescription}</span><br>
 				<br>
@@ -126,9 +127,10 @@ button a {
 
 	</table>
 	<table class="rating-box">
+	<caption></caption>
 	<tbody>
 	    <tr>
-				<td><span>Ratings and Review of our customer</span></td>
+				<th id="head"><span>Ratings and Review of our customer</span></th>
 			</tr>
 			 <c:forEach items="${review}" var="showReview">
 			

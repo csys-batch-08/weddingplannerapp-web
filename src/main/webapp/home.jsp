@@ -28,7 +28,7 @@
         <a href="ViewServiceServlet">Services</a>
         <a href="rechargeWallet.jsp">Wallet</a>
         <a href="aboutUs.jsp">About us</a>
-        <a href="">Contact us</a>
+        <a href="contactUs.jsp">Contact us</a>
         <a href="UserProfileServlet">My Profile</a>
         <a href="MyBookingServlet">My booking</a>
         

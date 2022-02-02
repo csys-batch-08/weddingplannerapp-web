@@ -2,7 +2,7 @@ package com.weddingplanner.dao;
 
 import java.util.List;
 
-import com.weddingplanner.module.Venues;
+import com.weddingplanner.model.Venues;
 
 public interface VenuesDao {
 	public List<Venues> showVenue();

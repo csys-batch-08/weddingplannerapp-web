@@ -11,10 +11,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.weddingplanner.daoimpl.VenuesDaoimpl;
-import com.weddingplanner.module.Venues;
+import com.weddingplanner.model.Venues;
 
 
-@WebServlet("/viewVenueAdminServlet")
+@WebServlet("/ViewVenueAdminServlet")
 public class ViewVenueAdminServlet extends HttpServlet {
 	
 	
@@ -25,7 +25,9 @@ public class ViewVenueAdminServlet extends HttpServlet {
 		try {
 		VenuesDaoimpl venueDao = new VenuesDaoimpl();
 		   List<Venues> venueList = venueDao.showVenue();
+			
 		  request.setAttribute("venueListAdmin", venueList);
+		 
 		     RequestDispatcher requestDispatcher=request.getRequestDispatcher("viewVenueAdmin.jsp");
 				requestDispatcher.forward(request, response);
 		}catch (Exception e) {

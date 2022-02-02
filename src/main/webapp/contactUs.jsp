@@ -63,21 +63,21 @@ nav ul li a:hover{
 <body>
    <nav>
 		<ul>
-           <li><a href="userProfile.jsp" >My profile</a></li>
-      	   <li><a href="">about us</a></li>
-		   <li><a href="">contact us</a></li>
-			<li><a href="viewVenues.jsp">Venues</a></li>
-			<li><a href="viewService.jsp">services</a></li>
-            <li><a href="MyBooking.jsp">my Bookings</a></li>
+           <li><a href="ViewVenuesServlet">Venues</a></li>
+        <li><a href="ViewServiceServlet">Services</a></li>
+        <li><a href="aboutUs.jsp">About us</a></li>
+        <li><a href="contactUs">Contact us</a></li>
+        <li><a href="UserProfileServlet">My Profile</a></li>
+        <li><a href="MyBookingServlet">My booking</a></li>
         </ul>
     
 </nav>
           
   <div class="contact-info">
-    <div><i class="fas fa-map-marker-alt"></i>51,kk nagar, Chennai</div>
-    <div><i class="fas fa-envelope"></i>wedplanner@gmail.com</div>
-    <div><i class="fas fa-phone"></i>9791609661</div>
-    <div><i class="fas fa-clock"></i>Mon - sat 8:00 AM to 9:00 PM</div>
+    <div><em class="fas fa-map-marker-alt"></em>51,kk nagar, Chennai</div>
+    <div><em class="fas fa-envelope"></em>wedplanner@gmail.com</div>
+    <div><em class="fas fa-phone"></em>9791609661</div>
+    <div><em class="fas fa-clock"></em>Mon - sat 8:00 AM to 9:00 PM</div>
     </div>
 </body>
 </html>

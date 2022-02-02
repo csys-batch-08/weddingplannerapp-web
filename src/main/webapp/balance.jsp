@@ -34,7 +34,7 @@ body{
 <div class="set">
      ${lowBalance}
  
-         <button><a href=rechargewallet.jsp>rechargeYourWallet</a></button>
+         <a href=rechargewallet.jsp><button>rechargeYourWallet</button></a>
    </div>       
 
 </body>

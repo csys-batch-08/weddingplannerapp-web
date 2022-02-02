@@ -126,12 +126,14 @@
 <body>
 <nav>
 		<ul>
-           <li><a href="userProfile.jsp" >My profile</a></li>
-		   <li><a href="">about us</a></li>
-		   <li><a href="">contact us</a></li>
-			<li><a href="viewVenues.jsp">Venues</a></li>
-			<li><a href="viewService.jsp">services</a></li>
-            <li><a href="MyBooking.jsp">my Bookings</a></li>
+           
+            
+        <li><a href="ViewVenuesServlet">Venues</a></li>
+        <li><a href="ViewServiceServlet">Services</a></li>
+        <li><a href="aboutUs.jsp">About us</a></li>
+        <li><a href="contactUs.jsp">Contact us</a></li>
+        <li><a href="UserProfileServlet">My Profile</a></li>
+        <li><a href="MyBookingServlet">My booking</a></li>
         </ul>
         <form action="filterCity" method="post">
         <input type="text" name="search" class="search">  
@@ -159,9 +161,9 @@
 					</div>
 				</div>
 				<div class="social">
-					<a href=""><i class="fab fa-facebook-f"></i></a>
-					<a href=""><i class="fab fa-twitter"></i></a>
-					<a href=""><i class="fab fa-instagram"></i></a>
+					<a href=""><em class="fab fa-facebook-f"></em></a>
+					<a href=""><em class="fab fa-twitter"></em></a>
+					<a href=""><em class="fab fa-instagram"></em></a>
 				</div>
 			</div>
 			

@@ -4,7 +4,7 @@ package com.weddingplanner.dao;
 import java.sql.SQLException;
 import java.util.List;
 
-import com.weddingplanner.module.User;
+import com.weddingplanner.model.User;
 
 public interface UserDao {
 	public boolean insertUser(User user) ;

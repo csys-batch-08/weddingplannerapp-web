@@ -2,7 +2,7 @@ package com.weddingplanner.dao;
 
 import java.util.List;
 
-import com.weddingplanner.module.Ratings;
+import com.weddingplanner.model.Ratings;
 
 public interface RatingsDao {
 	public void insertRating(Ratings rating);

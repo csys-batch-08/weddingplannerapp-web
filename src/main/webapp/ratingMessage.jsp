@@ -32,7 +32,7 @@ body{
 <div class="set">
            <h2>${ratingMessage}</h2>
 
-          <button><a href="viewService.jsp">Back</a></button>
+          <a href="viewService.jsp"><button>Back</button></a>
           </div>
 </body>
 </html>

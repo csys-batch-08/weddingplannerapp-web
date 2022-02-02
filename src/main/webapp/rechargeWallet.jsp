@@ -87,12 +87,12 @@ nav ul li a:hover{
 
 <nav>
 		<ul>
-           <li><a href="userProfile.jsp" >My profile</a></li>
-      	   <li><a href="">about us</a></li>
-		   <li><a href="">contact us</a></li>
-			<li><a href="viewVenues.jsp">Venues</a></li>
-			<li><a href="viewService.jsp">services</a></li>
-            <li><a href="MyBooking.jsp">my Bookings</a></li>
+        <li><a href="ViewVenuesServlet">Venues</a></li>
+        <li><a href="ViewServiceServlet">Services</a></li>
+        <li><a href="aboutUs.jsp">About us</a></li>
+        <li><a href="contactUs">Contact us</a></li>
+        <li><a href="UserProfileServlet">My Profile</a></li>
+        <li><a href="MyBookingServlet">My booking</a></li>
         </ul>
     
 </nav>

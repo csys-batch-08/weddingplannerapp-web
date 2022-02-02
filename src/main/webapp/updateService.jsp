@@ -78,7 +78,7 @@ button a{
      
      <label>sevice type image</label>
      <input type="file" name="serviceTypeImage" required><br><br><br>
- <button class="button"><a href="viewServicesAdmin.jsp">Back</a></button>
+ <a href="viewServicesAdmin.jsp"><button class="button">Back</button></a>
 <button type="submit" class="button">Update</button>
      
 </form>

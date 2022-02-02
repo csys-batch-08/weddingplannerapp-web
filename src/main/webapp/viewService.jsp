@@ -1,4 +1,3 @@
-
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -59,12 +58,12 @@
 
 <nav>
 		<ul>
-           <li><a href="userProfile.jsp" >My profile</a></li>
-		   <li><a href="">about us</a></li>
-		   <li><a href="">contact us</a></li>
-			<li><a href="viewVenuesServlet">Venues</a></li>
-			<li><a href="viewService.jsp">services</a></li>
-            <li><a href="MyBooking.jsp">my Bookings</a></li>
+           <li><a href="ViewVenuesServlet">Venues</a></li>
+        <li><a href="ViewServiceServlet">Services</a></li>
+        <li><a href="aboutUs.jsp">About us</a></li>
+        <li><a href="contactUs.jsp">Contact us</a></li>
+        <li><a href="UserProfileServlet">My Profile</a></li>
+        <li><a href="MyBookingServlet">My booking</a></li>
         </ul>
           <form action="filterPrice" method="post" >
       <input type="text" name="byPrice" class="search">  
@@ -73,21 +72,28 @@
         
 	</nav>
 <table>
+<caption></caption>
 <tbody>
 	   <tr>
+         <th id="tableHead"></th>
          
            <c:set var="count" value="1"/>
            <c:forEach items="${viewServices}" var="services">
 				
                     <td>
                         <table>
+                        <caption></caption>
                             <tbody>
+                           
                                 <tr>
+                                 <th id="tableHead"> </th>
                                     <td><a href="ShowServiceServlet?serviceType=${services.serviceType}"><img src="images/${services.serviceTypeImage}" alt="hall"></a></td>  
                                    <span>${services.serviceType}</span> 
                                                                       
                                     </td>
+                                    
                                 </tr>
+                               
                             </tbody>
                         </table>  
                             

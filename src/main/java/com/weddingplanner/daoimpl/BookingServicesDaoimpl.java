@@ -10,8 +10,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.weddingplanner.dao.BookingServiceDao;
-import com.weddingplanner.module.BookingServices;
-import com.weddingplanner.module.BookingVenues;
+import com.weddingplanner.model.BookingServices;
+import com.weddingplanner.model.BookingVenues;
 import com.weddingplanner.util.ConnectionUtil;
 
 public class BookingServicesDaoimpl implements BookingServiceDao{

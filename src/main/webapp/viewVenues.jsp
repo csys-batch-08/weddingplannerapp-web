@@ -1,4 +1,3 @@
-
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -34,12 +33,12 @@
 <body>
 <nav>
 		<ul>
-           <li><a href="userProfile.jsp" >My profile</a></li>
-		   <li><a href="">about us</a></li>
-		   <li><a href="">contact us</a></li>
-			<li><a href="viewVenues.jsp">Venues</a></li>
-			<li><a href="viewService.jsp">services</a></li>
-            <li><a href="MyBooking.jsp">my Bookings</a></li>
+          <li><a href="ViewVenuesServlet">Venues</a></li>
+        <li><a href="ViewServiceServlet">Services</a></li>
+        <li><a href="aboutUs.jsp">About us</a></li>
+        <li><a href="contactUs.jsp">Contact us</a></li>
+        <li><a href="UserProfileServlet">My Profile</a></li>
+        <li><a href="MyBookingServlet">My booking</a></li>
         </ul>
         <form action="filterCity" method="post">
         <input type="text" name="search" class="search" >  
@@ -58,13 +57,13 @@
       <div class="for-inline">
         <div class="image-container">
              <a href="ChooseVenueServlet?venueName=${venue.venueName}">
-              <img src="images/${venue.venueImages }" alt="hall" name="image"></a>
+              <img src="images/${venue.venueImages }" alt="hall"></a>
             <div class="title">
               <h2>  ${venue.venueName}</h2>
                 
            </div>
            <div class="pre">
-             <pre><i class="fas fa-map-marker-alt"></i> ${venue.venueCity}         <i class="fas fa-hotel"></i> ${venue.venueType} </pre>
+             <pre><em class="fas fa-map-marker-alt"></em> ${venue.venueCity}         <em class="fas fa-hotel"></em> ${venue.venueType} </pre>
              </div>   
            </div>
        </div>

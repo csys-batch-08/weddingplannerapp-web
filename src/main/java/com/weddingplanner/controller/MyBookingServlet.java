@@ -14,8 +14,8 @@ import javax.servlet.http.HttpSession;
 
 import com.weddingplanner.daoimpl.BookingServicesDaoimpl;
 import com.weddingplanner.daoimpl.BookingVenuesDaoimpl;
-import com.weddingplanner.module.BookingServices;
-import com.weddingplanner.module.BookingVenues;
+import com.weddingplanner.model.BookingServices;
+import com.weddingplanner.model.BookingVenues;
 
 
 @WebServlet("/MyBookingServlet")

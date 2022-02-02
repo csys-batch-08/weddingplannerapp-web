@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.weddingplanner.daoimpl.VenuesDaoimpl;
-import com.weddingplanner.module.Venues;
+import com.weddingplanner.model.Venues;
 
 
 @WebServlet("/filterCity")

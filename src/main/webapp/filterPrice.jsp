@@ -92,27 +92,29 @@ nav ul li .active{
 <nav >
      
       <ul>
-           <li><a href="userProfile.jsp" >My profile</a></li>
-		   <li><a href="">about us</a></li>
-		   <li><a href="">contact us</a></li>
-			<li><a href="viewVenues.jsp">Venues</a></li>
-			<li><a href="viewService.jsp">services</a></li>
-            <li><a href="MyBooking.jsp">my Bookings</a></li>
+           <li><a href="ViewVenuesServlet">Venues</a></li>
+        <li><a href="ViewServiceServlet">Services</a></li>
+        <li><a href="aboutUs.jsp">About us</a></li>
+        <li><a href="contactUs">Contact us</a></li>
+        <li><a href="UserProfileServlet">My Profile</a></li>
+        <li><a href="MyBookingServlet">My booking</a></li>
         </ul>
        
 	
       </nav>
    
 <table>
+<caption></caption>
 <tbody>
 	<tr>
 	<c:set var="count" value="1"/>
 	<c:forEach items="${servicePrice}" var="servicePriceList">
 	
-	   	<td>
+	   	<th id="table">
 	   	<table id="service">
+	   	<caption></caption>
 	   	<tbody>
-	   	<th>
+	   	<th id="table">
 	   		<tr>
 	   	 <td><a href="service1.jsp?serviceName=${servicePriceList.serviceName}"><img src="images/${servicePriceList.serviceImages }" alt="hall"></a></td>
 	   	 <td>    
@@ -122,11 +124,11 @@ nav ul li .active{
 	   	   
 	   	   
 	   	  </div>
-	   	  </td>
+	   	  </th>
 
 	   		
 	   		</tr>
-	   		</th>
+	   		</th id="table">
 	   	</tbody>
 	   	</table>
 	   	</td>

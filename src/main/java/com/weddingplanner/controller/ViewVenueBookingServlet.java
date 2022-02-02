@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.weddingplanner.daoimpl.BookingVenuesDaoimpl;
-import com.weddingplanner.module.BookingVenues;
+import com.weddingplanner.model.BookingVenues;
 
 
 @WebServlet("/ViewVenueBookingServlet")

@@ -36,7 +36,7 @@ body{
    20% of amount is deducted
     After refund Wallet balance:${RefundBalance }<br>
     <h2>${serviceCancelled}</h2>
-   <button><a href=viewService.jsp>Back</a></button> 
+   <a href=viewService.jsp><button>Back</button></a> 
             </div>
 </body>
 </html>

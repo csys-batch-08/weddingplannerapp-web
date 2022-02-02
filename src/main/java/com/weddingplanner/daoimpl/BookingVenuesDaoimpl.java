@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.weddingplanner.dao.BookingVenueDao;
-import com.weddingplanner.module.BookingVenues;
+import com.weddingplanner.model.BookingVenues;
 import com.weddingplanner.util.ConnectionUtil;
 
 public class BookingVenuesDaoimpl implements BookingVenueDao{

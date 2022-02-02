@@ -9,14 +9,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.weddingplanner.dao.VenuesDao;
-import com.weddingplanner.module.Venues;
+import com.weddingplanner.model.Venues;
 import com.weddingplanner.util.ConnectionUtil;
 
 public class VenuesDaoimpl implements VenuesDao {
 
 	public List<Venues> showVenue() {
 		List<Venues> venuelist = new ArrayList<>();
-		String showQuery = "select venue_id,venue_name,venue_area,venue_city,venue_type,venue_vendor_name,contact_number,venue_package,check_availability,venue_images from venue_details";
+		String showQuery = "select venue_id,venue_name,venue_area,venue_city,venue_type,venue_vendor_name,contact_number,venue_package,check_availability,venue_images from venue_details where check_availability='yes'";
 		Connection connection = null;
 		ResultSet resultSet = null;
 		Statement statement = null;
@@ -143,8 +143,8 @@ public class VenuesDaoimpl implements VenuesDao {
 			connection = ConnectionUtil.getDbConnection();
 			statement = connection.prepareStatement(updateQuery);
 			statement.setString(1, availability);
+			
 			statement.executeUpdate();
-			statement.executeUpdate("commit");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -267,8 +267,7 @@ public class VenuesDaoimpl implements VenuesDao {
 		try {
 			connection = ConnectionUtil.getDbConnection();
 			statement = connection.createStatement();
-
-			resultSet = statement.executeQuery(query);
+            resultSet = statement.executeQuery(query);
 
 			if (resultSet.next()) {
 				venuePackage = resultSet.getInt(1);
@@ -349,6 +348,38 @@ public class VenuesDaoimpl implements VenuesDao {
 		}
 
 		return venuelist;
+	}
+	public void inactiveVenue(String venueName) {
+		Connection connection = null;
+		String query = "update venue_details set check_availability ='No'  where venue_name = ?";
+		PreparedStatement prepareStatement = null;
+		try {
+			connection = ConnectionUtil.getDbConnection();
+			prepareStatement = connection.prepareStatement(query);
+			prepareStatement.setString(1, venueName);
+			prepareStatement.executeUpdate();
+			
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+		} finally {
+
+			if (prepareStatement != null) {
+				try {
+					prepareStatement.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if (connection != null) {
+				try {
+					connection.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+
 	}
 
 }

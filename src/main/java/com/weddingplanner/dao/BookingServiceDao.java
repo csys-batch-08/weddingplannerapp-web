@@ -3,7 +3,7 @@ package com.weddingplanner.dao;
 import java.time.LocalDate;
 import java.util.List;
 
-import com.weddingplanner.module.BookingServices;
+import com.weddingplanner.model.BookingServices;
 
 public interface BookingServiceDao {
 	public void bookService(BookingServices bookService) ;

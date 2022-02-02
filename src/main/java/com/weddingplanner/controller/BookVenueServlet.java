@@ -12,7 +12,7 @@ import javax.servlet.http.HttpSession;
 
 import com.weddingplanner.daoimpl.BookingVenuesDaoimpl;
 import com.weddingplanner.daoimpl.UserDaoimpl;
-import com.weddingplanner.module.BookingVenues;
+import com.weddingplanner.model.BookingVenues;
 @WebServlet("/book")
 
 public class BookVenueServlet extends HttpServlet {

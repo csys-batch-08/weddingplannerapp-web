@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.weddingplanner.daoimpl.UserDaoimpl;
-import com.weddingplanner.module.User;
+import com.weddingplanner.model.User;
 
 
 @WebServlet("/UserProfileServlet")

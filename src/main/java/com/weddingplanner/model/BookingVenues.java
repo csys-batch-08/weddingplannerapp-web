@@ -1,4 +1,4 @@
-package com.weddingplanner.module;
+package com.weddingplanner.model;
 
 import java.time.LocalDate;
 import java.util.Date;

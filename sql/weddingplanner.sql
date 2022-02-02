@@ -35,6 +35,7 @@ CREATE SEQUENCE venue_seq_id INCREMENT BY 1 START WITH 1011;
 SELECT
     *
 FROM venue_details;
+update venue_details set check_availability ='yes'  where venue_name ='Star Marriage hall';
 update venue_details set venue_vendor_name='swetha',contact_number=9856345678,venue_package=80000 where venue_name='Rina Venue';
 
 update venue_details set venue_name='Rina Venue' where venue_id=1114;

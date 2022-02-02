@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.weddingplanner.dao.UserDao;
-import com.weddingplanner.module.User;
+import com.weddingplanner.model.User;
 import com.weddingplanner.util.ConnectionUtil;
 
 public class UserDaoimpl implements UserDao {
@@ -96,16 +96,14 @@ public class UserDaoimpl implements UserDao {
 				+ emailId + "'and password='" + password + "'";
 		Connection connection = null;
 		User user = null;
-		System.out.println(user);
 		Statement statement = null;
 		try {
 			connection = ConnectionUtil.getDbConnection();
 			statement = connection.createStatement();
-			System.out.println("hdk");
 			ResultSet rs = statement.executeQuery(validateAdminQuery);
 			if (rs.next()) {
 				user = new User(rs.getString(3), rs.getLong(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getInt(8));
-				System.out.println(user);
+
 			}
 
 		} catch (SQLException e) {

@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.weddingplanner.dao.ServicesDao;
-import com.weddingplanner.module.Services;
+import com.weddingplanner.model.Services;
 import com.weddingplanner.util.ConnectionUtil;
 
 public class ServicesDaoimpl implements ServicesDao {
@@ -353,7 +353,7 @@ public class ServicesDaoimpl implements ServicesDao {
 	 }
 			public List<Services> showServiceType(){
 				List<Services> serviceList =new ArrayList<>();
-				String viewQuery="select distinct service_type,service_type_images from service_details ";
+				String viewQuery="select distinct service_type,service_type_images from service_details where availability='yes'";
 				Connection connection=null;
 				Statement statement=null;
 				ResultSet resultSet=null;
@@ -485,6 +485,38 @@ public class ServicesDaoimpl implements ServicesDao {
 					
 			     return serviceList;
 		 }
+			public void inactiveService(String serviceName) {
+				Connection connection = null;
+				String query = "update service_details set availability ='No'  where service_name = ?";
+				PreparedStatement prepareStatement = null;
+				try {
+					connection = ConnectionUtil.getDbConnection();
+					prepareStatement = connection.prepareStatement(query);
+					prepareStatement.setString(1, serviceName);
+					prepareStatement.executeUpdate();
+					
+				} catch (SQLException e) {
+
+					e.printStackTrace();
+				} finally {
+
+					if (prepareStatement != null) {
+						try {
+							prepareStatement.close();
+						} catch (SQLException e) {
+							e.printStackTrace();
+						}
+					}
+					if (connection != null) {
+						try {
+							connection.close();
+						} catch (SQLException e) {
+							e.printStackTrace();
+						}
+					}
+				}
+
+			}
 
 	 
 }

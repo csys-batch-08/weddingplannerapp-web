@@ -1,7 +1,7 @@
-
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
     
 <!DOCTYPE html>
 <html lang="en">
@@ -78,12 +78,12 @@ button a{
 <body>
  <nav>
 		<ul>
-           <li><a href="userProfile.jsp" >My profile</a></li>
-      	   <li><a href="">about us</a></li>
-		   <li><a href="">contact us</a></li>
-			<li><a href="viewVenues.jsp">Venues</a></li>
-			<li><a href="viewService.jsp">services</a></li>
-            <li><a href="MyBooking.jsp">my Bookings</a></li>
+           <li><a href="ViewVenuesServlet">Venues</a></li>
+        <li><a href="ViewServiceServlet">Services</a></li>
+        <li><a href="aboutUs.jsp">About us</a></li>
+        <li><a href="contactUs.jsp">Contact us</a></li>
+        <li><a href="UserProfileServlet">My Profile</a></li>
+        <li><a href="MyBookingServlet">My booking</a></li>
         </ul>
     
 </nav>
@@ -94,47 +94,52 @@ button a{
 
 
    <table class="table table-hover table-striped">
+   <caption></caption>
 	
 	<thead>
 	<tr>
   		
-		<th>service name</th>
-		<th>service package</th>
-		<th>Event Date</th>
-		<th>Booking date</th>
-		<th>status</th>
-		<th>cancel order</th>
+		<th id="heading1">service name</th>
+		<th id="heading2">service package</th>
+		<th id="heading3">Event Date</th>
+		<th id="heading4">Booking date</th>
+		<th id="heading5">status</th>
+		<th id="heading6">cancel order</th>
 		
 		
 	</tr>
 	</thead>
-	<br><br>
+	
 <tbody>
 
 
+<c:forEach items="${booking}" var="serviceBooking">
 
 <tr>
-<c:forEach items="${booking}" var="serviceBooking">
 
 
 <td>${serviceBooking.serviceName}</td>
 
 <td>${serviceBooking.servicePackage}</td>
 
- <td>${serviceBooking.eventDate}</td>
- <td>${bookingDate}</td>
+
+ <td><fmt:parseDate value="${serviceBooking.eventDate}" pattern="yyyy-MM-dd" var="eventDate" type="date"/>
+  <fmt:formatDate pattern="dd-MM-yyyy" value="${eventDate}"/></td>
+ 
+ <td><fmt:parseDate value="${bookingDate}" pattern="yyyy-MM-dd" var="serviceBookingDate" type="date"/>
+  <fmt:formatDate pattern="dd-MM-yyyy" value="${serviceBookingDate}"/></td>
  <td><jsp:useBean id="statusService" class="com.weddingplanner.daoimpl.BookingServicesDaoimpl"/>
 ${statusService.findStatus(serviceBooking.serviceName,serviceBooking.eventDate) }
 </td>
 <jsp:useBean id="serviceBookingIdFind" class="com.weddingplanner.daoimpl.BookingServicesDaoimpl"/>
 
-<td><button class="button"><a href="cancelService?serviceBookingId=${serviceBookingIdFind.findBookingServiceId(serviceBooking.userId,serviceBooking.eventDate,serviceBooking.serviceName)}">cancel</a></button></td>
+<td><a href="cancelService?serviceBookingId=${serviceBookingIdFind.findBookingServiceId(serviceBooking.userId,serviceBooking.eventDate,serviceBooking.serviceName)}"><button class="button">cancel</button></a></td>
     
 
-          
+      
  </tr>
-   
-</c:forEach>
+  </c:forEach>     
+
 </tbody>
           </table>
          
@@ -144,17 +149,18 @@ ${statusService.findStatus(serviceBooking.serviceName,serviceBooking.eventDate) 
 
 
  <table class="table table-hover table-striped" id="allusers">
+ <caption></caption>
 	<h1><b>Venue</b></h1>
 	<thead>
 	<tr>
   		
-		<th>venue name</th>
-		<th>venue package</th>
-		<th>Event Date</th>
-		<th>Booking date</th>
+		<th id="heading1">venue name</th>
+		<th id="heading1">venue package</th>
+		<th id="heading1">Event Date</th>
+		<th id="heading1">Booking date</th>
 		
-		<th>status</th>
-		<th>cancel your order</th>
+		<th id="heading1">status</th>
+		<th id="heading1">cancel your order</th>
 		
 		
 	</tr>
@@ -166,14 +172,18 @@ ${statusService.findStatus(serviceBooking.serviceName,serviceBooking.eventDate) 
 <tr>
 <td>${myBookingVenue.venueName}</td>
 <td>${myBookingVenue.venuePackage}</td>
-<td>${myBookingVenue.eventDate}</td>
-<td>${venueBookingDate }</td>
+
+<td><fmt:parseDate value="${myBookingVenue.eventDate}" pattern="yyyy-MM-dd" var="venueEventDate" type="date"/>
+  <fmt:formatDate pattern="dd-MM-yyyy" value="${venueEventDate}"/></td>
+
+ <td><fmt:parseDate value="${venueBookingDate}" pattern="yyyy-MM-dd" var="venueBookingDateShow" type="date"/>
+  <fmt:formatDate pattern="dd-MM-yyyy" value="${venueBookingDateShow}"/></td>
 <td><jsp:useBean id="statusVenue" class="com.weddingplanner.daoimpl.BookingVenuesDaoimpl"/>
 ${statusVenue.findStatus(myBookingVenue.venueName,myBookingVenue.eventDate) }
 </td>
 
 
-<td><button class="button"><a href="cancelVenue?venueBookingId=${venueBookingId}">cancel</a></button></td>
+<td><a href="cancelVenue?venueBookingId=${venueBookingId}"><button  class="button" id="lbl_hdn_text">cancel</button></a></td>
 
 
 
@@ -184,8 +194,9 @@ ${statusVenue.findStatus(myBookingVenue.venueName,myBookingVenue.eventDate) }
 
 </tbody>
           </table>
-           
-        
+ 
+
+     
 
 </body>
 </html>

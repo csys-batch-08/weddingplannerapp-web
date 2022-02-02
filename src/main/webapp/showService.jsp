@@ -1,4 +1,3 @@
-
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
     <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -46,14 +45,14 @@
 </style>
 <body>
 
-<nav >
+<nav>
       <ul>
-           <li><a href="userProfile.jsp" >My profile</a></li>
-		   <li><a href="">about us</a></li>
-		   <li><a href="">contact us</a></li>
-			<li><a href="viewVenues.jsp">Venues</a></li>
-			<li><a href="viewService.jsp">services</a></li>
-            <li><a href="MyBooking.jsp">my Bookings</a></li>
+          <li><a href="ViewVenuesServlet">Venues</a></li>
+        <li><a href="ViewServiceServlet">Services</a></li>
+        <li><a href="aboutUs.jsp">About us</a></li>
+        <li><a href="contactUs.jsp">Contact us</a></li>
+        <li><a href="UserProfileServlet">My Profile</a></li>
+        <li><a href="MyBookingServlet">My booking</a></li>
         </ul>
        
 	</nav>
@@ -61,15 +60,19 @@
     
 	 
 <table>
+<caption></caption>
 <tbody>
 	<tr>
+	<th id="tableHead"></th>
 	<c:set var="count" value="1"/>
 	<c:forEach items="${serviceShow}" var="servicelist">
 	
 	   	<td>
 	   	<table id="service">
+	   	<caption></caption>
 	   	<tbody>
 	   		<tr>
+	   		<th id="tableHead"></th>
 	   	 <td><a href="ChooseServiceServlet?serviceName=${servicelist.serviceName }"><img src="images/${servicelist.serviceImages}" alt="hall"></a>
 	   	    
 	   	  

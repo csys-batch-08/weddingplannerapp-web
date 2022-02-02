@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.weddingplanner.daoimpl.VenuesDaoimpl;
-import com.weddingplanner.module.Venues;
+import com.weddingplanner.model.Venues;
 
 
 @WebServlet("/update")
@@ -27,7 +27,7 @@ public class UpdateVenueServlet extends HttpServlet {
         Venues venue=new Venues(venueName,null,null,null,venueVendorName,contactNumber,venuePackage,null,venueImage);
 		VenuesDaoimpl venueDao=new VenuesDaoimpl();
 		venueDao.updateVenue(venue);
-	    response.sendRedirect("viewVenueAdmin");
+	    response.sendRedirect("ViewVenueAdminServlet");
 		}catch(Exception e) {
 			e.printStackTrace();
 

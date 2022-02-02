@@ -9,8 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.weddingplanner.dao.RatingsDao;
-import com.weddingplanner.module.Ratings;
-
+import com.weddingplanner.model.Ratings;
 import com.weddingplanner.util.ConnectionUtil;
 
 public class RatingsDaoimpl implements RatingsDao {

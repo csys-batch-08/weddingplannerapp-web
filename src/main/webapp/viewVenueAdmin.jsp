@@ -35,7 +35,7 @@ table{
         padding: 10px;
         border:none;
         }
- button{
+ .button{
  text decoration:none;
  text-align:center;
  float:center;
@@ -103,33 +103,37 @@ margin-left:520px;
 <nav>
     	
         <ul>
-         <li><a href="viewVenueAdmin.jsp">View venues</a></li>
-         <li><a href="viewServicesAdmin.jsp">View services</a></li>
-         <li><a href="viewUser.jsp">view users</a></li>
-         <li><a href="ViewAllBookings.jsp">view venue Booking</a></li>
-         <li><a href="ViewServiceBooking.jsp">view service Booking</a></li>
+         <li><a href="viewVenueAdminServlet">View venues</a></li>
+         <li><a href="ViewServiceAdminServlet">View services</a></li>
+         <li><a href="ViewUserAdminServlet">view users</a></li>
+         <li><a href="ViewVenueBookingServlet">view venue Booking</a></li>
+         <li><a href="ViewServiceBookingServlet">view service Booking</a></li>
+  
         </ul>
         </nav>
   
 <div class="view"> 
 <table >
+<caption></caption>
 	<h1>VenueList</h1>
 	<thead>
 	<tr>
-  		<th >S.no</th>
-		<th>Venue name</th>
-		<th>Venue Area</th>
-		<th>Venue City</th>
-		<th>Venue Vendor name</th>
-		<th>Contact number</th>
-		<th>Venue Type</th>
-		<th>Availabilty</th>
-		<th>Venue Package</th>
+  		
+		<th id="head2">Venue name</th>
+		<th id="head3">Venue Area</th>
+		<th id="head4">Venue City</th>
+		<th id="head5">Venue Vendor name</th>
+		<th id="head6">Contact number</th>
+		<th id="head7">Venue Type</th>
+		<th id="head8">Availabilty</th>
+		<th id="head9">Venue Package</th>
+		<th id="head10">Action</th>
 	</tr>
 	</thead>
 	<br><br>
 	<tbody>
 <c:forEach items="${venueListAdmin}" var="venueAdmin">
+
 
 <tr>
 <td>${venueAdmin.venueName}</td>
@@ -140,13 +144,15 @@ margin-left:520px;
 <td>${venueAdmin.venueType}</td>
 <td>${venueAdmin.availability}</td>
 <td>${venueAdmin.venuePackage}</td>
+
 </tr>
 </c:forEach>
 
 </tbody>
           </table><br>
-<button type="button" class="button"><a href="addVenues.jsp" style="text-decoration:none">Add Venue</a></button>
-<button type="button" class="button"><a href="updateVenue.jsp" style="text-decoration:none">Update Venue</a></button>
+<a href="addVenues.jsp" style="text-decoration:none"><button type="button" class="button">Add Venue</button></a>
+<a href="updateVenue.jsp" style="text-decoration:none"><button type="button" class="button">Update Venue</button></a>
+<a href="inactiveVenue.jsp" style="text-decoration:none"><button type="button" class="button">inactive</button></a>
 
 </div>
 	

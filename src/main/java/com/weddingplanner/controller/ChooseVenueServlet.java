@@ -13,7 +13,7 @@ import javax.servlet.http.HttpSession;
 
 
 import com.weddingplanner.daoimpl.VenuesDaoimpl;
-import com.weddingplanner.module.Venues;
+import com.weddingplanner.model.Venues;
 
 
 @WebServlet("/ChooseVenueServlet")
@@ -39,7 +39,7 @@ public class ChooseVenueServlet extends HttpServlet {
 				 session.setAttribute("venueId", venueId);
 				 session.setAttribute("venuepackage", venuepackage);
 				 session.setAttribute("advanceAmount", advanceAmount);
-			     request.setAttribute("venueShow", venue);
+			     session.setAttribute("venueShow", venue);
 			     RequestDispatcher requestDispatcher=request.getRequestDispatcher("pickVenue.jsp");
 					requestDispatcher.forward(request, response);
 			

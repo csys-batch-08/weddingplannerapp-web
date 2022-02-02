@@ -105,28 +105,29 @@ margin-left:520px;
   <nav>
     	
         <ul>
-         <li><a href="viewVenueAdmin.jsp">View venues</a></li>
-         <li><a href="viewServicesAdmin.jsp">View services</a></li>
-         <li><a href="viewUser.jsp">view users</a></li>
-         <li><a href="ViewAllBookings.jsp">view venue Booking</a></li>
-         <li><a href="ViewServiceBooking.jsp">view service Booking</a></li>
-        </ul>
+        
+         <li><a href="viewVenueAdminServlet">View venues</a></li>
+         <li><a href="ViewServiceAdminServlet">View services</a></li>
+         <li><a href="ViewUserAdminServlet">view users</a></li>
+         <li><a href="ViewVenueBookingServlet">view venue Booking</a></li>
+         <li><a href="ViewServiceBookingServlet">view service Booking</a></li>
+       </ul>
         </nav>
 
 <table class="table table-hover table-striped">
+<caption></caption>
 	<h1><b>service Booking List</b></h1>
 	<thead>
 	<tr>
   		
-  		<th>User Id</th>
-		<th>service name</th>
-		<th>service package</th>
-		<th>Event Date</th>
-		<th>Booking Date</th>
-		<th>Status</th>
+  		<th id="head1">User Id</th>
+		<th id="head2">service name</th>
+		<th id="head3">service package</th>
+		<th id="head4">Event Date</th>
+		<th id="head5">Booking Date</th>
+		<th id="head6">Status</th>
 	</tr>
 	</thead>
-	<br><br>
 <tbody>
 <c:forEach items="${serviceBookingAdmin}" var="serviceBookingAdmin">
 

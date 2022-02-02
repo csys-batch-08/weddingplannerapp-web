@@ -80,7 +80,7 @@ button a{
 <input type="text" name="description" pattern="[a-zA-Z]{3,}" required>
 <label>service Type image:</label>
 <input type="file" name="serviceTypeImage"><br><br>
-<button class="button"><a href="viewServicesAdmin.jsp">Back</a></button>
+<a href="viewServicesAdmin.jsp"><button class="button">Back</button></a>
 <button type="submit" class="button">Add</button>
 </form>
 </body>

@@ -44,7 +44,7 @@
     After deduction Wallet balance:${servicePayBalance}
           <h2>${servicebooked }</h2>
      
-          <button class="button"> <a href=home.jsp> Back</a></button>
+          <a href=home.jsp><button class="button">Back</button></a>
           
     </div>     
 </body>

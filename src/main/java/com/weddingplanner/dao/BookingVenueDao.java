@@ -3,7 +3,7 @@ package com.weddingplanner.dao;
 import java.time.LocalDate;
 import java.util.List;
 
-import com.weddingplanner.module.BookingVenues;
+import com.weddingplanner.model.BookingVenues;
 
 public interface BookingVenueDao {
 	public boolean bookVenue(BookingVenues bookVenues);

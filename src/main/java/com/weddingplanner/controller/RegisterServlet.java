@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.weddingplanner.daoimpl.UserDaoimpl;
-import com.weddingplanner.module.User;
+import com.weddingplanner.model.User;
 
 
 @WebServlet("/Register")

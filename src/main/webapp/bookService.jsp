@@ -8,7 +8,7 @@
 <meta charset="ISO-8859-1">
 <title>Book service</title>
 <link rel="stylesheet" href="style.css">
-<script src="https://kit.fontawesome.com/ae23c8822d.js" crossorigin="anonymous"></script>
+
 
 <style>
   body

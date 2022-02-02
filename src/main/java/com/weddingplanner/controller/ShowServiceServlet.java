@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.weddingplanner.daoimpl.ServicesDaoimpl;
-import com.weddingplanner.module.Services;
+import com.weddingplanner.model.Services;
 
 
 @WebServlet("/ShowServiceServlet")

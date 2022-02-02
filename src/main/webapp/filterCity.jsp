@@ -29,16 +29,14 @@
 </head>
 <body>
  <nav>
-       <input type="text" name="search" class="search">
-      <a href="filter.jsp"><button>search</button></a>
-     <a href="viewVenues.jsp">Venues</a>
-        <a href="viewService.jsp">Services</a>
-        <a href="">About us</a>
-        <a href="">Contact us</a>
-        <a href="login.jsp">Logout</a>
-       
-        <a href="myBooking.jsp">My booking</a>
-        
+       <ul>
+     <li><a href="ViewVenuesServlet">Venues</a></li>
+        <li><a href="ViewServiceServlet">Services</a></li>
+        <li><a href="aboutUs.jsp">About us</a></li>
+        <li><a href="contactUs.jsp">Contact us</a></li>
+        <li><a href="UserProfileServlet">My Profile</a></li>
+        <li><a href="MyBookingServlet">My booking</a></li>
+        </ul>
     </nav>
 <c:set var="i" value="0"/>
 <c:forEach items="${searchCity}" var="filterVenueCity">
@@ -53,7 +51,7 @@
                 <h2> venue name:${filterVenueCity.venueName }</h2>
                 
            </div>
-              <pre><i class="fas fa-map-marker-alt"></i> ${filterVenueCity.venueCity }   <i class="fas fa-hotel"></i> ${filterVenueCity.venueType}</pre>
+              <pre><em class="fas fa-map-marker-alt"></em> ${filterVenueCity.venueCity }   <em class="fas fa-hotel"></em> ${filterVenueCity.venueType}</pre>
         
            </div>
        </div>

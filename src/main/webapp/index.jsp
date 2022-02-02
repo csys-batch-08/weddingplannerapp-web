@@ -84,7 +84,8 @@ h1{
            <label>Email</label>
            <input type="email" name="email" placeholder="" required>
            <label>Password</label>
-           <input type="password" name="password" placeholder="" required><br>
+           <input type="password" name="password" placeholder="" id="showPassword" required><br>
+           <input type="checkbox" onclick="myFunction()">Show Password<br>
           <button class="button">Submit</button><br>
           
         </form>
@@ -95,5 +96,15 @@ h1{
          <h3>${sessionScope.login}</h3>
          </c:if>
          <c:remove var="login" scope="session"/>
-       
+     <script>   
+         function myFunction() {
+  var x = document.getElementById("showPassword");
+  if (x.type === "password") {
+    x.type = "text";
+  } else {
+    x.type = "password";
+  }
+}
+         </script> 
+       </body>
 </html>

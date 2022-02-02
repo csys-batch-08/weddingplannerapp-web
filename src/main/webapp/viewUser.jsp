@@ -1,4 +1,3 @@
-
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
     <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -104,24 +103,26 @@ margin-left:520px;
 <nav>
     	
         <ul>
-         <li><a href="viewVenueAdmin.jsp">View venues</a></li>
-         <li><a href="viewServicesAdmin.jsp">View services</a></li>
-         <li><a href="viewUser.jsp">view users</a></li>
-         <li><a href="ViewAllBookings.jsp">view venue Booking</a></li>
-         <li><a href="ViewServiceBooking.jsp">view service Booking</a></li>
+         <li><a href="viewVenueAdminServlet">View venues</a></li>
+         <li><a href="ViewServiceAdminServlet">View services</a></li>
+         <li><a href="ViewUserAdminServlet">view users</a></li>
+         <li><a href="ViewVenueBookingServlet">view venue Booking</a></li>
+         <li><a href="ViewServiceBookingServlet">view service Booking</a></li>
+        
         </ul>
         </nav>
 
 <table class="table table-hover table-striped">
-	<h1><b>All User List</b></h1>
+<caption></caption>
+	<h1><strong>All User List</strong></h1>
 	<thead>
 	<tr>
-  		<th >S.no</th>
-		<th>User name</th>
-		<th>Phone number</th>
-		<th>Address</th>
-		<th>Email address</th>
-		<th>Wallet</th>
+  		<th id="head1">S.no</th>
+		<th id="head1">User name</th>
+		<th id="head1">Phone number</th>
+		<th id="head1">Address</th>
+		<th id="head1">Email address</th>
+		<th id="head1">Wallet</th>
 	</tr>
 	</thead>
 	<br><br>

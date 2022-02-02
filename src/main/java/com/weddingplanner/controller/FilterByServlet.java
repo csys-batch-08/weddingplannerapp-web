@@ -12,8 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 
 import com.weddingplanner.daoimpl.ServicesDaoimpl;
-
-import com.weddingplanner.module.Services;
+import com.weddingplanner.model.Services;
 
 
 

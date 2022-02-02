@@ -33,7 +33,7 @@ body{
 <div class="set">
   ${unavailable}
 
-            <button><a href=viewVenues.jsp>Back</a></button>
+            <a href=viewVenues.jsp><button>Back</button></a>
             </div>
 </body>
 </html>

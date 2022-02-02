@@ -44,7 +44,7 @@ body
 
 
   <div class="profile">
-	<h1><b>Profile</b></h1>
+	<h1>Profile</h1>
 	
   		
 		<h4>User name : ${viewUserProfile.userName }</h4>
@@ -52,8 +52,8 @@ body
 		<h4>City :${viewUserProfile.city}</h4>
 		<h4>Email address :${viewUserProfile.emailId}</h4>
 		<h4>Wallet :${viewUserProfile.wallet}</h4>
-		<button class="button"><a href="index.jsp">Back</a></button>
-		<button class="button"><a href="updateUserProfile.jsp">Edit</a></button>
+		<a href="index.jsp"><button class="button">Back</button></a>
+		<a href="updateUserProfile.jsp"><button class="button">Edit</button></a>
 	
 </div>
 </c:forEach>

@@ -74,7 +74,7 @@ button a{
         </div>
       <label>Review</label>
       <input type="text" name="review" placeholder="write review" required><br><br>
-      <button class="button"><a href="viewService.jsp">Back</a></button>
+      <a href="viewService.jsp"><button class="button">Back</button></a>
              <button type="submit" class="button">Ok</button>
            
      

@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.weddingplanner.daoimpl.UserDaoimpl;
-import com.weddingplanner.module.User;
+import com.weddingplanner.model.User;
 
 
 @WebServlet("/login")
@@ -53,12 +53,12 @@ public class LoginServlet extends HttpServlet {
 			 else if(validUser != null) 
 			 {
 				
-				 RequestDispatcher rq=request.getRequestDispatcher("index.jsp");
+				 RequestDispatcher rq=request.getRequestDispatcher("home.jsp");
 				 rq.forward(request, response);
 	         }
 			 else {
 				 session.setAttribute("login", "invalid user!!");
-				 response.sendRedirect("login.jsp");
+				 response.sendRedirect("index.jsp");
 			
 			 }
 		} catch (Exception e) {

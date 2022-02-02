@@ -59,26 +59,28 @@ a{
 <body>
 <nav>
 		<ul>
-           <li><a href="userProfile.jsp" >My profile</a></li>
-			<li><a href="">about us</a></li>
-			<li><a href="">contact us</a></li>
-			<li><a href="viewVenues.jsp">Venues</a></li>
-			<li><a href="viewService.jsp">services</a></li>
-            <li><a href="MyBooking.jsp">my Bookings</a></li>
+           <li><a href="ViewVenuesServlet">Venues</a></li>
+        <li><a href="ViewServiceServlet">Services</a></li>
+        <li><a href="aboutUs.jsp">About us</a></li>
+        <li><a href="contactUs.jsp">Contact us</a></li>
+        <li><a href="UserProfileServlet">My Profile</a></li>
+        <li><a href="MyBookingServlet">My booking</a></li>
         </ul>
         
 	</nav>
 	
     <table>
+    <caption></caption>
     <tbody>
     <tr>
-     <c:out  value="${venueShow}" />
+    <c:set var="venueShow" scope="session" value="${venueShow}" />
+     
     
-   <td><img src="images/${venueShow.venueImages}" alt="hall"></td>
+   <th id="tableHead"><img src="images/${venueShow.venueImages}" alt="hall"></td>
     
             <td> <h1> ${venueShow.venueName}</h1>
-              <pre><i class="fas fa-map-marker-alt"></i>${venueShow.venueArea},${venueShow.venueCity}                <i class="fas fa-hotel"></i> ${venueShow.venueType}</pre>
-             <pre><i class="fas fa-phone"></i> ${venueShow.contactNumber}                           <i class="fas fa-rupee-sign"></i>${venueShow.venuePackage} </pre>  <br>
+              <pre><em class="fas fa-map-marker-alt"></em>${venueShow.venueArea},${venueShow.venueCity}                <em class="fas fa-hotel"></em> ${venueShow.venueType}</pre>
+             <pre><em class="fas fa-phone"></em> ${venueShow.contactNumber}                           <em class="fas fa-rupee-sign"></em>${venueShow.venuePackage} </pre>  <br>
             venue vendor name:${venueShow.venueVendorName}<br><br>
              
 		

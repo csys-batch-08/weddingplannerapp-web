@@ -101,22 +101,24 @@ margin-left:520px;
 <nav>
     	
         <ul>
-         <li><a href="viewVenueAdmin.jsp">View venues</a></li>
-         <li><a href="viewServicesAdmin.jsp">View services</a></li>
-         <li><a href="viewUser.jsp">view users</a></li>
-         <li><a href="ViewAllBookings.jsp">view venue Booking</a></li>
-         <li><a href="ViewServiceBooking.jsp">view service Booking</a></li>
+         <li><a href="viewVenueAdminServlet">View venues</a></li>
+         <li><a href="ViewServiceAdminServlet">View services</a></li>
+         <li><a href="ViewUserAdminServlet">view users</a></li>
+         <li><a href="ViewVenueBookingServlet">view venue Booking</a></li>
+         <li><a href="ViewServiceBookingServlet">view service Booking</a></li>
+       
         </ul>
         </nav>
  
 <table>
-	<h1><b>All Service List</b></h1>
+<caption></caption>
+	<h1><strong>All Service List</strong></h1>
 	<thead>
 	<tr>
   		
-		<th>service name</th>
-		<th>service Package</th>
-		<th>Availability</th>
+		<th id="head1">service name</th>
+		<th id="head2">service Package</th>
+		<th id="head3">Availability</th>
 	</tr>
 	</thead>
 	<br><br>
@@ -136,8 +138,10 @@ margin-left:520px;
 
 </tbody>
           </table><br>
-<button type="button" class="button"><a href="addServices.jsp" style="text-decoration:none">Add Service</a></button>
-<button type="button" class="button"><a href="updateService.jsp" style="text-decoration:none">Update Service</a></button>
+<a href="addServices.jsp" style="text-decoration:none"><button type="button" class="button">Add Service</button></a>
+<a href="updateService.jsp" style="text-decoration:none"><button type="button" class="button">Update Service</button></a>
+<a href="inactiveService.jsp" style="text-decoration:none"><button type="button" class="button">inactive</button></a>
+
 
 	
     

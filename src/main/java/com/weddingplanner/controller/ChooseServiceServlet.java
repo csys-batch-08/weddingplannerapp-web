@@ -13,8 +13,8 @@ import javax.servlet.http.HttpSession;
 
 import com.weddingplanner.daoimpl.RatingsDaoimpl;
 import com.weddingplanner.daoimpl.ServicesDaoimpl;
-import com.weddingplanner.module.Ratings;
-import com.weddingplanner.module.Services;
+import com.weddingplanner.model.Ratings;
+import com.weddingplanner.model.Services;
 
 
 @WebServlet("/ChooseServiceServlet")
