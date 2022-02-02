@@ -13,32 +13,26 @@ import javax.servlet.http.HttpServletResponse;
 import com.weddingplanner.daoimpl.VenuesDaoimpl;
 import com.weddingplanner.model.Venues;
 
-
 @WebServlet("/filterCity")
 public class FilterCityServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-    
+
 	@Override
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
-	{
-		try 
-		{
-		String city=request.getParameter("search");
-		
-		VenuesDaoimpl venue=new VenuesDaoimpl();
-		List<Venues> showVenue=venue.findCity(city);
-		
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		try {
+			String city = request.getParameter("search");
 
-		
-		request.setAttribute("searchCity",showVenue);
-		RequestDispatcher requestdispatcher= request.getRequestDispatcher("filterCity.jsp");
-		requestdispatcher.forward(request, response);
-	}
-		catch(Exception e) 
-		{
-		e.printStackTrace();
+			VenuesDaoimpl venue = new VenuesDaoimpl();
+			List<Venues> showVenue = venue.findCity(city);
 
-	    }
+			request.setAttribute("searchCity", showVenue);
+			RequestDispatcher requestdispatcher = request.getRequestDispatcher("filterCity.jsp");
+			requestdispatcher.forward(request, response);
+		} catch (Exception e) {
+			e.printStackTrace();
+
+		}
 	}
 
 }

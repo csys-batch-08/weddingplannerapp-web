@@ -11,34 +11,33 @@ import javax.servlet.http.HttpSession;
 import com.weddingplanner.daoimpl.RatingsDaoimpl;
 import com.weddingplanner.model.Ratings;
 
-
 @WebServlet("/ratings")
 public class RatingServlet extends HttpServlet {
-	
-	
+
 	private static final long serialVersionUID = 1L;
 
 	@Override
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		try {
-		HttpSession session=request.getSession();
+			HttpSession session = request.getSession();
 
-		int userId=(int) session.getAttribute("id");
+			int userId = (int) session.getAttribute("id");
 
-		String servicename = request.getParameter("venuename");
-		int  rating=Integer.parseInt(request.getParameter("rating"));
-		session.setAttribute("rating", rating);
-		String review=request.getParameter("review");
-		RatingsDaoimpl ratings =new RatingsDaoimpl();
-		Ratings giveRating=new Ratings(userId,servicename,rating,review);
-		ratings.insertRating(giveRating);
-		 session.setAttribute("ratingMessage", "Thank You For Your Ratings!!");
-         response.sendRedirect("ratingMessage.jsp");
-		
-	}catch(Exception e) {
-		e.printStackTrace();
+			String servicename = request.getParameter("venuename");
+			int rating = Integer.parseInt(request.getParameter("rating"));
+			session.setAttribute("rating", rating);
+			String review = request.getParameter("review");
+			RatingsDaoimpl ratings = new RatingsDaoimpl();
+			Ratings giveRating = new Ratings(userId, servicename, rating, review);
+			ratings.insertRating(giveRating);
+			session.setAttribute("ratingMessage", "Thank You For Your Ratings!!");
+			response.sendRedirect("ratingMessage.jsp");
 
-	}
+		} catch (Exception e) {
+			e.printStackTrace();
+
+		}
 	}
 
 }

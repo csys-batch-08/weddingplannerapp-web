@@ -15,27 +15,23 @@ import com.weddingplanner.daoimpl.UserDaoimpl;
 public class CancelService extends HttpServlet
 
 {
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException 
-	{
-		try 
-		{
-              BookingServicesDaoimpl book = new BookingServicesDaoimpl();
-			  HttpSession session = request.getSession();
-			  UserDaoimpl userdao = new UserDaoimpl();
-			  int userId = (int) session.getAttribute("id");
-              Double servicePackage = (Double) session.getAttribute("servicePackageName");
-			  int bookingServiceid = Integer.parseInt(request.getParameter("serviceBookingId"));
-			  boolean flag = book.checkCancelServiceBooking(bookingServiceid);
+			throws ServletException, IOException {
+		try {
+			BookingServicesDaoimpl book = new BookingServicesDaoimpl();
+			HttpSession session = request.getSession();
+			UserDaoimpl userdao = new UserDaoimpl();
+			int userId = (int) session.getAttribute("id");
+			Double servicePackage = (Double) session.getAttribute("servicePackageName");
+			int bookingServiceid = Integer.parseInt(request.getParameter("serviceBookingId"));
+			boolean flag = book.checkCancelServiceBooking(bookingServiceid);
 
 			int days = book.validateCancelBooking(bookingServiceid);
-			if (!flag)
-			{
-				if (days > 0) 
-				{
+			if (!flag) {
+				if (days > 0) {
 					int walletBalance = 0;
 					walletBalance = userdao.walletbal(userId);
 					session.setAttribute("cancelWallet", walletBalance);
@@ -46,21 +42,16 @@ public class CancelService extends HttpServlet
 					session.setAttribute("serviceCancelled", "Your services are successfully cancelled");
 				}
 
-				else
-				{
+				else {
 					session.setAttribute("notCancelled", "Nope!You can't cancel the Booking");
 					response.sendRedirect("cancelVenueDate.jsp");
 				}
-			} 
-			else 
-			{
+			} else {
 				session.setAttribute("dateCancelled", "You can't cancel the booking ! You already cancel this Booking");
 				response.sendRedirect("cancelDate.jsp");
 
 			}
-		} 
-		catch (Exception e) 
-		{
+		} catch (Exception e) {
 			e.printStackTrace();
 
 		}

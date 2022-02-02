@@ -93,7 +93,8 @@ public class RatingsDaoimpl implements RatingsDao {
 
 	public List<Ratings> showReview(String serviceName) {
 		List<Ratings> venueList = new ArrayList<>();
-		String viewQuery = "select rating_id,user_id,service_name,rating,review from rating_details where service_name='" + serviceName + "'";
+		String viewQuery = "select rating_id,user_id,service_name,rating,review from rating_details where service_name='"
+				+ serviceName + "'";
 		Connection connection = null;
 		Statement statement = null;
 		ResultSet resultSet = null;

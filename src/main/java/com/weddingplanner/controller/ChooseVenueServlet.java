@@ -14,17 +14,14 @@ import com.weddingplanner.daoimpl.VenuesDaoimpl;
 import com.weddingplanner.model.Venues;
 
 @WebServlet("/ChooseVenueServlet")
-public class ChooseVenueServlet extends HttpServlet 
-{
+public class ChooseVenueServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException 
-	{
-		try 
-		{
+			throws ServletException, IOException {
+		try {
 			String venuename = request.getParameter("venueName");
 			VenuesDaoimpl venueDaoImpl = new VenuesDaoimpl();
 			HttpSession session = request.getSession();
@@ -39,9 +36,7 @@ public class ChooseVenueServlet extends HttpServlet
 			session.setAttribute("venueShow", venue);
 			RequestDispatcher requestDispatcher = request.getRequestDispatcher("pickVenue.jsp");
 			requestDispatcher.forward(request, response);
-		} 
-		catch (Exception e) 
-		{
+		} catch (Exception e) {
 			e.printStackTrace();
 
 		}

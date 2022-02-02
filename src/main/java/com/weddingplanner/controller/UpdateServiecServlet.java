@@ -11,7 +11,6 @@ import com.weddingplanner.daoimpl.ServicesDaoimpl;
 import com.weddingplanner.model.Services;
 
 
-
 @WebServlet("/updateService")
 public class UpdateServiecServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;

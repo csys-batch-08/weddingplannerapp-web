@@ -16,67 +16,55 @@ import com.weddingplanner.model.BookingServices;
 
 @WebServlet("/addToService")
 
-public class BookServiceServlet extends HttpServlet 
-  {
+public class BookServiceServlet extends HttpServlet {
 
-	
 	private static final long serialVersionUID = 1L;
 
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException 
-	{
-        try 
-        {
-		HttpSession session = request.getSession();
-		int userId = (int) session.getAttribute("id");
-		int serviceId = (int) session.getAttribute("serviceId");
-		String servicename = request.getParameter("servicename");
-		LocalDate eventDate = LocalDate.parse(request.getParameter("date"));
-        Double servicePackage = Double.parseDouble(request.getParameter("servicepackage"));
-		int advanceAmount = Integer.parseInt(request.getParameter("advancepackageService"));
-		BookingServicesDaoimpl book = new BookingServicesDaoimpl();
-		boolean flag = book.checkDate(servicename, eventDate);
-		if (!flag) 
-		{
-            UserDaoimpl userdao = new UserDaoimpl();
-            int walletBalance = 0;
-			walletBalance = userdao.walletbal(userId);
-			session.setAttribute("userWalletBalance", walletBalance);
-			int payWallet =  (walletBalance - advanceAmount);
-			session.setAttribute("servicePayBalance", payWallet);
-            if (advanceAmount <= walletBalance) 
-            {
-				int balance = 0;
-				balance = userdao.updatewalletBalance(payWallet, userId);
-				if (balance > 0) 
-				{
-					BookingServices bookservice = new BookingServices(userId, serviceId, servicename, eventDate,
-							servicePackage);
+			throws ServletException, IOException {
+		try {
+			HttpSession session = request.getSession();
+			int userId = (int) session.getAttribute("id");
+			int serviceId = (int) session.getAttribute("serviceId");
+			String servicename = request.getParameter("servicename");
+			LocalDate eventDate = LocalDate.parse(request.getParameter("date"));
+			Double servicePackage = Double.parseDouble(request.getParameter("servicepackage"));
+			int advanceAmount = Integer.parseInt(request.getParameter("advancepackageService"));
+			BookingServicesDaoimpl book = new BookingServicesDaoimpl();
+			boolean flag = book.checkDate(servicename, eventDate);
+			if (!flag) {
+				UserDaoimpl userdao = new UserDaoimpl();
+				int walletBalance = 0;
+				walletBalance = userdao.walletbal(userId);
+				session.setAttribute("userWalletBalance", walletBalance);
+				int payWallet = (walletBalance - advanceAmount);
+				session.setAttribute("servicePayBalance", payWallet);
+				if (advanceAmount <= walletBalance) {
+					int balance = 0;
+					balance = userdao.updatewalletBalance(payWallet, userId);
+					if (balance > 0) {
+						BookingServices bookservice = new BookingServices(userId, serviceId, servicename, eventDate,
+								servicePackage);
 
-					book.bookService(bookservice);
-					response.sendRedirect("serviceBook.jsp");
-					session.setAttribute("servicebooked", "Your services are successfully booked");
+						book.bookService(bookservice);
+						response.sendRedirect("serviceBook.jsp");
+						session.setAttribute("servicebooked", "Your services are successfully booked");
+					}
+
+				} else {
+					response.sendRedirect("balance.jsp");
+					session.setAttribute("lowBalance", "Low balance!please recharge your wallet");
+
 				}
 
-			} 
-            else 
-            {
-				response.sendRedirect("balance.jsp");
-				session.setAttribute("lowBalance", "Low balance!please recharge your wallet");
-
+			} else {
+				response.sendRedirect("serviceUnavailable.jsp");
+				session.setAttribute("unavailable", "This service already booked on this date");
 			}
-
-		} else 
-		{
-			response.sendRedirect("serviceUnavailable.jsp");
-			session.setAttribute("unavailable", "This service already booked on this date");
-		}
-	}
-        catch(Exception e) 
-        {
+		} catch (Exception e) {
 			e.printStackTrace();
 
-    	}
+		}
 	}
 }

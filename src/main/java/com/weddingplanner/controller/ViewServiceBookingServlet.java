@@ -13,28 +13,25 @@ import javax.servlet.http.HttpServletResponse;
 import com.weddingplanner.daoimpl.BookingServicesDaoimpl;
 import com.weddingplanner.model.BookingServices;
 
-
 @WebServlet("/ViewServiceBookingServlet")
 public class ViewServiceBookingServlet extends HttpServlet {
-	
-	
+
 	private static final long serialVersionUID = 1L;
 
 	@Override
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	 try {
-		BookingServicesDaoimpl bookingdao = new BookingServicesDaoimpl();
-		   List<BookingServices> serviceList = bookingdao.allServiceBooking();
-		   request.setAttribute("serviceBookingAdmin", serviceList);
-		     RequestDispatcher requestDispatcher=request.getRequestDispatcher("viewServiceBooking.jsp");
-				requestDispatcher.forward(request, response);
-	 }catch (Exception e) {
-			
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		try {
+			BookingServicesDaoimpl bookingdao = new BookingServicesDaoimpl();
+			List<BookingServices> serviceList = bookingdao.allServiceBooking();
+			request.setAttribute("serviceBookingAdmin", serviceList);
+			RequestDispatcher requestDispatcher = request.getRequestDispatcher("viewServiceBooking.jsp");
+			requestDispatcher.forward(request, response);
+		} catch (Exception e) {
+
 			e.printStackTrace();
 		}
-		
-	}
 
-	
+	}
 
 }

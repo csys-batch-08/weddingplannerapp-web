@@ -10,35 +10,30 @@ import javax.servlet.http.HttpSession;
 
 import com.weddingplanner.daoimpl.UserDaoimpl;
 
-
-
-
 @WebServlet("/rechargewallet")
 public class RechargeWallet extends HttpServlet {
-	
-    
 
 	private static final long serialVersionUID = 1L;
 
 	@Override
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		try {
-		
-			
-		HttpSession session = request.getSession();	
-		int userId=(int)session.getAttribute("id");
-		
-		int amount = Integer.parseInt(request.getParameter("amount"));
-		session.setAttribute("amount", amount);
-		
-		UserDaoimpl userdao = new UserDaoimpl();
-		 userdao.updatewallet(amount, userId);
-		session.setAttribute("recharged", "Your Wallet is sucessfully recharged");
-        response.sendRedirect("UserProfileServlet");
-		
-	}catch(Exception e) {
-		e.printStackTrace();
 
-	}
+			HttpSession session = request.getSession();
+			int userId = (int) session.getAttribute("id");
+
+			int amount = Integer.parseInt(request.getParameter("amount"));
+			session.setAttribute("amount", amount);
+
+			UserDaoimpl userdao = new UserDaoimpl();
+			userdao.updatewallet(amount, userId);
+			session.setAttribute("recharged", "Your Wallet is sucessfully recharged");
+			response.sendRedirect("UserProfileServlet");
+
+		} catch (Exception e) {
+			e.printStackTrace();
+
+		}
 	}
 }

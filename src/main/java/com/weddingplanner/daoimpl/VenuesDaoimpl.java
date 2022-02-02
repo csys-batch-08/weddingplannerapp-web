@@ -143,7 +143,7 @@ public class VenuesDaoimpl implements VenuesDao {
 			connection = ConnectionUtil.getDbConnection();
 			statement = connection.prepareStatement(updateQuery);
 			statement.setString(1, availability);
-			
+
 			statement.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -212,7 +212,8 @@ public class VenuesDaoimpl implements VenuesDao {
 
 	public Venues allVenue(String venueName) {
 
-		String validateQuery = "select venue_id,venue_name,venue_area,venue_city,venue_type,venue_vendor_name,contact_number,venue_package,check_availability,venue_images from venue_details WHERE  venue_name='" + venueName + "'";
+		String validateQuery = "select venue_id,venue_name,venue_area,venue_city,venue_type,venue_vendor_name,contact_number,venue_package,check_availability,venue_images from venue_details WHERE  venue_name='"
+				+ venueName + "'";
 		Connection connection = null;
 		Venues venue = null;
 		ResultSet resultSet = null;
@@ -267,7 +268,7 @@ public class VenuesDaoimpl implements VenuesDao {
 		try {
 			connection = ConnectionUtil.getDbConnection();
 			statement = connection.createStatement();
-            resultSet = statement.executeQuery(query);
+			resultSet = statement.executeQuery(query);
 
 			if (resultSet.next()) {
 				venuePackage = resultSet.getInt(1);
@@ -305,7 +306,8 @@ public class VenuesDaoimpl implements VenuesDao {
 
 	public List<Venues> findCity(String venueCity) {
 		List<Venues> venuelist = new ArrayList<>();
-		String query = "select venue_id,venue_name,venue_area,venue_city,venue_type,venue_vendor_name,contact_number,venue_package,check_availability,venue_images from venue_details where lower(venue_city) like '" + venueCity + "%'";
+		String query = "select venue_id,venue_name,venue_area,venue_city,venue_type,venue_vendor_name,contact_number,venue_package,check_availability,venue_images from venue_details where lower(venue_city) like '"
+				+ venueCity + "%'";
 		Connection connection = null;
 		ResultSet resultSet = null;
 		Venues venue = null;
@@ -349,6 +351,7 @@ public class VenuesDaoimpl implements VenuesDao {
 
 		return venuelist;
 	}
+
 	public void inactiveVenue(String venueName) {
 		Connection connection = null;
 		String query = "update venue_details set check_availability ='No'  where venue_name = ?";
@@ -358,7 +361,7 @@ public class VenuesDaoimpl implements VenuesDao {
 			prepareStatement = connection.prepareStatement(query);
 			prepareStatement.setString(1, venueName);
 			prepareStatement.executeUpdate();
-			
+
 		} catch (SQLException e) {
 
 			e.printStackTrace();

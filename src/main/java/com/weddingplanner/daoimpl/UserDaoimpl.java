@@ -55,7 +55,8 @@ public class UserDaoimpl implements UserDao {
 	}
 
 	public User validateUser(String emailId, String password) {
-		String validateQuery = "select user_id, user_role, user_name, mobile_number,city,email_id,password,user_wallet from user_details where email_id='"+ emailId + "'and password='" + password + "'and user_role='customer' ";
+		String validateQuery = "select user_id, user_role, user_name, mobile_number,city,email_id,password,user_wallet from user_details where email_id='"
+				+ emailId + "'and password='" + password + "'and user_role='customer' ";
 		Connection connection = null;
 		User user = null;
 		Statement statement = null;
@@ -102,7 +103,8 @@ public class UserDaoimpl implements UserDao {
 			statement = connection.createStatement();
 			ResultSet rs = statement.executeQuery(validateAdminQuery);
 			if (rs.next()) {
-				user = new User(rs.getString(3), rs.getLong(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getInt(8));
+				user = new User(rs.getString(3), rs.getLong(4), rs.getString(5), rs.getString(6), rs.getString(7),
+						rs.getInt(8));
 
 			}
 
@@ -112,17 +114,16 @@ public class UserDaoimpl implements UserDao {
 		} finally {
 
 			if (statement != null) {
-					statement.close();
+				statement.close();
 			}
 			if (connection != null) {
-					connection.close();
-		
+				connection.close();
+
 			}
 
 		}
 
 		return user;
-		
 
 	}
 
