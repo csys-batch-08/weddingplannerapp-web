@@ -18,11 +18,8 @@ import com.weddingplanner.model.Services;
 
 
 @WebServlet("/ChooseServiceServlet")
-public class ChooseServiceServlet extends HttpServlet {
-	
-
-	
-	
+public class ChooseServiceServlet extends HttpServlet 
+{
 	private static final long serialVersionUID = 1L;
 
 	@Override
@@ -34,7 +31,8 @@ public class ChooseServiceServlet extends HttpServlet {
 		String serviceName = request.getParameter("serviceName");
 		session.setAttribute("serviceName", serviceName);
 
-		try {
+		try 
+		{
 			Services service = serviceDaoImpl.allService(serviceName);
 			int serviceId = serviceDaoImpl.findServiceId(service.getServiceName());
 			double servicePackage = serviceDaoImpl.findPackage(serviceId);
@@ -55,7 +53,9 @@ public class ChooseServiceServlet extends HttpServlet {
 			 RequestDispatcher requestDispatcher=request.getRequestDispatcher("pickService.jsp");
 				requestDispatcher.forward(request, response);
 			
-		} catch (Exception e) {
+		} 
+		catch (Exception e) 
+		{
 			
 			e.printStackTrace();
 		}

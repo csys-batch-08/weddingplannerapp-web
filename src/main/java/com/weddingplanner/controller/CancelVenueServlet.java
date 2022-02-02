@@ -16,14 +16,16 @@ import com.weddingplanner.daoimpl.UserDaoimpl;
 
 
 @WebServlet("/cancelVenue")
-public class CancelVenueServlet extends HttpServlet {
+public class CancelVenueServlet extends HttpServlet 
+ {
 	
 
 	private static final long serialVersionUID = 1L;
 
 	@Override
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		try {
+		try 
+		{
 		HttpSession session=request.getSession();
        int userId=(int) session.getAttribute("id");
        String venueName=(String)session.getAttribute("venueBookingName");
@@ -36,8 +38,10 @@ public class CancelVenueServlet extends HttpServlet {
        int days=bookVenue.validateCancelBooking(bookingVenueid);
        UserDaoimpl userdao=new UserDaoimpl();
        boolean flag=bookVenue.checkCancelBooking( venueName, eventDate);
-       if(!flag) {
-       if(days>0) {
+       if(!flag) 
+       {
+       if(days>0) 
+       {
     	   
        int walletBalance=0;
 		walletBalance=userdao.walletbal(userId);
@@ -63,7 +67,9 @@ public class CancelVenueServlet extends HttpServlet {
        }
 
 	
-       }else {
+       }
+       else 
+       {
     	   session.setAttribute("dateCancelled","You can't cancel the Booking ! You already cancel this Booking" );
     	   response.sendRedirect("cancelDate.jsp");
     	   

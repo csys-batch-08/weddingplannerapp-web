@@ -17,13 +17,13 @@ import com.weddingplanner.model.Services;
 
 
 @WebServlet("/filterPrice")
-public class FilterByServlet extends HttpServlet {
-	
-	
+public class FilterByServlet extends HttpServlet 
+{
 	private static final long serialVersionUID = 1L;
 
 	@Override
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
+	{
 		try {
 		Double servicePackage=Double.parseDouble(request.getParameter("byPrice"));
 		 ServicesDaoimpl serviceDaoImpl = new ServicesDaoimpl();
@@ -33,10 +33,12 @@ public class FilterByServlet extends HttpServlet {
 		  RequestDispatcher requestDispatcher=request.getRequestDispatcher("filterPrice.jsp");
 			requestDispatcher.forward(request, response);
 		
-	}catch(Exception e) {
+	}
+		catch(Exception e) 
+		{
 		e.printStackTrace();
 
-	}
+	    }
 	}
 
 }

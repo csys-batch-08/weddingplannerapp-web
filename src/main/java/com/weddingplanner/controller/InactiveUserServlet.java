@@ -14,25 +14,21 @@ import com.weddingplanner.daoimpl.UserDaoimpl;
 
 @WebServlet("/inactiveUser")
 public class InactiveUserServlet extends HttpServlet {
-	
-       
-   
 	private static final long serialVersionUID = 1L;
 
 	@Override
-   	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		try {
+   	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
+	{
+		try 
+		{
 		UserDaoimpl userdao=new UserDaoimpl();
         int userId=Integer.parseInt(request.getParameter("userId"));
         userdao.inactiveUser(userId);
-        
-		
-		
-		
-	}catch(Exception e) {
+        }
+		catch(Exception e) 
+		{
 		e.printStackTrace();
-
-	}
+        }
 	}
 
 }

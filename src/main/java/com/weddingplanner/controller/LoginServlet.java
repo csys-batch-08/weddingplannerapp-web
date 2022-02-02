@@ -21,10 +21,11 @@ public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	@Override
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
+	{
 
-		
-		try {
+	try 
+	{
 			HttpSession session=request.getSession();
 			
 			String email=request.getParameter("email");
@@ -61,17 +62,13 @@ public class LoginServlet extends HttpServlet {
 				 response.sendRedirect("index.jsp");
 			
 			 }
-		} catch (Exception e) {
+		} 
+	     catch (Exception e) 
+	      {
 			e.printStackTrace();
-		}
+		   }
 		
-		
-
-//		
-		     
-			 
-		
-	} 
-	}
+		} 
+  }
 
 

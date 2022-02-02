@@ -20,13 +20,13 @@ public class InactiveServiceServlet extends HttpServlet {
     
 
 	@Override
-	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		ServicesDaoimpl serviceDaoimpl=new ServicesDaoimpl();
+	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
+	{
+		  ServicesDaoimpl serviceDaoimpl=new ServicesDaoimpl();
 		  String serviceName=request.getParameter("inactiveVenueName");
 		  serviceDaoimpl.inactiveService(serviceName);
-		
-		  RequestDispatcher requestDispatcher=request.getRequestDispatcher("ViewServiceAdminServlet");
-			requestDispatcher.forward(request, response);
+	      RequestDispatcher requestDispatcher=request.getRequestDispatcher("ViewServiceAdminServlet");
+		  requestDispatcher.forward(request, response);
 	}
 
 }

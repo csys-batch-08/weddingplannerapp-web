@@ -11,20 +11,19 @@ import com.weddingplanner.daoimpl.ServicesDaoimpl;
 
 
 @WebServlet("/deleteService")
-public class DeleteService extends HttpServlet {
-	
-	
-
+public class DeleteService extends HttpServlet 
+{
 	private static final long serialVersionUID = 1L;
 
 	@Override
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
+	{
 		
 		String serviceName = request.getParameter("serviceName");
 		ServicesDaoimpl servicedao = new ServicesDaoimpl();
 		servicedao.updateServiceAvailability(serviceName);
 		
 	}
-	}
+}
 
 

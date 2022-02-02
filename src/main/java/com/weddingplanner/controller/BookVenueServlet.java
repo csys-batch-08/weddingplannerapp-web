@@ -15,14 +15,17 @@ import com.weddingplanner.daoimpl.UserDaoimpl;
 import com.weddingplanner.model.BookingVenues;
 @WebServlet("/book")
 
-public class BookVenueServlet extends HttpServlet {
+public class BookVenueServlet extends HttpServlet 
+{
 	
 	private static final long serialVersionUID = 1L;
 
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		try {
+			throws ServletException, IOException 
+	{
+		try 
+		{
 		HttpSession session = request.getSession();
 		int userId = (int) session.getAttribute("id");
 		int venueId = (int) session.getAttribute("venueId");
@@ -40,7 +43,8 @@ public class BookVenueServlet extends HttpServlet {
 		session.setAttribute("bookingVenueId", bookingVenueId);
 		boolean flag = bookVenue.checkDate(venuename, eventDate);
 
-		if (!flag) {
+		if (!flag) 
+		{
 
 			UserDaoimpl userdao = new UserDaoimpl();
 
@@ -50,10 +54,12 @@ public class BookVenueServlet extends HttpServlet {
 			int payWallet = (walletBalance - advanceAmount);
 			session.setAttribute("venuePayBalance", payWallet);
 
-			if (advanceAmount <= walletBalance) {
+			if (advanceAmount <= walletBalance) 
+			{
 				int balance = 0;
 				balance = userdao.updatewalletBalance(payWallet, userId);
-				if (balance > 0) {
+				if (balance > 0) 
+				{
 					BookingVenues book = new BookingVenues(userId, venueId, venuename, noOfGuest, eventDate,venuePackage,advanceAmount);
 					bookVenue.bookVenue(book);
 					session.setAttribute("booked", "venue sucessfully booked");
@@ -61,17 +67,23 @@ public class BookVenueServlet extends HttpServlet {
 
 				}
 
-			} else {
+			} 
+			else 
+			{
 				response.sendRedirect("balance.jsp");
 				session.setAttribute("lowBalance", "Low balance!please recharge your wallet");
 
 			}
 
-		} else {
+		} 
+		else 
+		{
 			response.sendRedirect("venueUnavailable.jsp");
 			session.setAttribute("unavailable", "This venue already booked on this date");
 		}
-	}catch(Exception e) {
+	}
+	catch(Exception e) 
+	{
 		e.printStackTrace();
 
 	}

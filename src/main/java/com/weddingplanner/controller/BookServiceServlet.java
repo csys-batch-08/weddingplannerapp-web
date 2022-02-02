@@ -16,15 +16,18 @@ import com.weddingplanner.model.BookingServices;
 
 @WebServlet("/addToService")
 
-public class BookServiceServlet extends HttpServlet {
+public class BookServiceServlet extends HttpServlet 
+  {
 
 	
 	private static final long serialVersionUID = 1L;
 
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-        try {
+			throws ServletException, IOException 
+	{
+        try 
+        {
 		HttpSession session = request.getSession();
 		int userId = (int) session.getAttribute("id");
 		int serviceId = (int) session.getAttribute("serviceId");
@@ -34,20 +37,20 @@ public class BookServiceServlet extends HttpServlet {
 		int advanceAmount = Integer.parseInt(request.getParameter("advancepackageService"));
 		BookingServicesDaoimpl book = new BookingServicesDaoimpl();
 		boolean flag = book.checkDate(servicename, eventDate);
-		if (!flag) {
-
-			UserDaoimpl userdao = new UserDaoimpl();
-
-			int walletBalance = 0;
+		if (!flag) 
+		{
+            UserDaoimpl userdao = new UserDaoimpl();
+            int walletBalance = 0;
 			walletBalance = userdao.walletbal(userId);
 			session.setAttribute("userWalletBalance", walletBalance);
 			int payWallet =  (walletBalance - advanceAmount);
 			session.setAttribute("servicePayBalance", payWallet);
-
-			if (advanceAmount <= walletBalance) {
+            if (advanceAmount <= walletBalance) 
+            {
 				int balance = 0;
 				balance = userdao.updatewalletBalance(payWallet, userId);
-				if (balance > 0) {
+				if (balance > 0) 
+				{
 					BookingServices bookservice = new BookingServices(userId, serviceId, servicename, eventDate,
 							servicePackage);
 
@@ -56,18 +59,22 @@ public class BookServiceServlet extends HttpServlet {
 					session.setAttribute("servicebooked", "Your services are successfully booked");
 				}
 
-			} else {
+			} 
+            else 
+            {
 				response.sendRedirect("balance.jsp");
 				session.setAttribute("lowBalance", "Low balance!please recharge your wallet");
 
 			}
 
-		} else {
+		} else 
+		{
 			response.sendRedirect("serviceUnavailable.jsp");
 			session.setAttribute("unavailable", "This service already booked on this date");
 		}
 	}
-        catch(Exception e) {
+        catch(Exception e) 
+        {
 			e.printStackTrace();
 
     	}

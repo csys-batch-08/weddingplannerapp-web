@@ -19,8 +19,10 @@ public class FilterCityServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     
 	@Override
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		try {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
+	{
+		try 
+		{
 		String city=request.getParameter("search");
 		
 		VenuesDaoimpl venue=new VenuesDaoimpl();
@@ -31,10 +33,12 @@ public class FilterCityServlet extends HttpServlet {
 		request.setAttribute("searchCity",showVenue);
 		RequestDispatcher requestdispatcher= request.getRequestDispatcher("filterCity.jsp");
 		requestdispatcher.forward(request, response);
-	}catch(Exception e) {
+	}
+		catch(Exception e) 
+		{
 		e.printStackTrace();
 
-	}
+	    }
 	}
 
 }
