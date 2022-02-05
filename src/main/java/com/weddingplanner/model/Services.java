@@ -10,6 +10,7 @@ public class Services {
 	private String serviceType;
 	private String serviceDescription;
 	private String serviceTypeImage;
+	private int serviceId;
 
 	public String getServiceName() {
 		return serviceName;
@@ -71,6 +72,15 @@ public class Services {
 	public void setServiceTypeImage(String serviceTypeImage) {
 		this.serviceTypeImage = serviceTypeImage;
 	}
+	
+
+	public int getServiceId() {
+		return serviceId;
+	}
+
+	public void setServiceId(int serviceId) {
+		this.serviceId = serviceId;
+	}
 
 	public Services(String serviceType, String serviceTypeImage) {
 		super();
@@ -98,9 +108,22 @@ public class Services {
 		this.availability = availability;
 	}
 
+   	
+	public Services(String serviceName, double servicePackage, String serviceImages, String availability,
+			String serviceType, String serviceDescription, String serviceTypeImage, int serviceId) {
+		super();
+		this.serviceName = serviceName;
+		this.servicePackage = servicePackage;
+		this.serviceImages = serviceImages;
+		this.availability = availability;
+		this.serviceType = serviceType;
+		this.serviceDescription = serviceDescription;
+		this.serviceTypeImage = serviceTypeImage;
+		this.serviceId = serviceId;
+	}
+
 	public Services() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override

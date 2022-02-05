@@ -10,7 +10,7 @@ public interface BookingVenueDao {
 
 	public boolean checkDate(String venuename, LocalDate eventDate);
 
-	public void cancelBooking(int userId, String venueName, LocalDate eventDate);
+	public void cancelBooking(int userId, int bookingId);
 
 	public List<BookingVenues> myBooking(int userId);
 

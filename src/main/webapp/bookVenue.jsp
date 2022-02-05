@@ -100,6 +100,18 @@ if(mm<10){
 } 
 today = yyyy+'-'+mm+'-'+dd;
 document.getElementById("datefield").setAttribute("min", today);
+var todayMax = new Date();
+var dd = todayMax.getDate()+30;
+var mm = todayMax.getMonth()+1; 
+var yyyy = todayMax.getFullYear();
+if(dd<10){
+  dd='0'+dd
+} 
+if(mm<10){
+  mm='0'+mm
+} 
+todayMax = yyyy+'-'+mm+'-'+dd;
+document.getElementById("datefield").setAttribute("max", todayMax);
 </script>
 
 </html>

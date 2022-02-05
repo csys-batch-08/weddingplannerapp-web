@@ -28,8 +28,9 @@ public class VenueServlet extends HttpServlet {
 			Double venuePackage = Double.parseDouble(request.getParameter("venuePackage"));
 			String availability = request.getParameter("availability");
 			String venueImages = request.getParameter("image");
+			String venueDescription=request.getParameter("description");
 			Venues venue = new Venues(venueName, venueArea, venueCity, venueType, venueVendorName, contactNumber,
-					venuePackage, availability, venueImages);
+					venuePackage, availability, venueImages,venueDescription);
 			venueDao.insertVenue(venue);
 
 			response.sendRedirect("viewVenueAdmin");

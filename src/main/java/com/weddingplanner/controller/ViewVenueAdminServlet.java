@@ -23,7 +23,7 @@ public class ViewVenueAdminServlet extends HttpServlet {
 			throws ServletException, IOException {
 		try {
 			VenuesDaoimpl venueDao = new VenuesDaoimpl();
-			List<Venues> venueList = venueDao.showVenue();
+			List<Venues> venueList = venueDao.showVenueAdmin();
 
 			request.setAttribute("venueListAdmin", venueList);
 

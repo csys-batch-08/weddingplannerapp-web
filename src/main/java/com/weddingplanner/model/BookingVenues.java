@@ -15,6 +15,8 @@ public class BookingVenues {
 	private double venuePackage;
 	private String status;
 	private int advanceAmount;
+	private int venueBookingId;
+	
 
 	public int getUserId() {
 		return userId;
@@ -87,6 +89,15 @@ public class BookingVenues {
 	public void setAdvanceAmount(int advanceAmount) {
 		this.advanceAmount = advanceAmount;
 	}
+	
+
+	public int getVenueBookingId() {
+		return venueBookingId;
+	}
+
+	public void setVenueBookingId(int venueBookingId) {
+		this.venueBookingId = venueBookingId;
+	}
 
 	public BookingVenues(int userId, int venueId, String venueName, int noOfGuest, LocalDate eventDate,
 			double venuePackage, int advanceAmount) {
@@ -124,10 +135,30 @@ public class BookingVenues {
 		this.venuePackage = venuePackage;
 	}
 
+	
+	
+	
+
+	public BookingVenues(int userId, int venueId, String venueName, int noOfGuest, LocalDate bookingDate,
+			LocalDate eventDate, double venuePackage, String status, int advanceAmount, int venueBookingId) {
+		super();
+		this.userId = userId;
+		this.venueId = venueId;
+		this.venueName = venueName;
+		this.noOfGuest = noOfGuest;
+		this.bookingDate = bookingDate;
+		this.eventDate = eventDate;
+		this.venuePackage = venuePackage;
+		this.status = status;
+		this.advanceAmount = advanceAmount;
+		this.venueBookingId = venueBookingId;
+	}
+
 	public BookingVenues() {
 		super();
 
 	}
+	
 
 	@Override
 	public int hashCode() {

@@ -19,8 +19,8 @@ public class InactiveVenueServlet extends HttpServlet {
 	protected void service(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		VenuesDaoimpl venueDaoimpl = new VenuesDaoimpl();
-		String venueName = request.getParameter("inactiveVenueName");
-		venueDaoimpl.inactiveVenue(venueName);
+		int venueId = Integer.parseInt(request.getParameter("venueIdAdmin"));
+		venueDaoimpl.inactiveVenue(venueId);
 		RequestDispatcher requestDispatcher = request.getRequestDispatcher("ViewVenueAdminServlet");
 		requestDispatcher.forward(request, response);
 	}

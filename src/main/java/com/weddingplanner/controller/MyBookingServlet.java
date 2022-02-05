@@ -27,9 +27,11 @@ public class MyBookingServlet extends HttpServlet {
 			throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		BookingServicesDaoimpl service = new BookingServicesDaoimpl();
+		
 		try {
 			int userId = (int) session.getAttribute("id");
 			List<BookingServices> myService = service.myBooking(userId);
+	   
 			request.setAttribute("booking", myService);
 			for (BookingServices bookService : myService) {
 				String serviceBookingName = bookService.getServiceName();
@@ -63,8 +65,11 @@ public class MyBookingServlet extends HttpServlet {
 				request.setAttribute("venueBookingId", venueBooking);
 				String venueStatus = venues.findStatus(bookVenue.getVenueName(), bookVenue.getEventDate());
 				request.setAttribute("venueStatus", venueStatus);
+				boolean flag = venues.checkCancelBooking(venueBookingName, venueEventDate);
+				request.setAttribute("cancelflag",flag);
 
 			}
+
 			RequestDispatcher requestDispatcher = request.getRequestDispatcher("myBooking.jsp");
 			requestDispatcher.forward(request, response);
 		} catch (Exception e) {

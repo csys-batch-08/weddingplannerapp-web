@@ -104,8 +104,8 @@ public class RatingsDaoimpl implements RatingsDao {
 			resultSet = statement.executeQuery(viewQuery);
 			while (resultSet.next()) {
 
-				Ratings rating = new Ratings(resultSet.getInt(2), resultSet.getString(3), resultSet.getInt(4),
-						resultSet.getString(5));
+				Ratings rating = new Ratings(resultSet.getInt("user_id"), resultSet.getString("service_name"), resultSet.getInt("rating"),
+						resultSet.getString("review"));
 				venueList.add(rating);
 			}
 		} catch (SQLException e) {

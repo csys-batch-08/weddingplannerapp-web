@@ -26,8 +26,6 @@ public interface UserDao {
 
 	public List<User> currentuserprofile(int userid);
 
-	public String findUserStatus(int userId);
-
 	public void inactiveUser(int userId);
 
 	public String findUserName(int userId);

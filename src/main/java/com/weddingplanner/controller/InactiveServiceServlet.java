@@ -19,8 +19,8 @@ public class InactiveServiceServlet extends HttpServlet {
 	protected void service(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		ServicesDaoimpl serviceDaoimpl = new ServicesDaoimpl();
-		String serviceName = request.getParameter("inactiveVenueName");
-		serviceDaoimpl.inactiveService(serviceName);
+		int serviceId = Integer.parseInt(request.getParameter("serviceIdAdmin"));
+		serviceDaoimpl.inactiveService(serviceId);
 		RequestDispatcher requestDispatcher = request.getRequestDispatcher("ViewServiceAdminServlet");
 		requestDispatcher.forward(request, response);
 	}

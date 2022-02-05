@@ -1,15 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
- <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
- <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
- 
+    <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+     <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+    
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="ISO-8859-1">
-<title>All Bookings</title>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+<title>filter by date</title>
 <style>
 *{
 	margin:0px;
@@ -35,7 +33,13 @@ table{
         padding: 10px;
         border:none;
         }
+ button{
+ text decoration:none;
+ text-align:center;
+ float:center;
+ margin-left:200px;
  
+ }
  .set{
  margin-top:10px;
  text-align:center;
@@ -83,13 +87,14 @@ nav ul li .active{
 	color:#c0d96f;
 } 
 h1{
+
 margin-left:520px;
  } 
- .search{
-   margin-left:950px;
-   
-    }
- .table{
+.button{
+      margin-left:350px;   
+ 
+ }
+   .table{
    width:650px;
    margin-left:400px;}
 </style>
@@ -98,24 +103,19 @@ margin-left:520px;
 <nav>
     	
         <ul>
+       
          <li><a href="viewVenueAdminServlet">View venues</a></li>
          <li><a href="ViewServiceAdminServlet">View services</a></li>
          <li><a href="ViewUserAdminServlet">view users</a></li>
          <li><a href="ViewVenueBookingServlet">view venue Booking</a></li>
          <li><a href="ViewServiceBookingServlet">view service Booking</a></li>
+        
         </ul>
         </nav>
-        <h1>All Venue Booking List</h1>
-        <form action="FilterDateVenueServlet" method="post">
-        <input type="date" name="search" class="search" >  
-       <button class="button">search</button>
-        </form>
+
 <table class="table table-hover table-striped">
 <caption></caption>
-
-
-	
-	 
+	<h1>All Venue Booking List</h1>
 	<thead>
 	<tr>
   		<th id="head1">S.no</th>
@@ -130,20 +130,22 @@ margin-left:520px;
 	</thead>
 	<br><br>
 <tbody>
-<c:forEach items="${venueBookingAdmin}" var="venueBookingView">
+<c:forEach items="${searchDate}" var="searchDateVenue">
 <c:set var="i" value="${i+1}"/>
 <tr>
 <td>${i}</td>
-<td>${venueBookingView.userId }</td>
-<td>${venueBookingView.venueName}</td>
-<td>${venueBookingView.noOfGuest}</td>
-<td>${venueBookingView.venuePackage}</td>
+<td>${searchDateVenue.userId }</td>
+<td>${searchDateVenue.venueName}</td>
+<td>${searchDateVenue.noOfGuest}</td>
+<td>${searchDateVenue.venuePackage}</td>
 
-<td><fmt:parseDate value="${venueBookingView.eventDate}"   pattern="yyyy-MM-dd" var="adminBookingVenue" type="date"/>
-  <fmt:formatDate pattern="dd-MM-yyyy" value="${adminBookingVenue}"/></td>
-<td><fmt:parseDate value="${venueBookingView.bookingDate}"   pattern="yyyy-MM-dd" var="adminBookingDateVenue" type="date"/>
-  <fmt:formatDate pattern="dd-MM-yyyy" value="${adminBookingDateVenue}"/></td>
-<td>${venueBookingView.status}</td>
+<td><fmt:parseDate value="${searchDateVenue.eventDate}"   pattern="yyyy-MM-dd" var="adminfilterEventVenue" type="date"/>
+  <fmt:formatDate pattern="dd-MM-yyyy" value="${adminfilterEventVenue}"/></td>
+<td><fmt:parseDate value="${searchDateVenue.bookingDate}"   pattern="yyyy-MM-dd" var="adminBookingDatefilterVenue" type="date"/>
+  <fmt:formatDate pattern="dd-MM-yyyy" value="${adminBookingDatefilterVenue}"/></td>
+
+<td>${searchDateVenue.status}</td>
+
 
 </tr>
 </c:forEach>
@@ -155,4 +157,4 @@ margin-left:520px;
 
 
 </body>
-</html>
+</html></html>

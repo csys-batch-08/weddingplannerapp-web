@@ -65,18 +65,22 @@ button a{
 </style>
 </head>
 <body>
-<form action="update" method="post" class="login-box">
+<form action="update" method="post" class="login-box" id="updateVenue">
 
 <label>venue name:</label>
-    <input type="text" name="venueName" value=""><br>
+    <input type="text" name="venueNameShow" value="${venueNameView}" readonly><br>
     <label>Venue vendor name:</label>
-    <input type="text" name="venueVendorName" value=""><br>
+    <input type="text" name="venueVendorNameShow" value="${venueVendorNameView}"><br>
     <label>contact number:</label>
-    <input type="number" name="contactNumber" value=""> <br>
+    <input type="number" name="contactNumberShow" value="${contactNumberView}"> <br>
     <label>Venue Image:</label>
-    <input type="file" name="venueImage" value=""><br>
+    <input type="file" name="venueImage" value="${venueImageView}"><br>
+    <label>venue type:</label>
+    <input type="text" name="venueType" value="${venueTypeView}" required><br>
     <label>venue package:</label>
-    <input type="number" name="venuePackage" value="venuepackage"><br><br>
+    <input type="number" name="venuePackage" value="${venuePackageView}"><br><br>
+    <label>venue description:</label>
+    <input type="text" name="venueDescription"  value="${venueDescriptionShow}" required><br>
     <a href="viewVenueAdmin.jsp"><button class="button">Back</button></a>
     <button type="submit" class="button">Update</button>
  

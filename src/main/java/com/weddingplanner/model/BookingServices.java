@@ -12,6 +12,7 @@ public class BookingServices {
 	private LocalDate eventDate;
 	private double servicePackage;
 	private String serviceStatus;
+	private int serviceBookingId;
 
 	public int getUserId() {
 		return userId;
@@ -68,6 +69,28 @@ public class BookingServices {
 	public void setServiceStatus(String serviceStatus) {
 		this.serviceStatus = serviceStatus;
 	}
+	
+
+	public int getServiceBookingId() {
+		return serviceBookingId;
+	}
+
+	public void setServiceBookingId(int serviceBookingId) {
+		this.serviceBookingId = serviceBookingId;
+	}
+
+	public BookingServices(int userId, int serviceId, String serviceName, LocalDate bookingDate, LocalDate eventDate,
+			double servicePackage, String serviceStatus, int serviceBookingId) {
+		super();
+		this.userId = userId;
+		this.serviceId = serviceId;
+		this.serviceName = serviceName;
+		this.bookingDate = bookingDate;
+		this.eventDate = eventDate;
+		this.servicePackage = servicePackage;
+		this.serviceStatus = serviceStatus;
+		this.serviceBookingId = serviceBookingId;
+	}
 
 	public BookingServices(int userId, int serviceId, String serviceName, LocalDate bookingDate, LocalDate eventDate,
 			double servicePackage, String serviceStatus) {
@@ -92,7 +115,7 @@ public class BookingServices {
 
 	public BookingServices() {
 		super();
-		// TODO Auto-generated constructor stub
+
 	}
 
 	@Override

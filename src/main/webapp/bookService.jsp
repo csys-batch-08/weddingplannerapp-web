@@ -7,8 +7,6 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Book service</title>
-<link rel="stylesheet" href="style.css">
-
 
 <style>
   body
@@ -80,13 +78,13 @@ button a{
            <input type="text" id="advancePackage" class="text" name="advancepackageService" value="${advanceServiceAmount}"  placeholder="" required>
 
              <label>Event date</label>
-            <input type="date"  name="date" id="datefield" required><br><br>
+            <input type="date"  name="datefield" id="datefield" required><br><br>
             <a href="viewServices.jsp"><button class="button">Back</button></a>
              <button type="submit" class="button">Book</button>
            
             </form>
-</body>
-<script type="text/javascript">
+
+ <script type="text/javascript">
 var today = new Date();
 var dd = today.getDate();
 var mm = today.getMonth()+1; 
@@ -99,5 +97,8 @@ if(mm<10){
 } 
 today = yyyy+'-'+mm+'-'+dd;
 document.getElementById("datefield").setAttribute("min", today);
+
 </script>
+
+</body>
 </html>

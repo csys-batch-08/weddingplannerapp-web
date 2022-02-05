@@ -110,8 +110,9 @@ public class BookingServicesDaoimpl implements BookingServiceDao {
 			statement = connection.createStatement();
 			resultSet = statement.executeQuery(viewQuery);
 			while (resultSet.next()) {
-				BookingServices service = new BookingServices(resultSet.getInt(2), resultSet.getInt(3),
-						resultSet.getString(4), resultSet.getDate(6).toLocalDate(), resultSet.getDouble(7));
+				BookingServices service = new BookingServices(resultSet.getInt("USER_ID"),
+						resultSet.getInt("SERVICE_ID"), resultSet.getString("SERVICE_NAME"),resultSet.getDate("BOOKING_DATE").toLocalDate(),
+						resultSet.getDate("EVENT_DATE").toLocalDate(), resultSet.getDouble("SERVICE_PACKAGE"),resultSet.getString("Status"),resultSet.getInt("service_booking_id"));
 				serviceList.add(service);
 			}
 		} catch (SQLException e) {
@@ -155,8 +156,9 @@ public class BookingServicesDaoimpl implements BookingServiceDao {
 			statement = connection.createStatement();
 			resultSet = statement.executeQuery(findVenue);
 			if (resultSet.next()) {
-				new BookingServices(resultSet.getInt(2), resultSet.getInt(3), servicename, eventdate,
-						resultSet.getDouble(7));
+				new BookingServices(resultSet.getInt("USER_ID"), resultSet.getInt("SERVICE_ID"),
+						resultSet.getString("SERVICE_NAME"), resultSet.getDate("EVENT_DATE").toLocalDate(),
+						resultSet.getDouble("SERVICE_PACKGE"));
 			} else {
 				flag = false;
 			}
@@ -202,9 +204,9 @@ public class BookingServicesDaoimpl implements BookingServiceDao {
 			statement = connection.createStatement();
 			resultSet = statement.executeQuery(findVenue);
 			if (resultSet.next()) {
-				new BookingServices(resultSet.getInt(2), resultSet.getInt(3), servicename,
-						resultSet.getDate(6).toLocalDate(), resultSet.getDouble(7));
-
+				new BookingServices(resultSet.getInt("User_id"), resultSet.getInt("Service_id"),
+						resultSet.getString("Service_name"), resultSet.getDate("Event_date").toLocalDate(),
+						resultSet.getDouble("Service_package"));
 			} else {
 				flag = false;
 			}
@@ -282,7 +284,7 @@ public class BookingServicesDaoimpl implements BookingServiceDao {
 			statement = connection.createStatement();
 			resultSet = statement.executeQuery(findVenue);
 			if (resultSet.next()) {
-				bookDate = resultSet.getDate(1).toLocalDate();
+				bookDate = resultSet.getDate("booking_Date").toLocalDate();
 			}
 		} catch (SQLException e) {
 
@@ -327,7 +329,7 @@ public class BookingServicesDaoimpl implements BookingServiceDao {
 			statement = connection.createStatement();
 			resultSet = statement.executeQuery(findVenue);
 			if (resultSet.next()) {
-				status = resultSet.getString(1);
+				status = resultSet.getString("Status");
 			}
 		} catch (SQLException e) {
 
@@ -400,7 +402,6 @@ public class BookingServicesDaoimpl implements BookingServiceDao {
 				}
 			}
 		}
-
 		return serviceBookingId;
 
 	}
@@ -417,7 +418,7 @@ public class BookingServicesDaoimpl implements BookingServiceDao {
 			statement = connection.createStatement();
 			resultSet = statement.executeQuery(findVenue);
 			if (resultSet.next()) {
-				serviceBookingId = resultSet.getInt(1);
+				serviceBookingId = resultSet.getInt("service_booking_id");
 			}
 		} catch (SQLException e) {
 
@@ -462,8 +463,9 @@ public class BookingServicesDaoimpl implements BookingServiceDao {
 			statement = connection.createStatement();
 			resultSet = statement.executeQuery(findVenue);
 			if (resultSet.next()) {
-				new BookingVenues(resultSet.getInt(2), resultSet.getInt(3), resultSet.getString(4), resultSet.getInt(5),
-						resultSet.getDate(7).toLocalDate(), resultSet.getDouble(8));
+				new BookingVenues(resultSet.getInt("User_id"), resultSet.getInt("Service_id"),
+						resultSet.getString("Service_name"), serviceId, resultSet.getDate("Event_date").toLocalDate(),
+						resultSet.getDouble("Service_package"));
 
 			} else {
 				flag = false;
@@ -510,9 +512,55 @@ public class BookingServicesDaoimpl implements BookingServiceDao {
 			statement = connection.createStatement();
 			resultSet = statement.executeQuery(viewQuery);
 			while (resultSet.next()) {
-				BookingServices service = new BookingServices(resultSet.getInt(2), resultSet.getInt(3),
-						resultSet.getString(4), resultSet.getDate(5).toLocalDate(), resultSet.getDate(6).toLocalDate(),
-						resultSet.getDouble(7), resultSet.getString(8));
+				BookingServices service = new BookingServices(resultSet.getInt("user_id"), resultSet.getInt("service_id"),
+						resultSet.getString("service_name"), resultSet.getDate("booking_date").toLocalDate(), resultSet.getDate("event_date").toLocalDate(),
+						resultSet.getDouble("service_package"), resultSet.getString("status"));
+				serviceList.add(service);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if (resultSet != null) {
+				try {
+					resultSet.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if (statement != null) {
+				try {
+					statement.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if (connection != null) {
+				try {
+					connection.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+
+		return serviceList;
+	}
+
+	public List<BookingServices> filterByDate(LocalDate eventDate) {
+		List<BookingServices> serviceList = new ArrayList<>();
+		String viewQuery = "select service_booking_id,user_id,service_id,service_name,booking_date,event_date,service_package,status from Booking_services where  to_char(event_date,'yyyy-mm-dd')='"
+				+ eventDate + "'";
+		Connection connection = null;
+		Statement statement = null;
+		ResultSet resultSet = null;
+		try {
+			connection = ConnectionUtil.getDbConnection();
+			statement = connection.createStatement();
+			resultSet = statement.executeQuery(viewQuery);
+			while (resultSet.next()) {
+				BookingServices service = new BookingServices(resultSet.getInt("user_id"), resultSet.getInt("service_id"),
+						resultSet.getString("service_name"), resultSet.getDate("booking_date").toLocalDate(), resultSet.getDate("event_date").toLocalDate(),
+						resultSet.getDouble("service_package"), resultSet.getString("status"));
 				serviceList.add(service);
 			}
 		} catch (SQLException e) {

@@ -128,11 +128,9 @@ margin-left:520px;
 	<br><br>
 <tbody>
 <c:forEach items="${userListAdmin}" var="userListAdmin">
-
+<c:set var="i" value="${i+1}"/>
 <tr>
-
-
-
+<td>${i}</td>
 <td>${userListAdmin.userName}</td>
 <td>${userListAdmin.mobileNumber}</td>
 <td> ${userListAdmin.city}</td>

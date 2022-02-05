@@ -16,7 +16,7 @@ public class VenuesDaoimpl implements VenuesDao {
 
 	public List<Venues> showVenue() {
 		List<Venues> venuelist = new ArrayList<>();
-		String showQuery = "select venue_id,venue_name,venue_area,venue_city,venue_type,venue_vendor_name,contact_number,venue_package,check_availability,venue_images from venue_details where check_availability='yes'";
+		String showQuery = "select venue_id,venue_name,venue_area,venue_city,venue_type,venue_vendor_name,contact_number,venue_package,check_availability,venue_images,venue_description from venue_details where check_availability='yes'";
 		Connection connection = null;
 		ResultSet resultSet = null;
 		Statement statement = null;
@@ -25,9 +25,9 @@ public class VenuesDaoimpl implements VenuesDao {
 			statement = connection.createStatement();
 			resultSet = statement.executeQuery(showQuery);
 			while (resultSet.next()) {
-				Venues venue = new Venues(resultSet.getString(2), resultSet.getString(3), resultSet.getString(4),
-						resultSet.getString(5), resultSet.getString(6), resultSet.getLong(7), resultSet.getDouble(8),
-						resultSet.getString(9), resultSet.getString(10));
+				Venues venue = new Venues(resultSet.getString("Venue_name"), resultSet.getString("Venue_area"), resultSet.getString("venue_city"),
+						resultSet.getString("Venue_type"), resultSet.getString("Venue_vendor_name"), resultSet.getLong("Contact_number"), resultSet.getDouble("Venue_package"),
+						resultSet.getString("Check_availability"), resultSet.getString("Venue_images"),resultSet.getInt("Venue_id"),resultSet.getString("Venue_description"));
 				venuelist.add(venue);
 
 			}
@@ -61,7 +61,7 @@ public class VenuesDaoimpl implements VenuesDao {
 	}
 
 	public void insertVenue(Venues venue) {
-		String insertQuery = "insert into venue_details(venue_name,venue_area,venue_city,venue_type,venue_vendor_name,contact_number,venue_package,check_availability, venue_images)values(?,?,?,?,?,?,?,?,?)";
+		String insertQuery = "insert into venue_details(venue_name,venue_area,venue_city,venue_type,venue_vendor_name,contact_number,venue_package,check_availability, venue_images,venue_description)values(?,?,?,?,?,?,?,?,?,?)";
 		Connection connection = null;
 		PreparedStatement prepareStatement = null;
 		try {
@@ -76,6 +76,8 @@ public class VenuesDaoimpl implements VenuesDao {
 			prepareStatement.setDouble(7, venue.getVenuePackage());
 			prepareStatement.setString(8, venue.getAvailability());
 			prepareStatement.setString(9, venue.getVenueImages());
+			prepareStatement.setString(10, venue.getVenueDescription());
+
 			prepareStatement.executeUpdate();
 
 		} catch (SQLException e) {
@@ -101,18 +103,22 @@ public class VenuesDaoimpl implements VenuesDao {
 	}
 
 	public void updateVenue(Venues venue) {
-		String updateQuery = "update venue_details set venue_vendor_name=?,contact_number=?,venue_package=?,venue_images=? where venue_name=?";
+		String updateQuery = "update venue_details set venue_vendor_name=?,contact_number=?,venue_package=?,venue_images=?,venue_type=?,venue_name=?,venue_description=? where venue_id=?";
 		Connection connection = null;
 		PreparedStatement prepareStatement = null;
 		try {
 			connection = ConnectionUtil.getDbConnection();
 			prepareStatement = connection.prepareStatement(updateQuery);
 			prepareStatement.setString(1, venue.getVenueVendorName());
-			prepareStatement.setLong(2, venue.getContactNumber());
+			prepareStatement.setLong(2,venue.getContactNumber());
 			prepareStatement.setDouble(3, venue.getVenuePackage());
 			prepareStatement.setString(4, venue.getVenueImages());
-			prepareStatement.setString(5, venue.getVenueName());
-			prepareStatement.executeUpdate();
+			prepareStatement.setString(5, venue.getVenueType());
+            prepareStatement.setString(6, venue.getVenueName());
+            prepareStatement.setString(7, venue.getVenueDescription());
+            prepareStatement.setInt(8, venue.getVenueId());
+            
+            prepareStatement.executeUpdate();
 			prepareStatement.executeUpdate("commit");
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -177,7 +183,7 @@ public class VenuesDaoimpl implements VenuesDao {
 			statement = connection.createStatement();
 			resultSet = statement.executeQuery(findVenue);
 			if (resultSet.next()) {
-				venueId = resultSet.getInt(1);
+				venueId = resultSet.getInt("venue_id");
 			}
 		} catch (SQLException e) {
 
@@ -212,7 +218,7 @@ public class VenuesDaoimpl implements VenuesDao {
 
 	public Venues allVenue(String venueName) {
 
-		String validateQuery = "select venue_id,venue_name,venue_area,venue_city,venue_type,venue_vendor_name,contact_number,venue_package,check_availability,venue_images from venue_details WHERE  venue_name='"
+		String validateQuery = "select venue_id,venue_name,venue_area,venue_city,venue_type,venue_vendor_name,contact_number,venue_package,check_availability,venue_images,venue_description from venue_details WHERE  venue_name='"
 				+ venueName + "'";
 		Connection connection = null;
 		Venues venue = null;
@@ -223,9 +229,9 @@ public class VenuesDaoimpl implements VenuesDao {
 			statement = connection.createStatement();
 			resultSet = statement.executeQuery(validateQuery);
 			while (resultSet.next()) {
-				venue = new Venues(resultSet.getString(2), resultSet.getString(3), resultSet.getString(4),
-						resultSet.getString(5), resultSet.getString(6), resultSet.getLong(7), resultSet.getDouble(8),
-						resultSet.getString(9), resultSet.getString(10));
+				venue = new Venues(resultSet.getString("venue_name"), resultSet.getString("venue_area"), resultSet.getString("venue_city"),
+						resultSet.getString("venue_type"), resultSet.getString("venue_vendor_name"), resultSet.getLong("contact_number"), resultSet.getDouble("Venue_package"),
+						resultSet.getString("check_availability"), resultSet.getString("venue_images"),resultSet.getString("venue_description"));
 
 			}
 		} catch (SQLException e) {
@@ -271,7 +277,7 @@ public class VenuesDaoimpl implements VenuesDao {
 			resultSet = statement.executeQuery(query);
 
 			if (resultSet.next()) {
-				venuePackage = resultSet.getInt(1);
+				venuePackage = resultSet.getInt("venue_package");
 			}
 
 		} catch (SQLException e) {
@@ -317,9 +323,9 @@ public class VenuesDaoimpl implements VenuesDao {
 			statement = connection.createStatement();
 			resultSet = statement.executeQuery(query);
 			while (resultSet.next()) {
-				venue = new Venues(resultSet.getString(2), resultSet.getString(3), venueCity, resultSet.getString(5),
-						resultSet.getString(6), resultSet.getLong(7), resultSet.getDouble(8), resultSet.getString(9),
-						resultSet.getString(10));
+				venue = new Venues(resultSet.getString("venue_name"), resultSet.getString("venue_area"), venueCity, resultSet.getString("venue_type"),
+						resultSet.getString("venue_vendor_name"), resultSet.getLong("contact_number"), resultSet.getDouble("venue_package"), resultSet.getString("check_availability"),
+						resultSet.getString("venue_images"));
 				venuelist.add(venue);
 			}
 
@@ -352,14 +358,14 @@ public class VenuesDaoimpl implements VenuesDao {
 		return venuelist;
 	}
 
-	public void inactiveVenue(String venueName) {
+	public void inactiveVenue(int venueId) {
 		Connection connection = null;
-		String query = "update venue_details set check_availability ='No'  where venue_name = ?";
+		String query = "update venue_details set check_availability ='No'  where venue_id = ?";
 		PreparedStatement prepareStatement = null;
 		try {
 			connection = ConnectionUtil.getDbConnection();
 			prepareStatement = connection.prepareStatement(query);
-			prepareStatement.setString(1, venueName);
+			prepareStatement.setInt(1, venueId);
 			prepareStatement.executeUpdate();
 
 		} catch (SQLException e) {
@@ -382,6 +388,51 @@ public class VenuesDaoimpl implements VenuesDao {
 				}
 			}
 		}
+
+	}
+	public List<Venues> showVenueAdmin() {
+		List<Venues> venuelist = new ArrayList<>();
+		String showQuery = "select venue_id,venue_name,venue_area,venue_city,venue_type,venue_vendor_name,contact_number,venue_package,check_availability,venue_images,venue_description from venue_details";
+		Connection connection = null;
+		ResultSet resultSet = null;
+		Statement statement = null;
+		try {
+			connection = ConnectionUtil.getDbConnection();
+			statement = connection.createStatement();
+			resultSet = statement.executeQuery(showQuery);
+			while (resultSet.next()) {
+				Venues venue = new Venues(resultSet.getString("Venue_name"), resultSet.getString("Venue_area"), resultSet.getString("venue_city"),
+						resultSet.getString("Venue_type"), resultSet.getString("Venue_vendor_name"), resultSet.getLong("Contact_number"), resultSet.getDouble("Venue_package"),
+						resultSet.getString("Check_availability"), resultSet.getString("Venue_images"),resultSet.getInt("Venue_id"),resultSet.getString("Venue_description"));
+				venuelist.add(venue);
+
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if (resultSet != null) {
+				try {
+					resultSet.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if (statement != null) {
+				try {
+					statement.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if (connection != null) {
+				try {
+					connection.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		return venuelist;
 
 	}
 

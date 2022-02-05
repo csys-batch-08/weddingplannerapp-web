@@ -54,6 +54,10 @@ a{
   font-size: 20px;
   border-radius:10px;
 }
+.font{
+   font-weight:bold;
+}
+
 </style>
 </head>
 <body>
@@ -68,28 +72,28 @@ a{
         </ul>
         
 	</nav>
-	
+	 <div class="font">
     <table>
     <caption></caption>
     <tbody>
     <tr>
     <c:set var="venueShow" scope="session" value="${venueShow}" />
-     
+    
     
    <th id="tableHead"><img src="images/${venueShow.venueImages}" alt="hall"></td>
-    
+           
             <td> <h1> ${venueShow.venueName}</h1>
               <pre><em class="fas fa-map-marker-alt"></em>${venueShow.venueArea},${venueShow.venueCity}                <em class="fas fa-hotel"></em> ${venueShow.venueType}</pre>
              <pre><em class="fas fa-phone"></em> ${venueShow.contactNumber}                           <em class="fas fa-rupee-sign"></em>${venueShow.venuePackage} </pre>  <br>
             venue vendor name:${venueShow.venueVendorName}<br><br>
-             
+             ${venueShow.venueDescription}<br><br>
 		
         For booking click here: <button class="button"><a href="bookVenue.jsp">book</a></button></td>
-     
+      
         </tr>
        
   </tbody>          
   </table>  
-                        
+       </div>                  
 </body>
 </html>

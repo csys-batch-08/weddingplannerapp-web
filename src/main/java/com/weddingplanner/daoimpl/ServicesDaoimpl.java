@@ -24,8 +24,8 @@ public class ServicesDaoimpl implements ServicesDao {
 			statement = connection.createStatement();
 			resultSet = statement.executeQuery(viewQuery);
 			while (resultSet.next()) {
-				Services service = new Services(resultSet.getString(2), resultSet.getDouble(3), resultSet.getString(4),
-						resultSet.getString(5));
+				Services service = new Services(resultSet.getString("Service_name"), resultSet.getDouble("Service_Package"), resultSet.getString("Service_images"),
+						resultSet.getString("Availability"),resultSet.getString("Service_Type"),resultSet.getString("Service_description"),resultSet.getString("Service_Type_images"),resultSet.getInt("Service_id"));
 				serviceList.add(service);
 			}
 		} catch (SQLException e) {
@@ -109,7 +109,7 @@ public class ServicesDaoimpl implements ServicesDao {
 			resultSet = statement.executeQuery(query);
 
 			if (resultSet.next()) {
-				servicePackage = resultSet.getDouble(1);
+				servicePackage = resultSet.getDouble("Service_package");
 			}
 
 		} catch (SQLException e) {
@@ -184,7 +184,7 @@ public class ServicesDaoimpl implements ServicesDao {
 			statement = connection.createStatement();
 			resultSet = statement.executeQuery(findVenue);
 			if (resultSet.next()) {
-				serviceId = resultSet.getInt(1);
+				serviceId = resultSet.getInt("service_id");
 			}
 		} catch (SQLException e) {
 
@@ -232,8 +232,8 @@ public class ServicesDaoimpl implements ServicesDao {
 			resultSet = statement.executeQuery(validateQuery);
 			while (resultSet.next()) {
 
-				service = new Services(resultSet.getString(2), resultSet.getDouble(3), resultSet.getString(4),
-						resultSet.getString(5), resultSet.getString(6), resultSet.getString(7), resultSet.getString(8));
+				service = new Services(resultSet.getString("Service_name"), resultSet.getDouble("Service_package"), resultSet.getString("Service_images"),
+						resultSet.getString("Availability"), resultSet.getString("Service_type"), resultSet.getString("Service_description"), resultSet.getString("Service_type_images"));
 			}
 
 		} catch (SQLException e) {
@@ -347,7 +347,7 @@ public class ServicesDaoimpl implements ServicesDao {
 			statement = connection.createStatement();
 			resultSet = statement.executeQuery(viewQuery);
 			while (resultSet.next()) {
-				Services service = new Services(resultSet.getString(1), resultSet.getString(2));
+				Services service = new Services(resultSet.getString("Service_type"), resultSet.getString("Service_type_images"));
 				serviceList.add(service);
 			}
 		} catch (SQLException e) {
@@ -380,7 +380,7 @@ public class ServicesDaoimpl implements ServicesDao {
 
 	public List<Services> showServiceList(String serviceType) {
 		List<Services> serviceList = new ArrayList<>();
-		String viewQuery = "select service_id,service_name,service_package,service_images,availability,service_type,service_description,service_type_images from service_details where service_type=?";
+		String viewQuery = "select service_id,service_name,service_package,service_images,availability,service_type,service_description,service_type_images from service_details where service_type=? and availability='yes'";
 		Connection connection = null;
 		PreparedStatement statement = null;
 		ResultSet resultSet = null;
@@ -391,8 +391,8 @@ public class ServicesDaoimpl implements ServicesDao {
 			statement.setString(1, serviceType);
 			resultSet = statement.executeQuery();
 			while (resultSet.next()) {
-				Services service = new Services(resultSet.getString(2), resultSet.getDouble(3), resultSet.getString(4),
-						resultSet.getString(5), resultSet.getString(6), resultSet.getString(7), resultSet.getString(8));
+				Services service = new Services(resultSet.getString("service_name"), resultSet.getDouble("service_package"), resultSet.getString("service_images"),
+						resultSet.getString("availability"), resultSet.getString("service_type"), resultSet.getString("service_description"), resultSet.getString("service_type_images"));
 				serviceList.add(service);
 			}
 		} catch (SQLException e) {
@@ -437,8 +437,8 @@ public class ServicesDaoimpl implements ServicesDao {
 			statement.setDouble(1, servicePackage);
 			resultSet = statement.executeQuery();
 			while (resultSet.next()) {
-				Services service = new Services(resultSet.getString(2), resultSet.getDouble(3), resultSet.getString(4),
-						resultSet.getString(5), resultSet.getString(6), resultSet.getString(7), resultSet.getString(8));
+				Services service = new Services(resultSet.getString("service_name"), resultSet.getDouble("service_package"), resultSet.getString("service_images"),
+						resultSet.getString("availability"), resultSet.getString("service_type"), resultSet.getString("service_description"), resultSet.getString("service_type_images"));
 
 				serviceList.add(service);
 			}
@@ -471,14 +471,14 @@ public class ServicesDaoimpl implements ServicesDao {
 		return serviceList;
 	}
 
-	public void inactiveService(String serviceName) {
+	public void inactiveService(int serviceId) {
 		Connection connection = null;
-		String query = "update service_details set availability ='No'  where service_name = ?";
+		String query = "update service_details set availability ='No'  where service_id = ?";
 		PreparedStatement prepareStatement = null;
 		try {
 			connection = ConnectionUtil.getDbConnection();
 			prepareStatement = connection.prepareStatement(query);
-			prepareStatement.setString(1, serviceName);
+			prepareStatement.setInt(1, serviceId);
 			prepareStatement.executeUpdate();
 
 		} catch (SQLException e) {

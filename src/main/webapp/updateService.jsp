@@ -66,15 +66,15 @@ button a{
 <body>
 <form action="updateService" method="post" class="login-box">
      <label>Service name</label>
-     <input type="text" name="serviceName" required>
+     <input type="text" name="serviceName" value="${serviceNameView}" required>
      <label>Service Package</label>
-     <input type="number" name="servicePackage" required>
+     <input type="number" name="servicePackage" value="${servicePackageView }" required>
      <label>service Image</label>
-     <input type="file" name="serviceImage" required>
+     <input type="file" name="serviceImage"  required>
      <label>service type</label>  
-     <input type="text" name="type" required>
+     <input type="text" name="type" value="${serviceTypeView}" required>
      <label>service Description:</label>
-      <input type="text" name="description" required>
+      <input type="text" name="description" value="${serviceDescriptionView}" required>
      
      <label>sevice type image</label>
      <input type="file" name="serviceTypeImage" required><br><br><br>

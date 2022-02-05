@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
      <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+     <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+     
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -33,13 +35,7 @@ table{
         padding: 10px;
         border:none;
         }
- button{
- text decoration:none;
- text-align:center;
- float:center;
- margin-left:200px;
  
- }
  .set{
  margin-top:10px;
  text-align:center;
@@ -90,22 +86,19 @@ h1{
 
 margin-left:520px;
  } 
-.button{
-      margin-left:350px;   
- 
- }
-   .table{
+.table{
    width:650px;
    margin-left:400px;}
+  .search{
+   margin-left:1000px;
+  }
 </style>
-</style>
+
 </head>
 <body>
   <body>
   <nav>
-    	
-        <ul>
-        
+     <ul>
          <li><a href="viewVenueAdminServlet">View venues</a></li>
          <li><a href="ViewServiceAdminServlet">View services</a></li>
          <li><a href="ViewUserAdminServlet">view users</a></li>
@@ -113,13 +106,18 @@ margin-left:520px;
          <li><a href="ViewServiceBookingServlet">view service Booking</a></li>
        </ul>
         </nav>
+        <h1>service Booking List</h1>
+        <form action="FilterDateServiceServlet" method="post">
+        <input type="date" name="search" class="search" >  
+       <button class="button">search</button>
+        </form>
 
 <table class="table table-hover table-striped">
 <caption></caption>
-	<h1><b>service Booking List</b></h1>
+	
 	<thead>
 	<tr>
-  		
+  		<th id=heading>s.no</th>
   		<th id="head1">User Id</th>
 		<th id="head2">service name</th>
 		<th id="head3">service package</th>
@@ -130,18 +128,18 @@ margin-left:520px;
 	</thead>
 <tbody>
 <c:forEach items="${serviceBookingAdmin}" var="serviceBookingAdmin">
-
+<c:set var="i" value="${i+1}"/>
 <tr>
-
-
-
+<td>${i}</td>
 <td>${serviceBookingAdmin.userId}</td>
 <td>${serviceBookingAdmin.serviceName}</td>
 <td>${serviceBookingAdmin.servicePackage}</td>
-<td>${serviceBookingAdmin.eventDate}</td>
-<td>${serviceBookingAdmin.bookingDate}</td>
-<td>${serviceBookingAdmin.serviceStatus}</td>
+<td><fmt:parseDate value="${serviceBookingAdmin.eventDate}"   pattern="yyyy-MM-dd" var="adminBookingService" type="date"/>
+  <fmt:formatDate pattern="dd-MM-yyyy" value="${adminBookingService}"/></td>
 
+<td><fmt:parseDate value="${serviceBookingAdmin.bookingDate}"   pattern="yyyy-MM-dd" var="adminBookingDateService" type="date"/>
+  <fmt:formatDate pattern="dd-MM-yyyy" value="${adminBookingDateService}"/></td>
+<td>${serviceBookingAdmin.serviceStatus}</td>
 </tr>
 </c:forEach>
 

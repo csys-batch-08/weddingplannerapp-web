@@ -1,8 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-    
-   
-    
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -87,6 +84,8 @@ button a{
 <input type="text" name="availability" pattern="[a-zA-Z]{3,}" required><br>
 <label>venue Image:</label>
 <input type="file" name="image" required><br><br>
+<label>description:</label>
+<input type="text" name="description" pattern="[a-zA-Z]{3,}" required><br>
 <a href="viewVenueAdmin.jsp"><button class="button">Back</button></a>
 		<button type="submit" class="button">Add</button>
 

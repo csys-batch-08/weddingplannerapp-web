@@ -6,6 +6,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.weddingplanner.daoimpl.VenuesDaoimpl;
 import com.weddingplanner.model.Venues;
@@ -15,17 +16,24 @@ public class UpdateVenueServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	@Override
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+	protected void service(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		HttpSession session = request.getSession();
 
 		try {
-			String venueName = request.getParameter("venueName");
-			String venueVendorName = request.getParameter("venueVendorName");
-			Long contactNumber = Long.parseLong(request.getParameter("contactNumber"));
+			int venueId = (int) session.getAttribute("venueIdView");
+			String venueName = request.getParameter("venueNameShow");
+
+			String venueVendorName = request.getParameter("venueVendorNameShow");
+
+			Long contactNumber = Long.parseLong(request.getParameter("contactNumberShow"));
+
 			Double venuePackage = Double.parseDouble(request.getParameter("venuePackage"));
 			String venueImage = request.getParameter("venueImage");
-			Venues venue = new Venues(venueName, null, null, null, venueVendorName, contactNumber, venuePackage, null,
-					venueImage);
+			String venueType = request.getParameter("venueType");
+			String venueDescription=request.getParameter("venueDescription");
+			Venues venue = new Venues(venueName, venueType, venueVendorName, contactNumber, venuePackage, venueImage,
+					 venueId,venueDescription);
 			VenuesDaoimpl venueDao = new VenuesDaoimpl();
 			venueDao.updateVenue(venue);
 			response.sendRedirect("ViewVenueAdminServlet");

@@ -65,7 +65,7 @@ public class UserDaoimpl implements UserDao {
 			statement = connection.createStatement();
 			ResultSet rs = statement.executeQuery(validateQuery);
 			if (rs.next()) {
-				user = new User(rs.getString(3), rs.getLong(4), rs.getString(5), emailId, password, rs.getInt(8));
+				user = new User(rs.getString("user_name"), rs.getLong("mobile_number"), rs.getString("city"), emailId, password, rs.getInt("user_wallet"));
 			}
 
 		} catch (SQLException e) {
@@ -103,7 +103,7 @@ public class UserDaoimpl implements UserDao {
 			statement = connection.createStatement();
 			ResultSet rs = statement.executeQuery(validateAdminQuery);
 			if (rs.next()) {
-				user = new User(rs.getString(3), rs.getLong(4), rs.getString(5), rs.getString(6), rs.getString(7),
+				user = new User(rs.getString("user_name"), rs.getLong("mobile_number"), rs.getString("city"), rs.getString("email_id"), rs.getString("password"),
 						rs.getInt(8));
 
 			}
@@ -175,8 +175,8 @@ public class UserDaoimpl implements UserDao {
 			statement = connection.createStatement();
 			ResultSet rs = statement.executeQuery(validateUpdateQuery);
 			if (rs.next()) {
-				user = new User(rs.getString(3), rs.getLong(4), rs.getString(5), emailId, rs.getString(7),
-						rs.getInt(8));
+				user = new User(rs.getString("user_name"), rs.getLong("mobile_number"), rs.getString("city"), emailId, rs.getString("password"),
+						rs.getInt("user_wallet"));
 			}
 
 		} catch (SQLException e) {
@@ -213,8 +213,8 @@ public class UserDaoimpl implements UserDao {
 			statement = connection.createStatement();
 			ResultSet rs = statement.executeQuery(showQuery);
 			while (rs.next()) {
-				User user = new User(rs.getString(3), rs.getLong(4), rs.getString(5), rs.getString(6), rs.getString(7),
-						rs.getInt(8));
+				User user = new User(rs.getString("user_name"), rs.getLong("mobile_number"), rs.getString("city"), rs.getString("email_id"), rs.getString("password"),
+						rs.getInt("user_wallet"));
 				userList.add(user);
 
 			}
@@ -251,7 +251,7 @@ public class UserDaoimpl implements UserDao {
 			statement = connection.createStatement();
 			ResultSet rs = statement.executeQuery(findUser);
 			if (rs.next()) {
-				userId = rs.getInt(1);
+				userId = rs.getInt("User_id");
 			}
 
 		} catch (SQLException e) {
@@ -289,7 +289,7 @@ public class UserDaoimpl implements UserDao {
 			statement.setInt(1, id);
 			ResultSet rs = statement.executeQuery();
 			while (rs.next()) {
-				return rs.getInt(1);
+				return rs.getInt("user_wallet");
 			}
 
 		} catch (SQLException e) {
@@ -398,8 +398,8 @@ public class UserDaoimpl implements UserDao {
 			statement.setInt(1, userid);
 			ResultSet rs = statement.executeQuery();
 			while (rs.next()) {
-				User user = new User(rs.getString(1), rs.getLong(2), rs.getString(3), rs.getString(4), rs.getString(5),
-						rs.getInt(6));
+				User user = new User(rs.getString("user_name"), rs.getLong("mobile_number"), rs.getString("city"), rs.getString("email_id"), rs.getString("password"),
+						rs.getInt("user_wallet"));
 				userList.add(user);
 			}
 		} catch (SQLException e) {
@@ -425,43 +425,7 @@ public class UserDaoimpl implements UserDao {
 		return userList;
 	}
 
-	public String findUserStatus(int userId) {
-		String findVenue = "select roles from  user_details where user_id='" + userId + "'";
-		Connection connection = null;
-		String status = null;
-		Statement statement = null;
-		try {
-			connection = ConnectionUtil.getDbConnection();
-			statement = connection.createStatement();
-			ResultSet rs = statement.executeQuery(findVenue);
-			if (rs.next()) {
-				status = rs.getString(1);
-			}
-		} catch (SQLException e) {
-
-			e.printStackTrace();
-		} finally {
-
-			if (statement != null) {
-				try {
-					statement.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
-			if (connection != null) {
-				try {
-					connection.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
-		}
-
-		return status;
-
-	}
-
+	
 	public void inactiveUser(int userId) {
 		Connection connection = null;
 		String query = "update user_details set user_role ='inactive'  where user_id = ?";
@@ -505,7 +469,7 @@ public class UserDaoimpl implements UserDao {
 			statement = connection.createStatement();
 			ResultSet rs = statement.executeQuery(findVenue);
 			if (rs.next()) {
-				name = rs.getString(1);
+				name = rs.getString("user_name");
 			}
 		} catch (SQLException e) {
 

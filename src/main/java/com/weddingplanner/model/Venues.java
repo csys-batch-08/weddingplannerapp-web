@@ -12,6 +12,8 @@ public class Venues {
 	private double venuePackage;
 	private String availability;
 	private String venueImages;
+	private int venueId;
+	private String venueDescription;
 
 	public String getVenueName() {
 		return venueName;
@@ -85,6 +87,26 @@ public class Venues {
 		this.venueImages = venueImages;
 	}
 
+	
+	
+	
+	public int getVenueId() {
+		return venueId;
+	}
+
+	public void setVenueId(int venueId) {
+		this.venueId = venueId;
+	}
+	
+
+	public String getVenueDescription() {
+		return venueDescription;
+	}
+
+	public void setVenueDescription(String venueDescription) {
+		this.venueDescription = venueDescription;
+	}
+
 	public Venues(String venueName, String venueArea, String venueCity, String venueType, String venueVendorName,
 			long contactNumber, double venuePackage, String availability, String venueImages) {
 		super();
@@ -98,10 +120,76 @@ public class Venues {
 		this.availability = availability;
 		this.venueImages = venueImages;
 	}
+	
+
+	public Venues(String venueName, String venueArea, String venueCity, String venueType, String venueVendorName,
+			long contactNumber, double venuePackage, String venueImages, int venueId) {
+		super();
+		this.venueName = venueName;
+		this.venueArea = venueArea;
+		this.venueCity = venueCity;
+		this.venueType = venueType;
+		this.venueVendorName = venueVendorName;
+		this.contactNumber = contactNumber;
+		this.venuePackage = venuePackage;
+		this.venueImages = venueImages;
+		this.venueId = venueId;
+	}
+
+	
+	
+	
+     
+	public Venues(String venueName, String venueArea, String venueCity, String venueType, String venueVendorName,
+			long contactNumber, double venuePackage, String availability, String venueImages, String venueDescription) {
+		super();
+		this.venueName = venueName;
+		this.venueArea = venueArea;
+		this.venueCity = venueCity;
+		this.venueType = venueType;
+		this.venueVendorName = venueVendorName;
+		this.contactNumber = contactNumber;
+		this.venuePackage = venuePackage;
+		this.availability = availability;
+		this.venueImages = venueImages;
+		this.venueDescription = venueDescription;
+	}
+	
+
+	public Venues(String venueName, String venueType, String venueVendorName, long contactNumber, double venuePackage,
+		 String venueImages, int venueId, String venueDescription) {
+		super();
+		this.venueName = venueName;
+		this.venueType = venueType;
+		this.venueVendorName = venueVendorName;
+		this.contactNumber = contactNumber;
+		this.venuePackage = venuePackage;
+		this.venueImages = venueImages;
+		this.venueId = venueId;
+		this.venueDescription = venueDescription;
+	}
 
 	public Venues() {
 		super();
-		// TODO Auto-generated constructor stub
+		
+	}
+	
+
+	public Venues(String venueName, String venueArea, String venueCity, String venueType, String venueVendorName,
+			long contactNumber, double venuePackage, String availability, String venueImages, int venueId,
+			String venueDescription) {
+		super();
+		this.venueName = venueName;
+		this.venueArea = venueArea;
+		this.venueCity = venueCity;
+		this.venueType = venueType;
+		this.venueVendorName = venueVendorName;
+		this.contactNumber = contactNumber;
+		this.venuePackage = venuePackage;
+		this.availability = availability;
+		this.venueImages = venueImages;
+		this.venueId = venueId;
+		this.venueDescription = venueDescription;
 	}
 
 	@Override
