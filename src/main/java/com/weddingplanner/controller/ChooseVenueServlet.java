@@ -33,7 +33,7 @@ public class ChooseVenueServlet extends HttpServlet {
 			session.setAttribute("venueId", venueId);
 			session.setAttribute("venuepackage", venuepackage);
 			session.setAttribute("advanceAmount", advanceAmount);
-			session.setAttribute("venueShow", venue);
+			request.setAttribute("venueShow", venue);
 			RequestDispatcher requestDispatcher = request.getRequestDispatcher("pickVenue.jsp");
 			requestDispatcher.forward(request, response);
 		} catch (Exception e) {

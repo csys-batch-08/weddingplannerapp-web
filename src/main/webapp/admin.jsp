@@ -12,11 +12,12 @@
 	box-sizing: border-box;
 	font-family: 'Poppins', sans-serif;
 }
-img{
-    background-size: cover;
-    width:100%;
-    height:100%;
+body {
+	background-image: url("images/admin.jpg");
+	background-size: cover;
 }
+
+
 nav{
 	width: 100%;
 	height: 50px;
@@ -72,9 +73,7 @@ nav ul li .active{
          <li><a href="ViewServiceBookingServlet">view service Booking</a></li>
         </ul>
         </nav>
-        <div class="image">
-            <img src="images/admin.jpg" alt="backgroundImage">
-        </div>
+       
     
 </body>
 </html>

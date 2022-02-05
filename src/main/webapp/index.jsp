@@ -82,8 +82,8 @@ h1{
         <h1>Login</h1>
         <form action="login" method="post">
            <label>Email</label>
-           <input type="email" name="email" placeholder="" required>
-           <label>Password</label>
+           <input type="email" name="email" id="email" required>
+            <label>Password</label>
            <input type="password" name="password" placeholder="" id="showPassword" required><br>
            <input type="checkbox" onclick="myFunction()">Show Password<br>
           <button class="button">Submit</button><br>

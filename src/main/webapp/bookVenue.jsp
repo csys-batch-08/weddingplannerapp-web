@@ -71,13 +71,13 @@ button a{
 <form action="book" method="post"  class="login-box" >
          <h1>Book Venue</h1>
           <label>venue Name:</label>
-            <input type="text" id="name" class="text" name="venuename" value="${venuename}"  placeholder="" required>
+            <input type="text" id="name" class="text" name="venuename" value="${venuename}" required>
             <label>No.of.guest:</label>
-            <input type="text" id="number" class="text" name="noOfGuest" placeholder="" pattern="[0-9]+"  required>
+            <input type="text" id="number" class="text" name="noOfGuest" pattern="[0-9]+"  required>
             <label>venue Package:</label>
-            <input type="text" id="venuePackage" class="text" name="venuepackage" value="${venuepackage}"  placeholder="" required>
+            <input type="text" id="venuePackage" class="text" name="venuepackage" value="${venuepackage}"  required>
             <label>Advance Amount:</label>
-            <input type="text" id="advancePackage" class="text" name="advancepackage" value="${advanceAmount}"  placeholder="" required>
+            <input type="text" id="advancePackage" class="text" name="advancepackage" value="${advanceAmount}"  required>
             <label>Event date</label>
             <input type="date"  name="eventDate" id="datefield" required><br><br>
            

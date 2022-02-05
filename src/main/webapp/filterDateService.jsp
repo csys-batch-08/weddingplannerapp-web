@@ -113,10 +113,10 @@ margin-left:520px;
          <li><a href="ViewServiceBookingServlet">view service Booking</a></li>
         </ul>
         </nav>
-
+   <h1>service Booking List</h1>
 <table class="table table-hover table-striped">
 <caption></caption>
-	<h1><b>service Booking List</b></h1>
+	
 	<thead>
 	<tr>
   		<th id="heading">s.no</th>

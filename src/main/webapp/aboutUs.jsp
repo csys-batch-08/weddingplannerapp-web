@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+	<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+	
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -140,18 +142,14 @@
 		<ul>
 
 
-			<li><a href="ViewVenuesServlet">Venues</a></li>
-			<li><a href="ViewServiceServlet">Services</a></li>
+			<li><a href="ViewVenuesServlet" >Venues</a></li>
+			<li><a href="ViewServiceServlet" >Services</a></li>
 			<li><a href="aboutUs.jsp">About us</a></li>
 			<li><a href="contactUs.jsp">Contact us</a></li>
 			<li><a href="UserProfileServlet">My Profile</a></li>
 			<li><a href="MyBookingServlet">My booking</a></li>
 		</ul>
-		<form action="filterCity" method="post">
-			<input type="text" name="search" class="search"> <a
-				href="FilterCity.jsp"><button class="button">search</button></a>
-		</form>
-
+		
 	</nav>
 
 

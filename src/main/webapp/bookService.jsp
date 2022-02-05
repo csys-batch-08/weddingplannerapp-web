@@ -71,11 +71,11 @@ button a{
 		
     <h1>Book service</h1>
           <label>service Name:</label>
-            <input type="text" id="name" class="text" name="servicename" value="${serviceName}"  placeholder="" required>
+            <input type="text" id="name" class="text" name="servicename" value="${serviceName}" required>
             <label>service Package:</label>
-            <input type="text" id="venuePackage" class="text" name="servicepackage" value="${servicePackage}"  placeholder="" required>
+            <input type="text" id="venuePackage" class="text" name="servicepackage" value="${servicePackage}" required>
             <label>Advance amount:</label>
-           <input type="text" id="advancePackage" class="text" name="advancepackageService" value="${advanceServiceAmount}"  placeholder="" required>
+           <input type="text" id="advancePackage" class="text" name="advancepackageService" value="${advanceServiceAmount}" required>
 
              <label>Event date</label>
             <input type="date"  name="datefield" id="datefield" required><br><br>

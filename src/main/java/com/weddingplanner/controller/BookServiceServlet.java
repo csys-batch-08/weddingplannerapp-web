@@ -41,16 +41,13 @@ public class BookServiceServlet extends HttpServlet {
 				int payWallet = (walletBalance - advanceAmount);
 				session.setAttribute("servicePayBalance", payWallet);
 				if (advanceAmount <= walletBalance) {
-					int balance = 0;
-					balance = userdao.updatewalletBalance(payWallet, userId);
-					if (balance > 0) {
-						BookingServices bookservice = new BookingServices(userId, serviceId, servicename, eventDate,
-								servicePackage);
 
-						book.bookService(bookservice);
-						response.sendRedirect("serviceBook.jsp");
-						session.setAttribute("servicebooked", "Your services are successfully booked");
-					}
+					BookingServices bookservice = new BookingServices(userId, serviceId, servicename, eventDate,
+							servicePackage);
+					book.bookService(bookservice);
+					userdao.updatewalletBalance(payWallet, userId);
+					response.sendRedirect("serviceBook.jsp");
+					session.setAttribute("servicebooked", "Your services are successfully booked");
 
 				} else {
 					response.sendRedirect("balance.jsp");

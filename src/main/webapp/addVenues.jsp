@@ -67,17 +67,17 @@ button a{
 <form action="insert" method="post" class="login-box">
 <h1>venue details</h1>
 <label>venue name:</label>
-<input type="text" name="venueName" pattern="[a-zA-Z]{3,}" required><br>
+<input type="text" name="venueName" pattern="[a-zA-Z]{3,}" id="venueName" required><br>
 <label>venue area:</label>
-<input type="text" name="venueArea" pattern="[a-zA-Z]{3,}" required><br>
+<input type="text" name="venueArea" pattern="[a-zA-Z]{3,}" id="venueArea" required><br>
 <label>venue city:</label>
-<input type="text" name="city" pattern="[a-zA-Z]{3,}" required><br>
+<input type="text" name="city" pattern="[a-zA-Z]{3,}" id="venueCity" required><br>
 <label>venue type:</label>
-<input type="text" name="venueType" pattern="[a-zA-Z]{3,}" required><br>
+<input type="text" name="venueType" pattern="[a-zA-Z]{3,}" id="venueType" required><br>
 <label>venue vendor name:</label>
-<input type="text" name="vendorName" pattern="[a-zA-Z]{3,}" required><br>
+<input type="text" name="vendorName" pattern="[a-zA-Z]{3,}" id="vendorName" required><br>
 <label>contact number:</label>
-<input type="text" name="contactNumber" pattern="[6-9][0-9]{9}" required><br>
+<input type="text" name="contactNumber" pattern="[6-9][0-9]{9}" id="contactNumber" required><br>
 <label>venue Package:</label>
 <input type="text" name="venuePackage" pattern="[0-9]+" required><br>
 <label>availability:</label>

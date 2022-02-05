@@ -26,31 +26,29 @@ public class CancelVenueServlet extends HttpServlet {
 			int userId = (int) session.getAttribute("id");
 			Double venuePackage = (Double) session.getAttribute("venueBookingPackage");
 			BookingVenuesDaoimpl bookVenue = new BookingVenuesDaoimpl();
-            int bookingVenueid = Integer.parseInt(request.getParameter("venueBookingIdView"));
-            int days = bookVenue.validateCancelBooking(bookingVenueid);
+			int bookingVenueid = Integer.parseInt(request.getParameter("venueBookingIdView"));
+			int days = bookVenue.validateCancelBooking(bookingVenueid);
 			UserDaoimpl userdao = new UserDaoimpl();
-			
-				if (days > 0) {
 
-					int walletBalance = 0;
-					walletBalance = userdao.walletbal(userId);
-					session.setAttribute("cancelVenue", walletBalance);
+			if (days > 0) {
 
-					int payWallet = (int) (walletBalance + (venuePackage - (venuePackage * 0.2)));
-					session.setAttribute("cancelRefundVenue", payWallet);
+				int walletBalance = 0;
+				walletBalance = userdao.walletbal(userId);
+				session.setAttribute("cancelVenue", walletBalance);
 
-					bookVenue.cancelBooking(userId, bookingVenueid);
-					session.setAttribute("cancelled", "venue sucessfully cancelled");
-					response.sendRedirect("cancelBookingMsg.jsp");
+				int payWallet = (int) (walletBalance + (venuePackage - (venuePackage * 0.2)));
+				session.setAttribute("cancelRefundVenue", payWallet);
 
-				}
+				bookVenue.cancelBooking(userId, bookingVenueid);
+				session.setAttribute("cancelled", "venue sucessfully cancelled");
+				response.sendRedirect("cancelBookingMsg.jsp");
 
-				else {
-					session.setAttribute("notCancelled", "Nope!You can't cancel the Booking");
-					response.sendRedirect("cancelVenueDate.jsp");
-				}
+			}
 
-			
+			else {
+				session.setAttribute("notCancelled", "Nope!You can't cancel the Booking");
+				response.sendRedirect("cancelVenueDate.jsp");
+			}
 
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -67,16 +67,19 @@ button a {
 </head>
 <body>
 	<form action="insertServices" method="post" class="login-box">
-		<label>service name:</label> <input type="text" name="serviceName"
-			pattern="[a-zA-Z]{3,}" required><br> <label>service
-			package:</label> <input type="text" name="servicePackage" pattern="[0-9]+"
-			required><br> <label>service image:</label> <input
-			type="file" name="image" required><br> <label>service
-			type:</label> <input type="text" name="type" pattern="[a-zA-Z]{3,}" required><br>
-		<br> <label>service description:</label> <input type="text"
-			name="description" pattern="[a-zA-Z]{3,}" required> <label>service
-			Type image:</label> <input type="file" name="serviceTypeImage"><br>
-		<br> <a href="viewServicesAdmin.jsp"><button class="button">Back</button></a>
+		<label>service name:</label> 
+		<input type="text" name="serviceName" pattern="[a-zA-Z]{3,}" id="serviceName" required><br> 
+		<label>service package:</label> 
+		<input type="text" name="servicePackage" pattern="[0-9]+" id="servicePackage" required><br> 
+		<label>service image:</label> 
+		<input type="file" name="image" id="serviceImage" required><br> 
+		<label>service type:</label>
+		 <input type="text" name="type" pattern="[a-zA-Z]{3,}" id="serviceType" required><br><br> 
+		<label>service description:</label> 
+		<input type="text" name="description" pattern="[a-zA-Z]{3,}" id="serviceDescription" required> 
+		<label>service Type image:</label> 
+		<input type="file" name="serviceTypeImage" id="serviceTypeImage" required><br><br> 
+		<a href="viewServicesAdmin.jsp"><button class="button">Back</button></a>
 		<button type="submit" class="button">Add</button>
 	</form>
 </body>
