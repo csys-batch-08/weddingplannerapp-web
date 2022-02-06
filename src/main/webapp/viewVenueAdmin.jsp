@@ -12,6 +12,12 @@
 	rel="stylesheet">
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<link rel='stylesheet'
+	href='https://cdn.jsdelivr.net/npm/sweetalert2@7.12.15/dist/sweetalert2.min.css'></link>
+<script
+	src="https://cdn.jsdelivr.net/npm/sweetalert2@11.3.10/dist/sweetalert2.all.min.js"></script>
+<script src="message.js"></script>
 
 <style>
 * {
@@ -108,6 +114,7 @@ h1 {
 </style>
 </head>
 <body>
+
 	<nav>
 
 		<ul>
@@ -141,8 +148,7 @@ h1 {
 					<th id="head10">Action</th>
 				</tr>
 			</thead>
-			<br>
-			<br>
+
 			<tbody>
 				<c:forEach items="${venueListAdmin}" var="venueAdmin">
 					<c:set var="i" value="${i+1}" />
@@ -160,7 +166,11 @@ h1 {
 						<td><a
 							href="GetVenueUpdate?venueIdShow=${venueAdmin.venueId}&venueNameShow=${venueAdmin.venueName}&venueVendorNameShow=${venueAdmin.venueVendorName}&contactNumberShow=${venueAdmin.contactNumber}&venuePackageShow=${venueAdmin.venuePackage}&venueTypeShow=${venueAdmin.venueType}&venueDescriptionShow=${venueAdmin.venueDescription}&venueImageShow=${venueAdmin.venueImages}"><button>Update
 								</button></a></td>
-					   <td><a href="inactiveVenue?venueIdAdmin=${venueAdmin.venueId}" style="text-decoration: none"><button>inactive</button></a></td>
+
+						<td><a
+							href="inactiveVenue?venueIdAdmin=${venueAdmin.venueId}"
+							style="text-decoration: none"><button
+									onclick="inactiveVenue(${venueAdmin.venueId})">inactive</button></a></td>
 					</tr>
 				</c:forEach>
 
@@ -168,12 +178,19 @@ h1 {
 		</table>
 		<br> <a href="addVenues.jsp" style="text-decoration: none"><button
 				type="button" class="button">Add Venue</button></a>
-				 
-				
-
 	</div>
-
-
-
+	<c:set var="inactive" value="${param.inactiveVenue}" />
+	<c:choose>
+		<c:when test="${inactive!=null}">
+			<script type="text/javascript">
+			popupMessages('Inactive Successfully')
+		</script>
+		</c:when>
+		<c:when test="${inactiveError!=null}">
+			<script type="text/javascript">
+			popupMessages('not inactive successfully')
+		</script>
+		</c:when>
+	</c:choose>
 </body>
 </html>

@@ -31,10 +31,13 @@ public class VenueServlet extends HttpServlet {
 			String venueDescription=request.getParameter("description");
 			Venues venue = new Venues(venueName, venueArea, venueCity, venueType, venueVendorName, contactNumber,
 					venuePackage, availability, venueImages,venueDescription);
-			venueDao.insertVenue(venue);
-
-			response.sendRedirect("viewVenueAdmin");
-
+			boolean venueMsg=venueDao.insertVenue(venue);
+            if(venueMsg) {
+			response.sendRedirect("addVenue.jsp?infomsg=successfully added");
+            }
+            else {
+    			response.sendRedirect("addVenue.jsp?error=can not be added! please try again");
+    		}
 		} catch (Exception e) {
 
 			e.printStackTrace();

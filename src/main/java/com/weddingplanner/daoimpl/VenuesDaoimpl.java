@@ -60,10 +60,11 @@ public class VenuesDaoimpl implements VenuesDao {
 
 	}
 
-	public void insertVenue(Venues venue) {
+	public boolean insertVenue(Venues venue) {
 		String insertQuery = "insert into venue_details(venue_name,venue_area,venue_city,venue_type,venue_vendor_name,contact_number,venue_package,check_availability, venue_images,venue_description)values(?,?,?,?,?,?,?,?,?,?)";
 		Connection connection = null;
 		PreparedStatement prepareStatement = null;
+		 int result=0;
 		try {
 			connection = ConnectionUtil.getDbConnection();
 			prepareStatement = connection.prepareStatement(insertQuery);
@@ -78,7 +79,7 @@ public class VenuesDaoimpl implements VenuesDao {
 			prepareStatement.setString(9, venue.getVenueImages());
 			prepareStatement.setString(10, venue.getVenueDescription());
 
-			prepareStatement.executeUpdate();
+			result=prepareStatement.executeUpdate();
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -100,6 +101,7 @@ public class VenuesDaoimpl implements VenuesDao {
 				}
 			}
 		}
+		return true;
 	}
 
 	public void updateVenue(Venues venue) {
@@ -358,15 +360,16 @@ public class VenuesDaoimpl implements VenuesDao {
 		return venuelist;
 	}
 
-	public void inactiveVenue(int venueId) {
+	public boolean inactiveVenue(int venueId) {
 		Connection connection = null;
 		String query = "update venue_details set check_availability ='No'  where venue_id = ?";
 		PreparedStatement prepareStatement = null;
+		int result=0;
 		try {
 			connection = ConnectionUtil.getDbConnection();
 			prepareStatement = connection.prepareStatement(query);
 			prepareStatement.setInt(1, venueId);
-			prepareStatement.executeUpdate();
+			result=prepareStatement.executeUpdate();
 
 		} catch (SQLException e) {
 
@@ -388,6 +391,7 @@ public class VenuesDaoimpl implements VenuesDao {
 				}
 			}
 		}
+		return result>0;
 
 	}
 	public List<Venues> showVenueAdmin() {

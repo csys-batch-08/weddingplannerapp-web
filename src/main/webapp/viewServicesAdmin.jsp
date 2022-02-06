@@ -38,8 +38,6 @@ table {
 	border: none;
 }
 
-
-
 .set {
 	margin-top: 10px;
 	text-align: center;
@@ -114,14 +112,14 @@ h1 {
 		</ul>
 	</nav>
 	<h1>
-			<strong>All Service List</strong>
-		</h1>
-    <a href="addServices.jsp" style="text-decoration: none"><button
+		<strong>All Service List</strong>
+	</h1>
+	<a href="addServices.jsp" style="text-decoration: none"><button
 			type="button" class="button">Add Service</button></a>
-	
+
 	<table>
 		<caption></caption>
-		
+
 		<thead>
 			<tr>
 				<th id="heading">s.no</th>
@@ -134,8 +132,7 @@ h1 {
 				<th id="head">Action</th>
 			</tr>
 		</thead>
-		<br>
-		<br>
+
 		<tbody>
 			<c:forEach items="${serviceListAdmin}" var="serviceAdmin">
 				<c:set var="i" value="${i+1}" />
@@ -149,19 +146,13 @@ h1 {
 					<td><a
 						href="GetServiceUpdate?serviceIdShow=${serviceAdmin.serviceId}&serviceNameShow=${serviceAdmin.serviceName}&servicePackageShow=${serviceAdmin.servicePackage}&serviceTypeShow=${serviceAdmin.serviceType}&serviceDescriptionShow=${serviceAdmin.serviceDescription}"
 						style="text-decoration: none"><button>Update</button></a></td>
-						<td><a href="InactiveServiceServlet?serviceIdAdmin=${serviceAdmin.serviceId}" style="text-decoration: none"><button>inactive</button></a></td>
-
+					<td><a
+						href="InactiveServiceServlet?serviceIdAdmin=${serviceAdmin.serviceId}"
+						style="text-decoration: none"><button>inactive</button></a></td>
 				</tr>
 			</c:forEach>
-
 		</tbody>
 	</table>
 	<br>
-	
-
-
-
-
-
 </body>
 </html>

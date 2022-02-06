@@ -1,4 +1,3 @@
-
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 
@@ -67,17 +66,17 @@ button a {
 </head>
 <body>
 	<form action="insertServices" method="post" class="login-box">
-		<label>service name:</label> 
+		<label for="serviceName">service name:</label> 
 		<input type="text" name="serviceName" pattern="[a-zA-Z]{3,}" id="serviceName" required><br> 
-		<label>service package:</label> 
+		<label for="servicePackage">service package:</label> 
 		<input type="text" name="servicePackage" pattern="[0-9]+" id="servicePackage" required><br> 
-		<label>service image:</label> 
+		<label for="serviceImage">service image:</label> 
 		<input type="file" name="image" id="serviceImage" required><br> 
-		<label>service type:</label>
-		 <input type="text" name="type" pattern="[a-zA-Z]{3,}" id="serviceType" required><br><br> 
-		<label>service description:</label> 
+		<label for="serviceType">service type:</label>
+		<input type="text" name="type" pattern="[a-zA-Z]{3,}" id="serviceType" required><br><br> 
+		<label for="serviceDescription">service description:</label> 
 		<input type="text" name="description" pattern="[a-zA-Z]{3,}" id="serviceDescription" required> 
-		<label>service Type image:</label> 
+		<label for="serviceTypeImage">service Type image:</label> 
 		<input type="file" name="serviceTypeImage" id="serviceTypeImage" required><br><br> 
 		<a href="viewServicesAdmin.jsp"><button class="button">Back</button></a>
 		<button type="submit" class="button">Add</button>

@@ -66,25 +66,22 @@ button a{
 </head>
 <body>
 <form action="update" method="post" class="login-box" id="updateVenue">
-
-<label>venue name:</label>
-    <input type="text" name="venueNameShow" value="${venueNameView}" readonly><br>
-    <label>Venue vendor name:</label>
-    <input type="text" name="venueVendorNameShow" value="${venueVendorNameView}"><br>
-    <label>contact number:</label>
-    <input type="number" name="contactNumberShow" value="${contactNumberView}"> <br>
-    <label>Venue Image:</label>
-    <input type="file" name="venueImage" value="${venueImageView}"><br>
-    <label>venue type:</label>
-    <input type="text" name="venueType" value="${venueTypeView}" required><br>
-    <label>venue package:</label>
-    <input type="number" name="venuePackage" value="${venuePackageView}"><br><br>
-    <label>venue description:</label>
-    <input type="text" name="venueDescription"  value="${venueDescriptionShow}" required><br>
+<label for="venueNameShow">venue name:</label>
+    <input type="text" name="venueNameShow" id="venueNameShow" value="${venueNameView}" readonly><br>
+    <label for="venueVendorName">Venue vendor name:</label>
+    <input type="text" name="venueVendorNameShow" id="venueVendorName" value="${venueVendorNameView}"><br>
+    <label for="contactNumber">contact number:</label>
+    <input type="number" name="contactNumberShow" id="contactNumber" value="${contactNumberView}"> <br>
+    <label for="venueImage">Venue Image:</label>
+    <input type="file" name="venueImage" id="venueImage" value="${venueImageView}"><br>
+    <label for="venueType">venue type:</label>
+    <input type="text" name="venueType" id="venueType" value="${venueTypeView}" required><br>
+    <label for="venuePackage">venue package:</label>
+    <input type="number" name="venuePackage" id="venuePackage" value="${venuePackageView}"><br><br>
+    <label for="venueDescription">venue description:</label>
+    <input type="text" name="venueDescription" id="venueDescription"  value="${venueDescriptionShow}" required><br>
     <a href="viewVenueAdmin.jsp"><button class="button">Back</button></a>
     <button type="submit" class="button">Update</button>
- 
-   </form>
-
+  </form>
 </body>
 </html>

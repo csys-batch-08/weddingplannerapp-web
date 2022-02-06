@@ -71,16 +71,16 @@ button:hover
 <div class="signup-box">
         <h1>Sign Up</h1>
         <form action="Register" method="post">
-            <label>Name</label>
-            <input type="text" id="name"  name="username" placeholder="" pattern="[A-Za-z]{3,}" required>
-            <label>Mobile number</label>
-            <input type="text" id="number" name="phonenumber" placeholder="" pattern="[6-9][0-9]{9}" required>
-            <label>city</label>
-            <input type="text" id="city" name="city" placeholder="" pattern="[A-Za-z0]{4,25}" required>
-            <label>Email</label>
-            <input type="email" id="email" name="email" placeholder="" pattern="[a-z]+[a-z0-9]+[@][a-z]+[.][a-z]+" required>
-            <label>Password</label>
-            <input type="password" id="password" name="password" placeholder="" pattern="[A-Z]+[a-z]+[@#$]+[0-9]+{8,20}" required>
+            <label for="name">Name</label>
+            <input type="text" id="name"  name="username" placeholder="Enter Name" pattern="[A-Za-z]{3,}" required>
+            <label for="number">Mobile number</label>
+            <input type="text" id="number" name="phonenumber" placeholder="Enter Mobile Number" pattern="[6-9][0-9]{9}" required>
+            <label for="city">city</label>
+            <input type="text" id="city" name="city" placeholder="Enter City" pattern="[A-Za-z0]{4,25}" required>
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" placeholder="Enter Email" pattern="[a-z]+[a-z0-9]+[@][a-z]+[.][a-z]+" required>
+            <label id="password">Password</label>
+            <input type="password" id="password" name="password" placeholder="Enter Password" pattern="[A-Z]+[a-z]+[@#$]+[0-9]+{8,20}" required>
             <button class="button">Submit</button>
         </form>
     </div>

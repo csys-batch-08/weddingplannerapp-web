@@ -7,7 +7,7 @@ import com.weddingplanner.model.Venues;
 public interface VenuesDao {
 	public List<Venues> showVenue();
 
-	public void insertVenue(Venues venue);
+	public boolean insertVenue(Venues venue);
 
 	public void updateVenue(Venues venue);
 

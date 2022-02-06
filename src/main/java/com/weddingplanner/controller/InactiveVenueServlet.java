@@ -20,9 +20,15 @@ public class InactiveVenueServlet extends HttpServlet {
 			throws ServletException, IOException {
 		VenuesDaoimpl venueDaoimpl = new VenuesDaoimpl();
 		int venueId = Integer.parseInt(request.getParameter("venueIdAdmin"));
-		venueDaoimpl.inactiveVenue(venueId);
-		RequestDispatcher requestDispatcher = request.getRequestDispatcher("ViewVenueAdminServlet");
+		boolean flag=venueDaoimpl.inactiveVenue(venueId);
+		if(flag) {
+		RequestDispatcher requestDispatcher = request.getRequestDispatcher("viewVenueAdmin.jsp?inactiveVenue=Inactive Successfully");
 		requestDispatcher.forward(request, response);
+	}
+		else {
+			response.sendRedirect("viewVenueAdmin.jsp?inactiveError=not inactive successfully");
+
+		}
 	}
 
 }

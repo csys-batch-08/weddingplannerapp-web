@@ -65,22 +65,20 @@ button a{
 </head>
 <body>
 <form action="updateService" method="post" class="login-box">
-     <label>Service name</label>
-     <input type="text" name="serviceName" value="${serviceNameView}" required>
-     <label>Service Package</label>
-     <input type="number" name="servicePackage" value="${servicePackageView }" required>
-     <label>service Image</label>
-     <input type="file" name="serviceImage"  required>
-     <label>service type</label>  
-     <input type="text" name="type" value="${serviceTypeView}" required>
-     <label>service Description:</label>
-      <input type="text" name="description" value="${serviceDescriptionView}" required>
-     
-     <label>sevice type image</label>
-     <input type="file" name="serviceTypeImage" required><br><br><br>
- <a href="viewServicesAdmin.jsp"><button class="button">Back</button></a>
-<button type="submit" class="button">Update</button>
-     
-</form>
+     <label for="serviceName">Service name</label>
+     <input type="text" name="serviceName" value="${serviceNameView}" id="serviceName" required>
+     <label for="servicePackage">Service Package</label>
+     <input type="number" name="servicePackage" value="${servicePackageView }" id="servicePackage" required>
+     <label for="serviceImage">service Image</label>
+     <input type="file" name="serviceImage" id="serviceImage" required>
+     <label for="type">service type</label>  
+     <input type="text" name="type" value="${serviceTypeView}" id="type" required>
+     <label for="description">service Description:</label>
+     <input type="text" name="description" value="${serviceDescriptionView}" id="description" required>
+     <label for="serviceTypeImage">sevice type image</label>
+     <input type="file" name="serviceTypeImage" id="serviceTypeImage" required><br><br><br>
+     <a href="viewServicesAdmin.jsp"><button class="button">Back</button></a>
+     <button type="submit" class="button">Update</button>
+     </form>
 </body>
 </html>

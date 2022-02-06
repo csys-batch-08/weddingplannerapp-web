@@ -68,7 +68,6 @@ button a {
 				<th id="tableHead"></th>
 				<c:set var="count" value="1" />
 				<c:forEach items="${serviceShow}" var="servicelist">
-
 					<td>
 						<table id="service">
 							<caption></caption>
@@ -77,22 +76,21 @@ button a {
 									<th id="tableHead"></th>
 									<td><a
 										href="ChooseServiceServlet?serviceName=${servicelist.serviceName }"><img
-											src="images/${servicelist.serviceImages}" alt="hall"></a> <span>${servicelist.serviceName}<br></span>
+											src="images/${servicelist.serviceImages}" alt="hall"
+											height="250px" width="280px"></a> <span>${servicelist.serviceName}<br></span>
 										<span>package:${servicelist.servicePackage}</span></td>
-                                  </tr>
+								</tr>
 							</tbody>
 						</table>
 					</td>
 					<c:choose>
 						<c:when test="${count==3}">
 							<c:set var="count" value="1" />
-			</tr>
-			<tr>
-				</c:when>
-				<c:otherwise>
-					<c:set var="count" value="${count+1}" />
-				</c:otherwise>
-				</c:choose>
+						</c:when>
+						<c:otherwise>
+							<c:set var="count" value="${count+1}" />
+						</c:otherwise>
+					</c:choose>
 
 				</c:forEach>
 			</tr>

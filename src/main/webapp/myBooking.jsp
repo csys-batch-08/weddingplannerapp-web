@@ -41,10 +41,6 @@ nav {
 	padding: 0px 100px;
 }
 
-nav ul {
-	
-}
-
 nav ul li {
 	display: inline-block;
 	list-style: none;
@@ -98,90 +94,63 @@ button a {
 		</ul>
 
 	</nav>
-
-
-
 	<h1>Service</h1>
-
-
 	<table class="table table-hover table-striped">
 		<caption></caption>
-
 		<thead>
 			<tr>
-
 				<th id="heading1">service name</th>
 				<th id="heading2">service package</th>
 				<th id="heading3">Event Date</th>
 				<th id="heading4">Booking date</th>
 				<th id="heading5">status</th>
 				<th id="heading6">cancel order</th>
-
-
 			</tr>
 		</thead>
-
 		<tbody>
-
-
 			<c:forEach items="${booking}" var="serviceBooking">
-
 				<tr>
-
-
 					<td>${serviceBooking.serviceName}</td>
-
 					<td>${serviceBooking.servicePackage}</td>
-
-
 					<td><fmt:parseDate value="${serviceBooking.eventDate}"
 							pattern="yyyy-MM-dd" var="eventDate" type="date" /> <fmt:formatDate
 							pattern="dd-MM-yyyy" value="${eventDate}" /></td>
-
 					<td><fmt:parseDate value="${serviceBooking.bookingDate}"
 							pattern="yyyy-MM-dd" var="serviceBookingDate" type="date" /> <fmt:formatDate
 							pattern="dd-MM-yyyy" value="${serviceBookingDate}" /></td>
-
 					<td>${serviceBooking.serviceStatus}</td>
-
-
-
-                       <c:choose>
-       					<c:when test="${serviceBooking.serviceStatus.equals('booked')}">
-						<td><a
-							href="cancelService?serviceBookingId=${serviceBooking.serviceBookingId}"><button
-									class="button">cancel</button></a></td>
-					</c:when>
-                     <c:otherwise>
-                     <td>Already Cancelled</td>
-                     </c:otherwise>
-                   </c:choose>
+					<c:choose>
+						<c:when test="${serviceBooking.serviceStatus.equals('booked')}">
+							<td><a
+								href="cancelService?serviceBookingId=${serviceBooking.serviceBookingId}"><button
+										class="button">cancel</button></a></td>
+						</c:when>
+						<c:otherwise>
+							<td>Already Cancelled</td>
+						</c:otherwise>
+					</c:choose>
 				</tr>
 			</c:forEach>
-
 		</tbody>
 	</table>
 
 
 
 
-
+	<h1>Venue</h1>
 
 	<table class="table table-hover table-striped" id="allusers">
 		<caption></caption>
-		<h1>Venue</h1>
+
 		<thead>
 			<tr>
 				<th id="heading">s.no</th>
-				<th id="heading1">venue name</th>
-				<th id="heading1">venue package</th>
+				<th id="heading1">venueName</th>
+				<th id="heading1">venuePackage</th>
 				<th id="heading1">Event Date</th>
 				<th id="heading1">Booking date</th>
-
 				<th id="heading1">status</th>
 				<th id="heading1">cancel your order</th>
-
-
 			</tr>
 		</thead>
 
@@ -189,38 +158,26 @@ button a {
 			<c:set var="flag" scope="request" value="${cancelflag}" />
 			<c:forEach items="${bookingVenue}" var="myBookingVenue">
 				<c:set var="i" value="${i+1}" />
-
 				<tr>
 					<td>${i}</td>
 					<td>${myBookingVenue.venueName}</td>
 					<td>${myBookingVenue.venuePackage}</td>
-
 					<td><fmt:parseDate value="${myBookingVenue.eventDate}"
 							pattern="yyyy-MM-dd" var="venueEventDate" type="date" /> <fmt:formatDate
 							pattern="dd-MM-yyyy" value="${venueEventDate}" /></td>
-
 					<td><fmt:parseDate value="${myBookingVenue.bookingDate}"
 							pattern="yyyy-MM-dd" var="venueBookingDateShow" type="date" /> <fmt:formatDate
 							pattern="dd-MM-yyyy" value="${venueBookingDateShow}" /></td>
-					
-						<td>${myBookingVenue.status}</td>
-
-
+                    <td>${myBookingVenue.status}</td>
 					<c:if test="${myBookingVenue.status.equals('booked')}">
-						<td><button class="button">
-								<a href="cancelVenue?venueBookingIdView=${myBookingVenue.venueBookingId}">cancel</a>
-							</button></td>
+						<td><a
+							href="cancelVenue?venueBookingIdView=${myBookingVenue.venueBookingId}"><button
+									class="button">cancel</button></a></td>
 					</c:if>
 
 				</tr>
 			</c:forEach>
-
-
 		</tbody>
 	</table>
-
-
-
-
 </body>
 </html>
