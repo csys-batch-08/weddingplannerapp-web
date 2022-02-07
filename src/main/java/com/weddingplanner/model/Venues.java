@@ -211,12 +211,15 @@ public class Venues implements Serializable {
 
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
+		if (this == obj) {
 			return true;
-		if (obj == null)
+		}
+		if (obj == null) {
 			return false;
-		if (getClass() != obj.getClass())
+		}
+		if (getClass() != obj.getClass()) {
 			return false;
+		}
 		Venues other = (Venues) obj;
 		return Objects.equals(availability, other.availability) && contactNumber == other.contactNumber
 				&& Objects.equals(venueArea, other.venueArea) && Objects.equals(venueCity, other.venueCity)

@@ -51,7 +51,7 @@ public class Ratings implements Serializable{
 
 	public Ratings() {
 		super();
-		// TODO Auto-generated constructor stub
+		
 	}
 
 }

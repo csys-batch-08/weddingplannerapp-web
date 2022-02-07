@@ -30,9 +30,10 @@ public class CancelVenueServlet extends HttpServlet {
 			UserDaoimpl userdao = new UserDaoimpl();
 			if (days > 0) {
 				int walletBalance = 0;
+				float deductAmount=(float) 0.2;
 				walletBalance = userdao.walletbal(userId);
 				session.setAttribute("cancelVenue", walletBalance);
-				int payWallet = (int) (walletBalance + (venuePackage - (venuePackage * 0.2)));
+				int payWallet = (int) (walletBalance + (venuePackage - (venuePackage * deductAmount)));
 				session.setAttribute("cancelRefundVenue", payWallet);
 				bookVenue.cancelBooking(userId, bookingVenueid);
 				session.setAttribute("cancelled", "venue sucessfully cancelled");

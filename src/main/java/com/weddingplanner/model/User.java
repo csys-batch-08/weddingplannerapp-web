@@ -88,12 +88,15 @@ public class User implements Serializable{
 
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
+		if (this == obj) {
 			return true;
-		if (obj == null)
+		}
+		if (obj == null) {
 			return false;
-		if (getClass() != obj.getClass())
+		}
+		if (getClass() != obj.getClass()) {
 			return false;
+		}
 		User other = (User) obj;
 		return Objects.equals(city, other.city) && Objects.equals(emailId, other.emailId)
 				&& mobileNumber == other.mobileNumber && Objects.equals(password, other.password)

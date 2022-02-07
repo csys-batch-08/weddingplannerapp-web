@@ -23,7 +23,7 @@ public class BookVenueServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		try {
+		   try {
 			HttpSession session = request.getSession();
 			int userId = (int) session.getAttribute("id");
 			int venueId = (int) session.getAttribute("venueId");
@@ -48,15 +48,13 @@ public class BookVenueServlet extends HttpServlet {
 				int payWallet = (walletBalance - advanceAmount);
 				session.setAttribute("venuePayBalance", payWallet);
 				if (advanceAmount <= walletBalance) {
-					int balance = 0;
-					balance = userdao.updatewalletBalance(payWallet, userId);
-					if (balance > 0) {
-						BookingVenues book = new BookingVenues(userId, venueId, venuename, noOfGuest, eventDate,
-								venuePackage, advanceAmount);
-						bookVenue.bookVenue(book);
-						session.setAttribute("booked", "venue sucessfully booked");
-						response.sendRedirect("venueBooked.jsp");
-					}
+					userdao.updatewalletBalance(payWallet, userId);
+					BookingVenues book = new BookingVenues(userId, venueId, venuename, noOfGuest, eventDate,
+							venuePackage, advanceAmount);
+					bookVenue.bookVenue(book);
+					session.setAttribute("booked", "venue sucessfully booked");
+					response.sendRedirect("venueBooked.jsp");
+
 				} else {
 					response.sendRedirect("balance.jsp");
 					session.setAttribute("lowBalance", "Low balance!please recharge your wallet");
@@ -65,9 +63,12 @@ public class BookVenueServlet extends HttpServlet {
 				response.sendRedirect("venueUnavailable.jsp");
 				session.setAttribute("unavailable", "This venue already booked on this date");
 			}
-		} catch (Exception e) {
+		}catch(Exception e) {
 			e.printStackTrace();
 		}
 	}
+		
+}	
+	
 
-}
+

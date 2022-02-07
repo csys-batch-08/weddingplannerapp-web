@@ -133,12 +133,15 @@ public class BookingServices implements Serializable{
 
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
+		if (this == obj) {
 			return true;
-		if (obj == null)
+		}
+		if (obj == null) {
 			return false;
-		if (getClass() != obj.getClass())
+		}
+	   if (getClass() != obj.getClass()) {
 			return false;
+	   }
 		BookingServices other = (BookingServices) obj;
 		return Objects.equals(eventDate, other.eventDate) && serviceId == other.serviceId
 				&& Objects.equals(serviceName, other.serviceName)
