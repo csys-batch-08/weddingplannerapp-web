@@ -23,25 +23,19 @@ public class UpdateVenueServlet extends HttpServlet {
 		try {
 			int venueId = (int) session.getAttribute("venueIdView");
 			String venueName = request.getParameter("venueNameShow");
-
 			String venueVendorName = request.getParameter("venueVendorNameShow");
-
 			Long contactNumber = Long.parseLong(request.getParameter("contactNumberShow"));
-
 			Double venuePackage = Double.parseDouble(request.getParameter("venuePackage"));
 			String venueImage = request.getParameter("venueImage");
 			String venueType = request.getParameter("venueType");
-			String venueDescription=request.getParameter("venueDescription");
+			String venueDescription = request.getParameter("venueDescription");
 			Venues venue = new Venues(venueName, venueType, venueVendorName, contactNumber, venuePackage, venueImage,
-					 venueId,venueDescription);
+					venueId, venueDescription);
 			VenuesDaoimpl venueDao = new VenuesDaoimpl();
 			venueDao.updateVenue(venue);
 			response.sendRedirect("ViewVenueAdminServlet");
 		} catch (Exception e) {
 			e.printStackTrace();
-
 		}
-
 	}
-
 }

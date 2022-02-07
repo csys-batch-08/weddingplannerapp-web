@@ -32,9 +32,6 @@ public class UserProfileServlet extends HttpServlet {
 			requestDispatcher.forward(request, response);
 		} catch (Exception e) {
 			e.printStackTrace();
-
 		}
-
 	}
-
 }

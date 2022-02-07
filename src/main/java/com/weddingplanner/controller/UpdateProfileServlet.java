@@ -28,10 +28,8 @@ public class UpdateProfileServlet extends HttpServlet {
 			UserDaoimpl userdao = new UserDaoimpl();
 			userdao.updateUserProfile(user);
 			response.sendRedirect("userProfile.jsp");
-
 		} catch (Exception e) {
 			e.printStackTrace();
-
 		}
 	}
 }

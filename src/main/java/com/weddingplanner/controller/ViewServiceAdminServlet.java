@@ -27,11 +27,8 @@ public class ViewServiceAdminServlet extends HttpServlet {
 			request.setAttribute("serviceListAdmin", serviceList);
 			RequestDispatcher requestDispatcher = request.getRequestDispatcher("viewServicesAdmin.jsp");
 			requestDispatcher.forward(request, response);
-
 		} catch (Exception e) {
-
 			e.printStackTrace();
 		}
 	}
-
 }

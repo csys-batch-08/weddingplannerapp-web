@@ -30,11 +30,8 @@ public class ShowServiceServlet extends HttpServlet {
 			request.setAttribute("serviceShow", serviceList);
 			RequestDispatcher requestDispatcher = request.getRequestDispatcher("showService.jsp");
 			requestDispatcher.forward(request, response);
-
 		} catch (Exception e) {
 			e.printStackTrace();
-
 		}
 	}
-
 }

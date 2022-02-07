@@ -16,7 +16,6 @@ public class VenueServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
 		VenuesDaoimpl venueDao = new VenuesDaoimpl();
 		try {
 			String venueName = request.getParameter("venueName");
@@ -28,20 +27,18 @@ public class VenueServlet extends HttpServlet {
 			Double venuePackage = Double.parseDouble(request.getParameter("venuePackage"));
 			String availability = request.getParameter("availability");
 			String venueImages = request.getParameter("image");
-			String venueDescription=request.getParameter("description");
+			String venueDescription = request.getParameter("description");
 			Venues venue = new Venues(venueName, venueArea, venueCity, venueType, venueVendorName, contactNumber,
-					venuePackage, availability, venueImages,venueDescription);
-			boolean venueMsg=venueDao.insertVenue(venue);
-            if(venueMsg) {
-			response.sendRedirect("addVenue.jsp?infomsg=successfully added");
-            }
-            else {
-    			response.sendRedirect("addVenue.jsp?error=can not be added! please try again");
-    		}
+					venuePackage, availability, venueImages, venueDescription);
+			boolean venueMsg = venueDao.insertVenue(venue);
+			if (venueMsg) {
+				response.sendRedirect("addVenue.jsp?infomsg=successfully added");
+			} else {
+				response.sendRedirect("addVenue.jsp?error=can not be added! please try again");
+			}
 		} catch (Exception e) {
 
 			e.printStackTrace();
 		}
-
 	}
 }

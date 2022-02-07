@@ -31,6 +31,7 @@ public class BookServiceServlet extends HttpServlet {
 			LocalDate eventDate = LocalDate.parse(request.getParameter("datefield"));
 			Double servicePackage = Double.parseDouble(request.getParameter("servicepackage"));
 			int advanceAmount = Integer.parseInt(request.getParameter("advancepackageService"));
+			request.setAttribute("serviceAdvance", advanceAmount);
 			BookingServicesDaoimpl book = new BookingServicesDaoimpl();
 			boolean flag = book.checkDate(serviceName, eventDate);
 			if (!flag) {
@@ -41,27 +42,22 @@ public class BookServiceServlet extends HttpServlet {
 				int payWallet = (walletBalance - advanceAmount);
 				session.setAttribute("servicePayBalance", payWallet);
 				if (advanceAmount <= walletBalance) {
-
 					BookingServices bookservice = new BookingServices(userId, serviceId, serviceName, eventDate,
 							servicePackage);
 					book.bookService(bookservice);
 					userdao.updatewalletBalance(payWallet, userId);
 					response.sendRedirect("serviceBook.jsp");
 					session.setAttribute("servicebooked", "Your services are successfully booked");
-
 				} else {
 					response.sendRedirect("balance.jsp");
 					session.setAttribute("lowBalance", "Low balance!please recharge your wallet");
-
 				}
-
 			} else {
 				response.sendRedirect("serviceUnavailable.jsp");
 				session.setAttribute("unavailable", "This service already booked on this date");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-
 		}
 	}
 }

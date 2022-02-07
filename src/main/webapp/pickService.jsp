@@ -89,7 +89,7 @@ button a {
 		<tbody>
 			<tr>
 				<c:set var="chooseService" scope="session" value="${chooseService}" />
-				<th id="head"><img src="images/${chooseService.serviceImages}"
+				<th id="head"><img src="assets/images/${chooseService.serviceImages}"
 					width="400px" height="400px" alt="hall"></th>
 				<td><h1>${chooseService.serviceName}</h1> <br> <span>
 						<em class="fas fa-rupee-sign"></em>${chooseService.servicePackage}</span><br>

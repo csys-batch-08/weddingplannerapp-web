@@ -75,7 +75,7 @@ body {
 			<tbody>
 				<tr>
 					<c:set var="venueShow" scope="session" value="${venueShow}" />
-					<th id="tableHead"><img src="images/${venueShow.venueImages}"
+					<th id="tableHead"><img src="assets/images/${venueShow.venueImages}"
 						alt="hall" width="500px" height="400px">
 					<td>
 						<h1>${venueShow.venueName}</h1> 

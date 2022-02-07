@@ -24,12 +24,9 @@ public class ChooseServiceServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		ServicesDaoimpl serviceDaoImpl = new ServicesDaoimpl();
-
 		HttpSession session = request.getSession();
-
 		String serviceName = request.getParameter("serviceName");
 		session.setAttribute("serviceName", serviceName);
-
 		try {
 			Services service = serviceDaoImpl.allService(serviceName);
 			int serviceId = serviceDaoImpl.findServiceId(service.getServiceName());
@@ -40,18 +37,13 @@ public class ChooseServiceServlet extends HttpServlet {
 			session.setAttribute("advanceServiceAmount", advanceServiceAmount);
 			request.setAttribute("chooseService", service);
 			RatingsDaoimpl ratings = new RatingsDaoimpl();
-
 			List<Ratings> review = ratings.showReview(serviceName);
 			double rate = ratings.fetchRating(serviceName);
-
 			request.setAttribute("review", review);
 			request.setAttribute("rate", rate);
-
 			RequestDispatcher requestDispatcher = request.getRequestDispatcher("pickService.jsp");
 			requestDispatcher.forward(request, response);
-
 		} catch (Exception e) {
-
 			e.printStackTrace();
 		}
 

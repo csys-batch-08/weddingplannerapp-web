@@ -1,7 +1,6 @@
 package com.weddingplanner.controller;
 
 import java.io.IOException;
-import java.time.LocalDate;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -29,30 +28,21 @@ public class CancelVenueServlet extends HttpServlet {
 			int bookingVenueid = Integer.parseInt(request.getParameter("venueBookingIdView"));
 			int days = bookVenue.validateCancelBooking(bookingVenueid);
 			UserDaoimpl userdao = new UserDaoimpl();
-
 			if (days > 0) {
-
 				int walletBalance = 0;
 				walletBalance = userdao.walletbal(userId);
 				session.setAttribute("cancelVenue", walletBalance);
-
 				int payWallet = (int) (walletBalance + (venuePackage - (venuePackage * 0.2)));
 				session.setAttribute("cancelRefundVenue", payWallet);
-
 				bookVenue.cancelBooking(userId, bookingVenueid);
 				session.setAttribute("cancelled", "venue sucessfully cancelled");
 				response.sendRedirect("cancelBookingMsg.jsp");
-
-			}
-
-			else {
+			} else {
 				session.setAttribute("notCancelled", "Nope!You can't cancel the Booking");
 				response.sendRedirect("cancelVenueDate.jsp");
 			}
-
 		} catch (Exception e) {
 			e.printStackTrace();
-
 		}
 	}
 

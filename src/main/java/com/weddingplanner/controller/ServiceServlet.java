@@ -31,10 +31,8 @@ public class ServiceServlet extends HttpServlet {
 					serviceDescription, serviceTypeImage);
 			serviceDao.insertService(service);
 			response.sendRedirect("viewServicesAdmin");
-
 		} catch (Exception e) {
 			e.printStackTrace();
-
 		}
 	}
 

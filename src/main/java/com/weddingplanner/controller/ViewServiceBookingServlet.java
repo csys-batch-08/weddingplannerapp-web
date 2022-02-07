@@ -28,10 +28,7 @@ public class ViewServiceBookingServlet extends HttpServlet {
 			RequestDispatcher requestDispatcher = request.getRequestDispatcher("viewServiceBooking.jsp");
 			requestDispatcher.forward(request, response);
 		} catch (Exception e) {
-
 			e.printStackTrace();
 		}
-
 	}
-
 }

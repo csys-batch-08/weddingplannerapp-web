@@ -62,13 +62,15 @@ nav ul li a:hover {
 	width: 880px;
 	margin-left: 250px;
 }
-
+.table td{
+   padding:7px;
+}
 h1 {
 	margin-left: 650px;
 }
 
 .button {
-	padding: 7px 50px;
+	padding: 5px 15px;
 	border-radius: 4px;
 	background-color: rgba(140, 160, 184, 0.5);
 	border: 1px solid violet;
@@ -76,7 +78,7 @@ h1 {
 	display: inline-flex;
 }
 
-button a {
+ a {
 	text-decoration: none;
 	color: black;
 }
@@ -99,6 +101,7 @@ button a {
 		<caption></caption>
 		<thead>
 			<tr>
+			    <th id="heading">s.no</th>
 				<th id="heading1">service name</th>
 				<th id="heading2">service package</th>
 				<th id="heading3">Event Date</th>
@@ -109,7 +112,9 @@ button a {
 		</thead>
 		<tbody>
 			<c:forEach items="${booking}" var="serviceBooking">
+			<c:set var="i" value="${i+1}" />
 				<tr>
+				    <td>${i}</td>
 					<td>${serviceBooking.serviceName}</td>
 					<td>${serviceBooking.servicePackage}</td>
 					<td><fmt:parseDate value="${serviceBooking.eventDate}"
@@ -150,7 +155,7 @@ button a {
 				<th id="heading1">Event Date</th>
 				<th id="heading1">Booking date</th>
 				<th id="heading1">status</th>
-				<th id="heading1">cancel your order</th>
+				<th id="heading1">cancel order</th>
 			</tr>
 		</thead>
 
@@ -168,19 +173,18 @@ button a {
 					<td><fmt:parseDate value="${myBookingVenue.bookingDate}"
 							pattern="yyyy-MM-dd" var="venueBookingDateShow" type="date" /> <fmt:formatDate
 							pattern="dd-MM-yyyy" value="${venueBookingDateShow}" /></td>
-                    <td>${myBookingVenue.status}</td>
-                    <c:choose>
-					<c:when test="${myBookingVenue.status.equals('booked')}">
-						<td><a
-							href="cancelVenue?venueBookingIdView=${myBookingVenue.venueBookingId}"><button
-									class="button">cancel</button></a></td>
-					</c:when>
-					<c:otherwise>
+					<td>${myBookingVenue.status}</td>
+					<c:choose>
+						<c:when test="${myBookingVenue.status.equals('booked')}">
+							<td><a
+								href="cancelVenue?venueBookingIdView=${myBookingVenue.venueBookingId}"><button
+										class="button">cancel</button></a></td>
+						</c:when>
+						<c:otherwise>
 							<td>Already Cancelled</td>
-					</c:otherwise>
+						</c:otherwise>
 					</c:choose>
-
-				</tr>
+                 </tr>
 			</c:forEach>
 		</tbody>
 	</table>

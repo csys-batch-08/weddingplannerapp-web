@@ -19,21 +19,16 @@ public class RechargeWallet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		try {
-
 			HttpSession session = request.getSession();
 			int userId = (int) session.getAttribute("id");
-
 			int amount = Integer.parseInt(request.getParameter("amount"));
 			session.setAttribute("amount", amount);
-
 			UserDaoimpl userdao = new UserDaoimpl();
 			userdao.updatewallet(amount, userId);
 			session.setAttribute("recharged", "Your Wallet is sucessfully recharged");
 			response.sendRedirect("UserProfileServlet");
-
 		} catch (Exception e) {
 			e.printStackTrace();
-
 		}
 	}
 }

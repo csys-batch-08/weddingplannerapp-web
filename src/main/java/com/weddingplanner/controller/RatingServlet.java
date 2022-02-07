@@ -21,9 +21,7 @@ public class RatingServlet extends HttpServlet {
 			throws ServletException, IOException {
 		try {
 			HttpSession session = request.getSession();
-
 			int userId = (int) session.getAttribute("id");
-
 			String servicename = request.getParameter("venuename");
 			int rating = Integer.parseInt(request.getParameter("rating"));
 			session.setAttribute("rating", rating);
@@ -33,11 +31,8 @@ public class RatingServlet extends HttpServlet {
 			ratings.insertRating(giveRating);
 			session.setAttribute("ratingMessage", "Thank You For Your Ratings!!");
 			response.sendRedirect("ratingMessage.jsp");
-
 		} catch (Exception e) {
 			e.printStackTrace();
-
 		}
 	}
-
 }

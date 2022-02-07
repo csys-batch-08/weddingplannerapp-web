@@ -25,10 +25,8 @@ public class GetVenueUpdate extends HttpServlet {
 			session.setAttribute("venueNameView", venueName);
 			String venueVendorName = request.getParameter("venueVendorNameShow");
 			session.setAttribute("venueVendorNameView", venueVendorName);
-
 			Long contactNumber = Long.parseLong(request.getParameter("contactNumberShow"));
 			session.setAttribute("contactNumberView", contactNumber);
-
 			Double venuePackage = Double.parseDouble(request.getParameter("venuePackageShow"));
 			session.setAttribute("venuePackageView", venuePackage);
 			String venueType = request.getParameter("venueTypeShow");

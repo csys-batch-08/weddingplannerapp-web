@@ -1,8 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -42,12 +40,10 @@ button a {
 			<li><a href="MyBookingServlet">My booking</a></li>
 		</ul>
 		<form action="filterCity" method="post">
-		<label for="search"></label>
-			<input type="text" name="search" class="search" id="search">
-			<button class="button">search</button>
+		<input type="text" name="search" class="search" id="search">
+		<button class="button">search</button>
 		</form>
-
-	</nav>
+    </nav>
 	<c:forEach items="${showVenue}" var="venue">
 		<div class="venue">
 			<div class="for-inline">

@@ -24,11 +24,9 @@ public class FilterByServlet extends HttpServlet {
 			Double servicePackage = Double.parseDouble(request.getParameter("byPrice"));
 			ServicesDaoimpl serviceDaoImpl = new ServicesDaoimpl();
 			List<Services> serviceList = serviceDaoImpl.filterByPrice(servicePackage);
-
 			request.setAttribute("servicePrice", serviceList);
 			RequestDispatcher requestDispatcher = request.getRequestDispatcher("filterPrice.jsp");
 			requestDispatcher.forward(request, response);
-
 		} catch (Exception e) {
 			e.printStackTrace();
 

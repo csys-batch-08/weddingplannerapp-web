@@ -27,9 +27,7 @@ public class ViewServiceServlet extends HttpServlet {
 			RequestDispatcher requestDispatcher = request.getRequestDispatcher("viewService.jsp");
 			requestDispatcher.forward(request, response);
 		} catch (Exception e) {
-
 			e.printStackTrace();
 		}
-
 	}
 }

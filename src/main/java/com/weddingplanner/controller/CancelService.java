@@ -28,7 +28,6 @@ public class CancelService extends HttpServlet
 			Double servicePackage = (Double) session.getAttribute("servicePackageName");
 			int bookingServiceid = Integer.parseInt(request.getParameter("serviceBookingId"));
 			boolean flag = book.checkCancelServiceBooking(bookingServiceid);
-
 			int days = book.validateCancelBooking(bookingServiceid);
 			if (!flag) {
 				if (days > 0) {
@@ -40,16 +39,13 @@ public class CancelService extends HttpServlet
 					book.cancelServiceBooking(bookingServiceid);
 					response.sendRedirect("serviceCancel.jsp");
 					session.setAttribute("serviceCancelled", "Your services are successfully cancelled");
-				}
-
-				else {
+				} else {
 					session.setAttribute("notCancelled", "Nope!You can't cancel the Booking");
 					response.sendRedirect("cancelVenueDate.jsp");
 				}
 			} else {
 				session.setAttribute("dateCancelled", "You can't cancel the booking ! You already cancel this Booking");
 				response.sendRedirect("cancelDate.jsp");
-
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

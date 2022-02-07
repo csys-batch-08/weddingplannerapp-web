@@ -23,7 +23,7 @@ public class GetServiceUpdate extends HttpServlet {
 			session.setAttribute("serviceIdView", serviceId);
 			String serviceName = request.getParameter("serviceNameShow");
 			session.setAttribute("serviceNameView", serviceName);
-            Double servicePackage = Double.parseDouble(request.getParameter("servicePackageShow"));
+			Double servicePackage = Double.parseDouble(request.getParameter("servicePackageShow"));
 			session.setAttribute("servicePackageView", servicePackage);
 			String serviceType = request.getParameter("serviceTypeShow");
 			session.setAttribute("serviceTypeView", serviceType);

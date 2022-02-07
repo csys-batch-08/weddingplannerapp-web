@@ -27,10 +27,7 @@ public class ViewUserAdminServlet extends HttpServlet {
 			RequestDispatcher requestDispatcher = request.getRequestDispatcher("viewUser.jsp");
 			requestDispatcher.forward(request, response);
 		} catch (Exception e) {
-
 			e.printStackTrace();
 		}
-
 	}
-
 }

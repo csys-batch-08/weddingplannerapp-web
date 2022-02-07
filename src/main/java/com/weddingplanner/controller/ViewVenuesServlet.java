@@ -28,10 +28,7 @@ public class ViewVenuesServlet extends HttpServlet {
 			RequestDispatcher requestDispatcher = request.getRequestDispatcher("viewVenues.jsp");
 			requestDispatcher.forward(request, response);
 		} catch (Exception e) {
-
 			e.printStackTrace();
 		}
-
 	}
-
 }

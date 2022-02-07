@@ -24,7 +24,6 @@ public class ViewVenueBookingServlet extends HttpServlet {
 		try {
 			BookingVenuesDaoimpl bookingdao = new BookingVenuesDaoimpl();
 			List<BookingVenues> venueList = bookingdao.allBookings();
-			System.out.println(venueList);
 			request.setAttribute("venueBookingAdmin", venueList);
 			RequestDispatcher requestDispatcher = request.getRequestDispatcher("viewAllBookings.jsp");
 			requestDispatcher.forward(request, response);

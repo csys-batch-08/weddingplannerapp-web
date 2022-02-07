@@ -61,7 +61,7 @@ public class BookingServicesDaoimpl implements BookingServiceDao {
 			connection = ConnectionUtil.getDbConnection();
 			statement = connection.prepareStatement(query);
 			statement.setInt(1, userId);
-            resultSet = statement.executeQuery();
+			resultSet = statement.executeQuery();
 
 			if (resultSet.next()) {
 				totalPackage = resultSet.getInt(1);
@@ -106,12 +106,14 @@ public class BookingServicesDaoimpl implements BookingServiceDao {
 		try {
 			connection = ConnectionUtil.getDbConnection();
 			statement = connection.prepareStatement(viewQuery);
-			statement.setInt(1, userId);			
+			statement.setInt(1, userId);
 			resultSet = statement.executeQuery();
 			while (resultSet.next()) {
 				BookingServices service = new BookingServices(resultSet.getInt("USER_ID"),
-						resultSet.getInt("SERVICE_ID"), resultSet.getString("SERVICE_NAME"),resultSet.getDate("BOOKING_DATE").toLocalDate(),
-						resultSet.getDate("EVENT_DATE").toLocalDate(), resultSet.getDouble("SERVICE_PACKAGE"),resultSet.getString("Status"),resultSet.getInt("service_booking_id"));
+						resultSet.getInt("SERVICE_ID"), resultSet.getString("SERVICE_NAME"),
+						resultSet.getDate("BOOKING_DATE").toLocalDate(), resultSet.getDate("EVENT_DATE").toLocalDate(),
+						resultSet.getDouble("SERVICE_PACKAGE"), resultSet.getString("Status"),
+						resultSet.getInt("service_booking_id"));
 				serviceList.add(service);
 			}
 		} catch (SQLException e) {
@@ -374,8 +376,8 @@ public class BookingServicesDaoimpl implements BookingServiceDao {
 		try {
 			connection = ConnectionUtil.getDbConnection();
 			statement = connection.prepareStatement(findVenue);
-            statement.setInt(1, serviceBookingId);			
-            resultSet = statement.executeQuery();
+			statement.setInt(1, serviceBookingId);
+			resultSet = statement.executeQuery();
 			if (resultSet.next()) {
 				resultSet.getInt(1);
 			}
@@ -463,8 +465,8 @@ public class BookingServicesDaoimpl implements BookingServiceDao {
 		try {
 			connection = ConnectionUtil.getDbConnection();
 			statement = connection.prepareStatement(findVenue);
-            statement.setInt(1, serviceId);				
-            resultSet = statement.executeQuery();
+			statement.setInt(1, serviceId);
+			resultSet = statement.executeQuery();
 			if (resultSet.next()) {
 				new BookingVenues(resultSet.getInt("User_id"), resultSet.getInt("Service_id"),
 						resultSet.getString("Service_name"), serviceId, resultSet.getDate("Event_date").toLocalDate(),
@@ -515,8 +517,9 @@ public class BookingServicesDaoimpl implements BookingServiceDao {
 			statement = connection.prepareStatement(viewQuery);
 			resultSet = statement.executeQuery();
 			while (resultSet.next()) {
-				BookingServices service = new BookingServices(resultSet.getInt("user_id"), resultSet.getInt("service_id"),
-						resultSet.getString("service_name"), resultSet.getDate("booking_date").toLocalDate(), resultSet.getDate("event_date").toLocalDate(),
+				BookingServices service = new BookingServices(resultSet.getInt("user_id"),
+						resultSet.getInt("service_id"), resultSet.getString("service_name"),
+						resultSet.getDate("booking_date").toLocalDate(), resultSet.getDate("event_date").toLocalDate(),
 						resultSet.getDouble("service_package"), resultSet.getString("status"));
 				serviceList.add(service);
 			}
@@ -559,10 +562,11 @@ public class BookingServicesDaoimpl implements BookingServiceDao {
 			connection = ConnectionUtil.getDbConnection();
 			statement = connection.prepareStatement(viewQuery);
 			statement.setDate(1, java.sql.Date.valueOf(eventDate));
-            resultSet = statement.executeQuery();
+			resultSet = statement.executeQuery();
 			while (resultSet.next()) {
-				BookingServices service = new BookingServices(resultSet.getInt("user_id"), resultSet.getInt("service_id"),
-						resultSet.getString("service_name"), resultSet.getDate("booking_date").toLocalDate(), resultSet.getDate("event_date").toLocalDate(),
+				BookingServices service = new BookingServices(resultSet.getInt("user_id"),
+						resultSet.getInt("service_id"), resultSet.getString("service_name"),
+						resultSet.getDate("booking_date").toLocalDate(), resultSet.getDate("event_date").toLocalDate(),
 						resultSet.getDouble("service_package"), resultSet.getString("status"));
 				serviceList.add(service);
 			}

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+  <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -66,17 +67,17 @@ button a{
 <body>
 <form action="updateService" method="post" class="login-box">
      <label for="serviceName">Service name</label>
-     <input type="text" name="serviceName"  id="serviceName" pattern="[A-Za-z ]{3,}" value="${serviceNameView}" required>
+     <input type="text" name="serviceNameShow"  id="serviceName" pattern="[A-Za-z ]{3,}" value="${serviceNameView}" required>
      <label for="servicePackage">Service Package</label>
-     <input type="number" name="servicePackage"   min="10000" max="100000" id="servicePackage" value="${servicePackageView}" required>
+     <input type="number" name="servicePackageShow"   min="10000" max="100000" id="servicePackage" value="${servicePackageView}" required>
      <label for="serviceImage">service Image</label>
-     <input type="file" name="serviceImage" id="serviceImage" required>
+     <input type="file" name="serviceImageShow" id="serviceImage" required>
      <label for="type">service type</label>  
-     <input type="text" name="type"  id="type" pattern="[A-Za-z ]{3,}" value="${serviceTypeView}" required>
+     <input type="text" name="typeShow"  id="type" pattern="[A-Za-z ]{3,}" value="${serviceTypeView}" required>
      <label for="description">service Description:</label>
-     <input type="text" name="description"  id="description" pattern="[A-Za-z ]{3,}" value="${serviceDescriptionView}" required>
+     <input type="text" name="descriptionShow"  id="description" pattern="[A-Za-z ]{3,}" value="${serviceDescriptionView}" required>
      <label for="serviceTypeImage">sevice type image</label>
-     <input type="file" name="serviceTypeImage" id="serviceTypeImage" required><br><br><br>
+     <input type="file" name="serviceTypeImageShow" id="serviceTypeImage" required><br><br><br>
      <a href="viewServicesAdmin.jsp"><button class="button">Back</button></a>
      <button type="submit" class="button">Update</button>
      </form>

@@ -10,34 +10,27 @@ import javax.servlet.http.HttpServletResponse;
 import com.weddingplanner.daoimpl.ServicesDaoimpl;
 import com.weddingplanner.model.Services;
 
-
 @WebServlet("/updateService")
 public class UpdateServiecServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    
+
 	@Override
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		try {
-		String serviceName=request.getParameter("serviceName");
-	    Double servicePackage=Double.parseDouble(request.getParameter("servicePackage"));
-	    String serviceImage=request.getParameter("serviceImage");
-	    String serviceType=request.getParameter("type");
-		String serviceDescription=request.getParameter("description");
-		String serviceTypeImage=request.getParameter("serviceTypeImage");
-		
-		Services service=new Services(serviceName,servicePackage,serviceImage,null,serviceType,serviceDescription,serviceTypeImage);
-		ServicesDaoimpl serviceDao=new ServicesDaoimpl();
-		serviceDao.updateService(service);
-	    response.sendRedirect("viewServicesAdmin.jsp");
-		}catch(Exception e) {
+			String serviceName = request.getParameter("serviceNameShow");
+			Double servicePackage = Double.parseDouble(request.getParameter("servicePackageShow"));
+			String serviceImage = request.getParameter("serviceImageShow");
+			String serviceType = request.getParameter("typeShow");
+			String serviceDescription = request.getParameter("descriptionShow");
+			String serviceTypeImage = request.getParameter("serviceTypeImageShow");
+			Services service = new Services(serviceName, servicePackage, serviceImage, null, serviceType,
+					serviceDescription, serviceTypeImage);
+			ServicesDaoimpl serviceDao = new ServicesDaoimpl();
+			serviceDao.updateService(service);
+			response.sendRedirect("viewServicesAdmin.jsp");
+		} catch (Exception e) {
 			e.printStackTrace();
-
 		}
-
-		
-         
-
 	}
-
 }

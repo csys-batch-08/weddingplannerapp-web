@@ -24,13 +24,10 @@ public class ViewVenueAdminServlet extends HttpServlet {
 		try {
 			VenuesDaoimpl venueDao = new VenuesDaoimpl();
 			List<Venues> venueList = venueDao.showVenueAdmin();
-
 			request.setAttribute("venueListAdmin", venueList);
-
 			RequestDispatcher requestDispatcher = request.getRequestDispatcher("viewVenueAdmin.jsp");
 			requestDispatcher.forward(request, response);
 		} catch (Exception e) {
-
 			e.printStackTrace();
 		}
 

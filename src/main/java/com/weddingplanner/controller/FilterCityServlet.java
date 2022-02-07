@@ -22,16 +22,13 @@ public class FilterCityServlet extends HttpServlet {
 			throws ServletException, IOException {
 		try {
 			String city = request.getParameter("search");
-
 			VenuesDaoimpl venue = new VenuesDaoimpl();
 			List<Venues> showVenue = venue.findCity(city);
-
 			request.setAttribute("searchCity", showVenue);
 			RequestDispatcher requestdispatcher = request.getRequestDispatcher("filterCity.jsp");
 			requestdispatcher.forward(request, response);
 		} catch (Exception e) {
 			e.printStackTrace();
-
 		}
 	}
 

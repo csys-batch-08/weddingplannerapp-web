@@ -23,7 +23,6 @@ public class FilterDateServiceServlet extends HttpServlet {
 			throws ServletException, IOException {
 		try {
 			LocalDate eventDate = LocalDate.parse(request.getParameter("search"));
-
 			BookingServicesDaoimpl service = new BookingServicesDaoimpl();
 			List<BookingServices> showVenue = service.filterByDate(eventDate);
 			request.setAttribute("searchDateService", showVenue);
@@ -31,7 +30,6 @@ public class FilterDateServiceServlet extends HttpServlet {
 			requestdispatcher.forward(request, response);
 		} catch (Exception e) {
 			e.printStackTrace();
-
 		}
 	}
 }
