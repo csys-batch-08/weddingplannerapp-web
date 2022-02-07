@@ -119,6 +119,7 @@ h1 {
 	</nav>
 	<h1>service Booking List</h1>
 	<form action="FilterDateServiceServlet" method="post">
+	<label for="search"></label>
 		<input type="date" name="search" class="search" id="search">
 		<button class="button">search</button>
 	</form>

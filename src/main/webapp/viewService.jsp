@@ -66,6 +66,7 @@ button a {
 			<li><a href="MyBookingServlet">My booking</a></li>
 		</ul>
 		<form action="filterPrice" method="post">
+		<label for="byPrice"></label>
 			<input type="text" name="byPrice" class="search" id="byPrice">
 			<button class="button">search</button>
 		</form>

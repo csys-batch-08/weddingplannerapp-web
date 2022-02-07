@@ -79,7 +79,7 @@ button:hover
             <input type="text" id="city" name="city" placeholder="Enter City" pattern="[A-Za-z0]{4,25}" required>
             <label for="email">Email</label>
             <input type="email" id="email" name="email" placeholder="Enter Email" pattern="[a-z]+[a-z0-9]+[@][a-z]+[.][a-z]+" required>
-            <label id="password">Password</label>
+            <label for="password">Password</label>
             <input type="password" id="password" name="password" placeholder="Enter Password" pattern="[A-Z]+[a-z]+[@#$]+[0-9]+{8,20}" required>
             <button class="button">Submit</button>
         </form>
