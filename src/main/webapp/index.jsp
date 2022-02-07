@@ -89,7 +89,7 @@ h1 {
 				<input type="email" name="email" id="email" required> 
 				<label for="showPassword">Password</label>
 				<input type="password" name="password" id="showPassword" required><br>
-				<input type="checkbox" onclick="myFunction()" id="showPassword">Show Password<br>
+				<input type="checkbox" onKeyPress="myFunction()" id="showPassword">Show Password<br>
 				<button class="button">Submit</button>
 				<br>
            </form>

@@ -9,7 +9,7 @@ function popupMessages(infoMessage) {
 
 		case "Successfully Added":
 
-			swal.fire({
+		  swal.fire({
 				title: "Successfully Added!",
 				icon: "success",
 				showConfirmButton: false,
@@ -48,7 +48,7 @@ function popupMessages(infoMessage) {
 
 }
 function inactiveVenue(venueId) {
-	Swal.fire({
+	    Swal.fire({
 		title: "Are you sure? You Want to inactive this Venue",
 		icon: 'warning',
 		showCancelButton: true,
