@@ -12,7 +12,7 @@
 	crossorigin="anonymous"></script>
 <style>
 body {
-	background-image: url("images/b3.jpg");
+	background-image: url("assets/images/b3.jpg");
 	background-size: cover;
 }
 
@@ -47,7 +47,7 @@ nav a {
 			<div class="for-inline">
 				<div class="image-container">
 					<a href="ChooseVenueServlet?venueName=${filterVenueCity.venueName}">
-					<img src="images/${filterVenueCity.venueImages}" alt="hall" height="200px" width="350px"></a>
+					<img src="assets/images/${filterVenueCity.venueImages}" alt="hall" height="200px" width="350px"></a>
 					<div class="title">
 						<h2>venue name:${filterVenueCity.venueName }</h2>
 					</div>

@@ -7,7 +7,7 @@
 <title>home</title>
 <style>
 body {
-	background-image: url("images/wedding4.jpg");
+	background-image: url("assets/images/wedding4.jpg");
 	background-size: cover;
 }
 

@@ -26,7 +26,6 @@ public class FilterDateServiceServlet extends HttpServlet {
 
 			BookingServicesDaoimpl service = new BookingServicesDaoimpl();
 			List<BookingServices> showVenue = service.filterByDate(eventDate);
-			System.out.println(showVenue);
 			request.setAttribute("searchDateService", showVenue);
 			RequestDispatcher requestdispatcher = request.getRequestDispatcher("filterDateService.jsp");
 			requestdispatcher.forward(request, response);

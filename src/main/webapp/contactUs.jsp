@@ -10,7 +10,7 @@
 
 <style>
 body {
-	background-image: url("images/b3.jpg");
+	background-image: url("assets/images/b3.jpg");
 	background-size: cover;
 }
 

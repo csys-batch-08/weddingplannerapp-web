@@ -10,7 +10,7 @@
 <style>
 body
     {
-        background-image: url("images/adminImage.jpg");
+        background-image: url("assets/images/adminImage.jpg");
         background-size: cover;
     }
  .login-box{
@@ -67,19 +67,19 @@ button a{
 <body>
 <form action="update" method="post" class="login-box" id="updateVenue">
 <label for="venueNameShow">venue name:</label>
-    <input type="text" name="venueNameShow" id="venueNameShow" value="${venueNameView}" readonly><br>
+    <input type="text" name="venueNameShow" id="venueNameShow" value="${venueNameView}" pattern="[A-Za-z ]{3,}"><br>
     <label for="venueVendorName">Venue vendor name:</label>
-    <input type="text" name="venueVendorNameShow" id="venueVendorName" value="${venueVendorNameView}"><br>
+    <input type="text" name="venueVendorNameShow" id="venueVendorName" value="${venueVendorNameView}" pattern="[A-Za-z ]{3,}"><br>
     <label for="contactNumber">contact number:</label>
-    <input type="number" name="contactNumberShow" id="contactNumber" value="${contactNumberView}"> <br>
+    <input type="text" name="contactNumberShow" id="contactNumber" value="${contactNumberView}" pattern="[6-9][0-9]{9}"> <br>
     <label for="venueImage">Venue Image:</label>
     <input type="file" name="venueImage" id="venueImage" value="${venueImageView}"><br>
     <label for="venueType">venue type:</label>
-    <input type="text" name="venueType" id="venueType" value="${venueTypeView}" required><br>
+    <input type="text" name="venueType" id="venueType" value="${venueTypeView}" pattern="[A-Za-z ]{3,}" required><br>
     <label for="venuePackage">venue package:</label>
-    <input type="number" name="venuePackage" id="venuePackage" value="${venuePackageView}"><br><br>
+    <input type="number" name="venuePackage" id="venuePackage" min="10000" max="100000" value="${venuePackageView}"><br><br>
     <label for="venueDescription">venue description:</label>
-    <input type="text" name="venueDescription" id="venueDescription"  value="${venueDescriptionShow}" required><br>
+    <input type="text" name="venueDescription" id="venueDescription"  value="${venueDescriptionShow}" pattern="[A-Za-z ]{3,}"> required><br>
     <a href="viewVenueAdmin.jsp"><button class="button">Back</button></a>
     <button type="submit" class="button">Update</button>
   </form>

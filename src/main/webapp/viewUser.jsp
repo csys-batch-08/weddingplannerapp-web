@@ -20,7 +20,7 @@
 }
 
 body {
-	background-image: url("images/adminImage.jpg");
+	background-image: url("assets/images/adminImage.jpg");
 	background-size: cover;
 }
 

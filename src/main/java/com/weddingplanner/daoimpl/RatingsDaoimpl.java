@@ -93,15 +93,15 @@ public class RatingsDaoimpl implements RatingsDao {
 
 	public List<Ratings> showReview(String serviceName) {
 		List<Ratings> venueList = new ArrayList<>();
-		String viewQuery = "select rating_id,user_id,service_name,rating,review from rating_details where service_name='"
-				+ serviceName + "'";
+		String viewQuery = "select rating_id,user_id,service_name,rating,review from rating_details where service_name=?";
 		Connection connection = null;
-		Statement statement = null;
+		PreparedStatement statement = null;
 		ResultSet resultSet = null;
 		try {
 			connection = ConnectionUtil.getDbConnection();
-			statement = connection.createStatement();
-			resultSet = statement.executeQuery(viewQuery);
+			statement = connection.prepareStatement(viewQuery);
+			statement.setString(1, serviceName);
+			resultSet = statement.executeQuery();
 			while (resultSet.next()) {
 
 				Ratings rating = new Ratings(resultSet.getInt("user_id"), resultSet.getString("service_name"), resultSet.getInt("rating"),

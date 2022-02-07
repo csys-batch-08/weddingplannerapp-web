@@ -14,7 +14,7 @@
 }
 
 body {
-	background-image: url("images/admin.jpg");
+	background-image: url("assets/images/admin.jpg");
 	background-size: cover;
 }
 
@@ -75,6 +75,7 @@ nav ul li .active {
 			<li><a href="ViewUserAdminServlet">view users</a></li>
 			<li><a href="ViewVenueBookingServlet">view venue Booking</a></li>
 			<li><a href="ViewServiceBookingServlet">view service Booking</a></li>
+			
 		</ul>
 	</nav>
 </body>

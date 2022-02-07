@@ -50,8 +50,9 @@ public class BookVenueServlet extends HttpServlet {
 				session.setAttribute("venueBalance", walletBalance);
 				int payWallet = (walletBalance - advanceAmount);
 				session.setAttribute("venuePayBalance", payWallet);
-
+                 System.out.println("hi");
 				if (advanceAmount <= walletBalance) {
+					System.out.println("hi");
 					int balance = 0;
 					balance = userdao.updatewalletBalance(payWallet, userId);
 					if (balance > 0) {

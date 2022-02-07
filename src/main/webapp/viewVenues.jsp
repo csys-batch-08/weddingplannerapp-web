@@ -13,7 +13,7 @@
 	crossorigin="anonymous"></script>
 <style>
 body {
-	background-image: url("images/b3.jpg");
+	background-image: url("assets/images/b3.jpg");
 	background-size: cover;
 }
 
@@ -52,7 +52,7 @@ button a {
 			<div class="for-inline">
 				<div class="image-container">
 					<a href="ChooseVenueServlet?venueName=${venue.venueName}"> <img
-						src="images/${venue.venueImages }" alt="hall" height="200px"
+						src="assets/images/${venue.venueImages }" alt="hall" height="200px"
 						width="350px"></a>
 					<div class="title">
 						<h2>${venue.venueName}</h2>

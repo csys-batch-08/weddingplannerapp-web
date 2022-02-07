@@ -14,7 +14,7 @@ public interface UserDao {
 
 	public void updateUserProfile(User user);
 
-	public User validateUserUpdate(String emailId);
+	
 
 	public List<User> viewUser();
 

@@ -8,7 +8,7 @@
 <title>Services</title>
 <style>
 body {
-	background-image: url("images/adminImage.jpg");
+	background-image: url("assets/images/adminImage.jpg");
 	background-size: cover;
 }
 
@@ -67,15 +67,15 @@ button a {
 <body>
 	<form action="insertServices" method="post" class="login-box">
 		<label for="serviceName">service name:</label> 
-		<input type="text" name="serviceName" pattern="[a-zA-Z]{3,}" id="serviceName" required><br> 
+		<input type="text" name="serviceName"  id="serviceName" required pattern="[A-Za-z ]{3,}"><br> 
 		<label for="servicePackage">service package:</label> 
-		<input type="text" name="servicePackage" pattern="[0-9]+" id="servicePackage" required><br> 
+		<input type="number" name="servicePackage" id="servicePackage" min="10000" max="100000" required><br> 
 		<label for="serviceImage">service image:</label> 
 		<input type="file" name="image" id="serviceImage" required><br> 
 		<label for="serviceType">service type:</label>
-		<input type="text" name="type" pattern="[a-zA-Z]{3,}" id="serviceType" required><br><br> 
+		<input type="text" name="type" pattern="[A-Za-z ]{3,}" id="serviceType" required><br><br> 
 		<label for="serviceDescription">service description:</label> 
-		<input type="text" name="description" pattern="[a-zA-Z]{3,}" id="serviceDescription" required> 
+		<input type="text" name="description" pattern="[A-Za-z ]{3,}" id="serviceDescription" required> 
 		<label for="serviceTypeImage">service Type image:</label> 
 		<input type="file" name="serviceTypeImage" id="serviceTypeImage" required><br><br> 
 		<a href="viewServicesAdmin.jsp"><button class="button">Back</button></a>

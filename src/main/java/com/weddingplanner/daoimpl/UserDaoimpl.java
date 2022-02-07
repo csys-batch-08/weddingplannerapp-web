@@ -55,17 +55,18 @@ public class UserDaoimpl implements UserDao {
 	}
 
 	public User validateUser(String emailId, String password) {
-		String validateQuery = "select user_id, user_role, user_name, mobile_number,city,email_id,password,user_wallet from user_details where email_id='"
-				+ emailId + "'and password='" + password + "'and user_role='customer' ";
+		String validateQuery = "select user_id, user_role, user_name, mobile_number,city,email_id,password,user_wallet from user_details where email_id=? and password=? and user_role='customer' ";
 		Connection connection = null;
 		User user = null;
-		Statement statement = null;
+		PreparedStatement statement = null;
 		try {
 			connection = ConnectionUtil.getDbConnection();
-			statement = connection.createStatement();
-			ResultSet rs = statement.executeQuery(validateQuery);
+			statement = connection.prepareStatement(validateQuery);
+			statement.setString(1, emailId);
+			statement.setString(2, password);
+			ResultSet rs = statement.executeQuery();
 			if (rs.next()) {
-				user = new User(rs.getString("user_name"), rs.getLong("mobile_number"), rs.getString("city"), emailId, password, rs.getInt("user_wallet"));
+				user = new User(rs.getString("USER_NAME"), rs.getLong("Mobile_Number"), rs.getString("city"), emailId, password, rs.getInt("User_Wallet"));
 			}
 
 		} catch (SQLException e) {
@@ -93,17 +94,18 @@ public class UserDaoimpl implements UserDao {
 
 	public User validateAdmin(String emailId, String password) throws SQLException {
 
-		String validateAdminQuery = "select user_id, user_role, user_name, mobile_number,city,email_id,password,user_wallet from user_details where user_role='admin'and email_id='"
-				+ emailId + "'and password='" + password + "'";
+		String validateAdminQuery = "select user_id, user_role, user_name, mobile_number,city,email_id,password,user_wallet from user_details where user_role='admin'and email_id=? and password=?";
 		Connection connection = null;
 		User user = null;
-		Statement statement = null;
+		PreparedStatement statement = null;
 		try {
 			connection = ConnectionUtil.getDbConnection();
-			statement = connection.createStatement();
-			ResultSet rs = statement.executeQuery(validateAdminQuery);
+			statement = connection.prepareStatement(validateAdminQuery);
+			statement.setString(1, emailId);
+			statement.setString(2, password);
+			ResultSet rs = statement.executeQuery();
 			if (rs.next()) {
-				user = new User(rs.getString("user_name"), rs.getLong("mobile_number"), rs.getString("city"), rs.getString("email_id"), rs.getString("password"),
+				user = new User(rs.getString("User_name"), rs.getLong("Mobile_number"), rs.getString("city"), rs.getString("Email_id"), rs.getString("Password"),
 						rs.getInt(8));
 
 			}
@@ -164,57 +166,19 @@ public class UserDaoimpl implements UserDao {
 
 	}
 
-	public User validateUserUpdate(String emailId) {
-		String validateUpdateQuery = "select user_id, user_role, user_name, mobile_number,city,email_id,password,user_wallet from user_details where email_id='"
-				+ emailId + "'";
-		Connection connection = null;
-		User user = null;
-		Statement statement = null;
-		try {
-			connection = ConnectionUtil.getDbConnection();
-			statement = connection.createStatement();
-			ResultSet rs = statement.executeQuery(validateUpdateQuery);
-			if (rs.next()) {
-				user = new User(rs.getString("user_name"), rs.getLong("mobile_number"), rs.getString("city"), emailId, rs.getString("password"),
-						rs.getInt("user_wallet"));
-			}
-
-		} catch (SQLException e) {
-
-			e.printStackTrace();
-		} finally {
-
-			if (statement != null) {
-				try {
-					statement.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
-			if (connection != null) {
-				try {
-					connection.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
-
-		}
-		return user;
-	}
-
+	
 	public List<User> viewUser() {
 		List<User> userList = new ArrayList<>();
 		String showQuery = "select user_id, user_role, user_name, mobile_number,city,email_id,password,user_wallet from user_details where user_role='customer'";
 		Connection connection = null;
-		Statement statement = null;
+		PreparedStatement prepareStatement = null;
 		try {
 			connection = ConnectionUtil.getDbConnection();
-			statement = connection.createStatement();
-			ResultSet rs = statement.executeQuery(showQuery);
+			prepareStatement = connection.prepareStatement(showQuery);
+			ResultSet rs = prepareStatement.executeQuery();
 			while (rs.next()) {
-				User user = new User(rs.getString("user_name"), rs.getLong("mobile_number"), rs.getString("city"), rs.getString("email_id"), rs.getString("password"),
-						rs.getInt("user_wallet"));
+				User user = new User(rs.getString("User_Name"), rs.getLong("mobile_number"), rs.getString("city"), rs.getString("email_id"), rs.getString("password"),
+						rs.getInt("User_wallet"));
 				userList.add(user);
 
 			}
@@ -222,9 +186,9 @@ public class UserDaoimpl implements UserDao {
 			e.printStackTrace();
 		} finally {
 
-			if (statement != null) {
+			if (prepareStatement != null) {
 				try {
-					statement.close();
+					prepareStatement.close();
 				} catch (SQLException e) {
 					e.printStackTrace();
 				}
@@ -242,14 +206,15 @@ public class UserDaoimpl implements UserDao {
 	}
 
 	public int findUserId(String emailId) {
-		String findUser = "select User_id from user_details where email_id='" + emailId + "'";
+		String findUser = "select User_id from user_details where email_id=?";
 		Connection connection = null;
 		int userId = 0;
-		Statement statement = null;
+		PreparedStatement statement = null;
 		try {
 			connection = ConnectionUtil.getDbConnection();
-			statement = connection.createStatement();
-			ResultSet rs = statement.executeQuery(findUser);
+			statement = connection.prepareStatement(findUser);
+			statement.setString(1, emailId);
+			ResultSet rs = statement.executeQuery();
 			if (rs.next()) {
 				userId = rs.getInt("User_id");
 			}
@@ -460,14 +425,15 @@ public class UserDaoimpl implements UserDao {
 	}
 
 	public String findUserName(int userId) {
-		String findVenue = "select user_name from  user_details where user_id='" + userId + "'";
+		String findVenue = "select user_name from  user_details where user_id=?";
 		Connection connection = null;
 		String name = null;
-		Statement statement = null;
+		PreparedStatement statement = null;
 		try {
 			connection = ConnectionUtil.getDbConnection();
-			statement = connection.createStatement();
-			ResultSet rs = statement.executeQuery(findVenue);
+			statement = connection.prepareStatement(findVenue);
+			statement.setInt(1, userId);
+			ResultSet rs = statement.executeQuery();
 			if (rs.next()) {
 				name = rs.getString("user_name");
 			}

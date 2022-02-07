@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -28,8 +27,7 @@ public class BookingVenuesDaoimpl implements BookingVenueDao {
 			statement.setInt(2, bookVenues.getVenueId());
 			statement.setString(3, bookVenues.getVenueName());
 			statement.setInt(4, bookVenues.getNoOfGuest());
-
-			statement.setDate(5, java.sql.Date.valueOf(bookVenues.getEventDate()));
+            statement.setDate(5, java.sql.Date.valueOf(bookVenues.getEventDate()));
 			statement.setDouble(6, bookVenues.getVenuePackage());
 			statement.setDouble(7, bookVenues.getAdvanceAmount());
 			if (statement.executeUpdate() > 0) {
@@ -59,20 +57,21 @@ public class BookingVenuesDaoimpl implements BookingVenueDao {
 	}
 
 	public boolean checkDate(String venuename, LocalDate eventDate) {
-		String findVenue = "select venue_booking_id,user_id,venue_id,venue_name,no_of_guest,booking_date,event_date,venue_package,status,advance_amount from booking_venues where  to_char(event_date,'yyyy-mm-dd')='"
-				+ eventDate + "' and venue_name='" + venuename + "'";
+		String findVenue = "select venue_booking_id,user_id,venue_id,venue_name,no_of_guest,booking_date,event_date,venue_package,status,advance_amount from booking_venues where  to_char(event_date,'dd-mm-yyyy')=? and venue_name=?";
 		Connection connection = null;
 		boolean flag = true;
-		Statement statement = null;
+		PreparedStatement statement = null;
 		ResultSet resultSet = null;
 		try {
 			connection = ConnectionUtil.getDbConnection();
-			statement = connection.createStatement();
-			resultSet = statement.executeQuery(findVenue);
+			statement = connection.prepareStatement(findVenue);
+			statement.setDate(1,java.sql.Date.valueOf(eventDate));
+			statement.setString(2,venuename);
+			resultSet = statement.executeQuery();
 			if (resultSet.next()) {
-				new BookingVenues(resultSet.getInt("User_id"), resultSet.getInt("Venue_id"),
-						resultSet.getString("Venue_name"), resultSet.getInt("No_Of_Guest"),
-						resultSet.getDate("Event_date").toLocalDate(), resultSet.getDouble("Venue_Package"));
+				new BookingVenues(resultSet.getInt("User_Id"), resultSet.getInt("Venue_Id"),
+						resultSet.getString("Venue_Name"), resultSet.getInt("No_Of_Guest"),
+						resultSet.getDate("Event_Date").toLocalDate(), resultSet.getDouble("Venue_Package"));
 			} else {
 				flag = false;
 			}
@@ -143,18 +142,18 @@ public class BookingVenuesDaoimpl implements BookingVenueDao {
 
 	public List<BookingVenues> myBooking(int userId) {
 		List<BookingVenues> venueList = new ArrayList<>();
-		String viewQuery = "select venue_booking_id,user_id,venue_id,venue_name,no_of_guest,booking_date,event_date,venue_package,status,advance_amount from Booking_venues where user_id='"
-				+ userId + "'";
+		String viewQuery = "select venue_booking_id,user_id,venue_id,venue_name,no_of_guest,booking_date,event_date,venue_package,status,advance_amount from Booking_venues where user_id=? order by booking_date desc";
 		Connection connection = null;
-		Statement statement = null;
+		PreparedStatement statement = null;
 		ResultSet resultSet = null;
 		try {
 			connection = ConnectionUtil.getDbConnection();
-			statement = connection.createStatement();
-			resultSet = statement.executeQuery(viewQuery);
+			statement = connection.prepareStatement(viewQuery);
+			statement.setInt(1, userId);			
+			resultSet = statement.executeQuery();
 			while (resultSet.next()) {
 				BookingVenues venue = new BookingVenues(resultSet.getInt("USER_ID"), resultSet.getInt("VENUE_ID"),
-						resultSet.getString("VENUE_NAME"), resultSet.getInt("NO_OF_GUEST"),resultSet.getDate("booking_date").toLocalDate(),
+						resultSet.getString("VENUE_NAME"), resultSet.getInt("NO_OF_GUEST"),resultSet.getDate("Booking_Date").toLocalDate(),
 						resultSet.getDate("Event_date").toLocalDate(), resultSet.getDouble("VENUE_PACKAGE"),resultSet.getString("Status"),resultSet.getInt("advance_amount"),resultSet.getInt("venue_booking_id"));
 				venueList.add(venue);
 			}
@@ -188,15 +187,16 @@ public class BookingVenuesDaoimpl implements BookingVenueDao {
 	}
 
 	public LocalDate findVenueBookingDate(int userId) {
-		String findVenue = "select booking_Date from booking_venues where user_id='" + userId + "'";
+		String findVenue = "select booking_Date from booking_venues where user_id=?";
 		Connection connection = null;
 		LocalDate bookDate = null;
-		Statement statement = null;
+		PreparedStatement statement = null;
 		ResultSet resultSet = null;
 		try {
 			connection = ConnectionUtil.getDbConnection();
-			statement = connection.createStatement();
-			resultSet = statement.executeQuery(findVenue);
+			statement = connection.prepareStatement(findVenue);
+			statement.setInt(1, userId);			
+			resultSet = statement.executeQuery();
 			if (resultSet.next()) {
 				bookDate = resultSet.getDate("booking_Date").toLocalDate();
 			}
@@ -232,15 +232,17 @@ public class BookingVenuesDaoimpl implements BookingVenueDao {
 	}
 
 	public int findBookingVenueId(int userId, LocalDate eventDateBooking, String venueName) {
-		String findVenue = "select venue_booking_id from booking_venues where  to_char(event_date,'yyyy-mm-dd')='"
-				+ eventDateBooking + "' and  user_id='" + userId + "' and venue_name='" + venueName + "'";
+		String findVenue = "select venue_booking_id from booking_venues where  to_char(event_date,'yyyy-mm-dd')=? and  user_id=? and venue_name=?";
 		Connection connection = null;
 		int venueBookingId = 0;
-		Statement statement = null;
+		PreparedStatement statement = null;
 		ResultSet resultSet = null;
 		try {
 			connection = ConnectionUtil.getDbConnection();
-			statement = connection.createStatement();
+			statement = connection.prepareStatement(findVenue);
+			statement.setDate(1,java.sql.Date.valueOf(eventDateBooking));
+			statement.setInt(2,userId);
+			statement.setString(3,venueName);
 			resultSet = statement.executeQuery(findVenue);
 			if (resultSet.next()) {
 				venueBookingId = resultSet.getInt("venue_booking_id");
@@ -277,17 +279,17 @@ public class BookingVenuesDaoimpl implements BookingVenueDao {
 	}
 
 	public int validateCancelBooking(int venueBookingId) {
-		String findVenue = "select floor((event_date)- to_date(sysdate)) as no_of_days from booking_venues where venue_booking_id='"
-				+ venueBookingId + "'";
+		String findVenue = "select floor((event_date)- to_date(sysdate)) as no_of_days from booking_venues where venue_booking_id=?";
 
 		Connection connection = null;
 		int noOfDays = 0;
-		Statement statement = null;
+		PreparedStatement statement = null;
 		ResultSet resultSet = null;
 		try {
 			connection = ConnectionUtil.getDbConnection();
-			statement = connection.createStatement();
-			resultSet = statement.executeQuery(findVenue);
+			statement = connection.prepareStatement(findVenue);
+			statement.setInt(1,venueBookingId);
+            resultSet = statement.executeQuery();
 			if (resultSet.next()) {
 				noOfDays = resultSet.getInt(1);
 			}
@@ -323,16 +325,17 @@ public class BookingVenuesDaoimpl implements BookingVenueDao {
 	}
 
 	public String findStatus(String venueName, LocalDate eventDate) {
-		String findVenue = "select status from booking_venues where venue_name='" + venueName
-				+ "' and to_char(event_date,'yyyy-mm-dd')='" + eventDate + "'";
+		String findVenue = "select status from booking_venues where venue_name=? and to_char(event_date,'yyyy-mm-dd')=?";
 		Connection connection = null;
 		String status = null;
-		Statement statement = null;
+		PreparedStatement statement = null;
 		ResultSet resultSet = null;
 		try {
 			connection = ConnectionUtil.getDbConnection();
-			statement = connection.createStatement();
-			resultSet = statement.executeQuery(findVenue);
+			statement = connection.prepareStatement(findVenue);
+			statement.setString(1,venueName);
+			statement.setDate(2,java.sql.Date.valueOf(eventDate));
+			resultSet = statement.executeQuery();
 			if (resultSet.next()) {
 				status = resultSet.getString("Status");
 			}
@@ -368,16 +371,17 @@ public class BookingVenuesDaoimpl implements BookingVenueDao {
 	}
 
 	public Boolean checkCancelBooking(String venueName, LocalDate eventdate) {
-		String findVenue = "select venue_booking_id,user_id,venue_id,venue_name,no_of_guest,booking_date,event_date,venue_package,status,advance_amount from booking_venues where status='cancelled' and venue_name='"
-				+ venueName + "' and to_char(event_date,'yyyy-mm-dd')='" + eventdate + "'";
+		String findVenue = "select venue_booking_id,user_id,venue_id,venue_name,no_of_guest,booking_date,event_date,venue_package,status,advance_amount from booking_venues where status='cancelled' and venue_name=? and to_char(event_date,'yyyy-mm-dd')=?";
 		Connection connection = null;
 		boolean flag = true;
-		Statement statement = null;
+		PreparedStatement statement = null;
 		ResultSet resultSet = null;
 		try {
 			connection = ConnectionUtil.getDbConnection();
-			statement = connection.createStatement();
-			resultSet = statement.executeQuery(findVenue);
+			statement = connection.prepareStatement(findVenue);
+			statement.setString(1,venueName);
+			statement.setDate(2,java.sql.Date.valueOf(eventdate));
+			resultSet = statement.executeQuery();
 			if (resultSet.next()) {
 				new BookingVenues(resultSet.getInt("User_id"), resultSet.getInt("Venue_id"),
 						resultSet.getString("Venue_name"), resultSet.getInt("No_Of_Guest"),
@@ -421,12 +425,12 @@ public class BookingVenuesDaoimpl implements BookingVenueDao {
 		List<BookingVenues> venueList = new ArrayList<>();
 		String viewQuery = "select venue_booking_id,user_id,venue_id,venue_name,no_of_guest,booking_date,event_date,venue_package,status,advance_amount from Booking_venues";
 		Connection connection = null;
-		Statement statement = null;
+		PreparedStatement statement = null;
 		ResultSet resultSet = null;
 		try {
 			connection = ConnectionUtil.getDbConnection();
-			statement = connection.createStatement();
-			resultSet = statement.executeQuery(viewQuery);
+			statement = connection.prepareStatement(viewQuery);
+			resultSet = statement.executeQuery();
 			while (resultSet.next()) {
 				BookingVenues venue = new BookingVenues(resultSet.getInt("User_id"), resultSet.getInt("Venue_id"),
 						resultSet.getString("Venue_name"), resultSet.getInt("No_of_guest"),
@@ -466,12 +470,12 @@ public class BookingVenuesDaoimpl implements BookingVenueDao {
 		List<BookingVenues> venueList = new ArrayList<>();
 		String viewQuery = "select venue_booking_id,user_id,venue_id,venue_name,no_of_guest,booking_date,event_date,venue_package,status,advance_amount from Booking_venues";
 		Connection connection = null;
-		Statement statement = null;
+		PreparedStatement statement = null;
 		ResultSet resultSet = null;
 		try {
 			connection = ConnectionUtil.getDbConnection();
-			statement = connection.createStatement();
-			resultSet = statement.executeQuery(viewQuery);
+			statement = connection.prepareStatement(viewQuery);
+			resultSet = statement.executeQuery();
 			while (resultSet.next()) {
 				BookingVenues venue = new BookingVenues(resultSet.getInt("user_id"), resultSet.getInt("venue_id"),
 						resultSet.getString("venue_name"), resultSet.getInt("no_of_guest"),
@@ -510,15 +514,15 @@ public class BookingVenuesDaoimpl implements BookingVenueDao {
 
 	public List<BookingVenues> filterByDate(LocalDate eventDate) {
 		List<BookingVenues> venueList = new ArrayList<>();
-		String viewQuery = "select venue_booking_id,user_id,venue_id,venue_name,no_of_guest,booking_date,event_date,venue_package,status,advance_amount from Booking_venues where to_char(event_date,'yyyy-mm-dd')='"
-				+ eventDate + "'";
+		String viewQuery = "select venue_booking_id,user_id,venue_id,venue_name,no_of_guest,booking_date,event_date,venue_package,status,advance_amount from Booking_venues where to_char(event_date,'dd-mm-yyyy')=?";
 		Connection connection = null;
-		Statement statement = null;
+		PreparedStatement statement = null;
 		ResultSet resultSet = null;
 		try {
 			connection = ConnectionUtil.getDbConnection();
-			statement = connection.createStatement();
-			resultSet = statement.executeQuery(viewQuery);
+			statement = connection.prepareStatement(viewQuery);
+			statement.setDate(1,java.sql.Date.valueOf(eventDate));
+            resultSet = statement.executeQuery();
 			while (resultSet.next()) {
 				BookingVenues venue = new BookingVenues(resultSet.getInt("user_id"), resultSet.getInt("venue_id"),
 						resultSet.getString("venue_name"), resultSet.getInt("no_of_guest"),

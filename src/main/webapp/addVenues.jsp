@@ -13,7 +13,7 @@
 	src="https://cdn.jsdelivr.net/npm/sweetalert2@11.3.10/dist/sweetalert2.all.min.js"></script>
 <style>
 body {
-	background-image: url("images/adminImage.jpg");
+	background-image: url("assets/images/adminImage.jpg");
 	background-size: cover;
 }
 
@@ -73,21 +73,21 @@ button a {
    <form action="insert" method="post" class="login-box">
 		<h1>venue details</h1>
 		<label for="venueName">venue name:</label> 
-		<input type="text" name="venueName" id="venueName" required><br> 
+		<input type="text" name="venueName" id="venueName" pattern="[A-Za-z ]{3,}" required><br> 
 		<label for="venueArea">venue area:</label> 
-		<input type="text" name="venueArea" id="venueArea" required><br>
+		<input type="text" name="venueArea" id="venueArea" pattern="[A-Za-z ]{3,}" required><br>
 		<label for="venueCity">venue city:</label> 
-		<input type="text" name="city" id="venueCity" required><br> 
+		<input type="text" name="city" id="venueCity" pattern="[A-Za-z ]{3,}" required><br> 
 		<label for="venueType">venue type:</label>
-		<input type="text" name="venueType" id="venueType" required><br>
+		<input type="text" name="venueType" id="venueType" pattern="[A-Za-z ]{3,}" required><br>
 		<label for="vendorName">venue vendor name:</label> 
-		<input type="text" name="vendorName" id="vendorName" required><br> 
+		<input type="text" name="vendorName" id="vendorName" pattern="[A-Za-z ]{3,}" required><br> 
 		<label for="contactNumber">contact number:</label> 
 		<input type="text" name="contactNumber" pattern="[6-9][0-9]{9}" id="contactNumber" required><br> 
 		<label for="venuePackage">venue Package:</label> 
-		<input type="text" name="venuePackage" pattern="[0-9]+" id="venuePackage" required><br> 
+		<input type="number" name="venuePackage" min="10000" max="100000" id="venuePackage" required><br> 
 		<label for="availability">availability:</label> 
-		<input type="text" name="availability" id="availability" required><br> 
+		<input type="text" name="availability" id="availability" pattern="[A-Za-z ]{3,}" required><br> 
 		<label for="image">venue Image:</label> 
 		<input type="file" name="image" id="image" required><br><br> 
 		<label for="description">description:</label> 

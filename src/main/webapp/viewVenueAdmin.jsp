@@ -28,12 +28,12 @@
 }
 
 body {
-	background-image: url("images/adminImage.jpg");
+	background-image: url("assets/images/adminImage.jpg");
 	background-size: cover;
 }
 
 table {
-	margin-left: 200px;
+	margin-left: 10px;
 	background-color: rgba(172, 209, 231, 0.5);
 	border-radius: 13px;
 	padding: 50px;
@@ -126,9 +126,11 @@ h1 {
 
 		</ul>
 	</nav>
-
+      
 	<div class="view">
 		<h1>VenueList</h1>
+		<a href="addVenues.jsp" style="text-decoration: none"><button
+				type="button" class="button">Add Venue</button></a>
 		<table>
 			<caption></caption>
 
@@ -176,8 +178,7 @@ h1 {
 
 			</tbody>
 		</table>
-		<br> <a href="addVenues.jsp" style="text-decoration: none"><button
-				type="button" class="button">Add Venue</button></a>
+		<br> 
 	</div>
 	<c:set var="inactive" value="${param.inactiveVenue}" />
 	<c:choose>

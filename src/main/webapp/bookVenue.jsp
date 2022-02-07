@@ -15,7 +15,7 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <style>
 body {
-	background-image: url("images/b3.jpg");
+	background-image: url("assets/images/b3.jpg");
 	background-size: cover;
 }
 
@@ -75,13 +75,13 @@ button a {
 	<form action="book" method="post" class="login-box">
 		<h1>Book Venue</h1>
 		<label for="name">venue Name:</label> 
-		<input type="text" id="name" name="venuename" value="${venuename}" required>
+		<input type="text" id="name" name="venuename" pattern="[A-Za-z ]{3,}" value="${venuename}" readonly required>
 		<label for="number">No.of.guest:</label> 
-		<input type="text" id="number" name="noOfGuest" pattern="[0-9]+" required>
+		<input type="number" id="number" name="noOfGuest" min="100" max="500" title="minimum 100 and maximum 500 guest" required>
 		<label for="venuePackage">venue Package:</label> 
-		<input type="text" id="venuePackage" name="venuepackage" value="${venuepackage}" required> 
+		<input type="number" id="venuePackage" name="venuepackage" min="10000" max="100000"  value="${venuepackage}" readonly required> 
 		<label for="advancePackage">Advance Amount:</label> 
-		<input type="text" id="advancePackage" name="advancepackage" value="${advanceAmount}" required> 
+		<input type="number" id="advancePackage" name="advancepackage" min="10000" max="100000" value="${advanceAmount}" readonly required> 
 		<label for="datefield">Event date</label> 
 		<input type="date" name="eventDate" id="datefield" required><br><br>
 		<a href="viewVenues.jsp"><button class="button">Back</button></a>

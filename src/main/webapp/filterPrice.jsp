@@ -9,7 +9,7 @@
 <title>searchByprice</title>
 <style>
 body {
-	background-image: url("images/back1.jpg");
+	background-image: url("assets/images/back1.jpg");
 	background-size: 1400px 653px;
 }
 

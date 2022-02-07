@@ -11,10 +11,9 @@
 
 <style>
 body {
-	background-image: url("images/b3.jpg");
+	background-image: url("assets/images/b3.jpg");
 	background-size: cover;
 }
-
 form input {
 	margin-left: -52px;
 	padding: 7px;
@@ -90,11 +89,11 @@ button a {
 									<th id="tableHead"></th>
 									<td><a
 										href="ShowServiceServlet?serviceType=${services.serviceType}"><img
-											src="images/${services.serviceTypeImage}" alt="hall"
-											height="250px" width="280px"></a>
-									<span>${services.serviceType}</span>
+											src="assets/images/${services.serviceTypeImage}" alt="hall"
+											height="250px" width="280px"></a><br>
+									${services.serviceType}</td>
 
-									</td>
+									
 
 								</tr>
 

@@ -17,12 +17,12 @@ public class ServicesDaoimpl implements ServicesDao {
 		List<Services> serviceList = new ArrayList<>();
 		String viewQuery = "select service_id,service_name,service_package,service_images,availability,service_type,service_description,service_type_images from service_details";
 		Connection connection = null;
-		Statement statement = null;
+		PreparedStatement statement = null;
 		ResultSet resultSet = null;
 		try {
 			connection = ConnectionUtil.getDbConnection();
-			statement = connection.createStatement();
-			resultSet = statement.executeQuery(viewQuery);
+			statement = connection.prepareStatement(viewQuery);
+			resultSet = statement.executeQuery();
 			while (resultSet.next()) {
 				Services service = new Services(resultSet.getString("Service_name"), resultSet.getDouble("Service_Package"), resultSet.getString("Service_images"),
 						resultSet.getString("Availability"),resultSet.getString("Service_Type"),resultSet.getString("Service_description"),resultSet.getString("Service_Type_images"),resultSet.getInt("Service_id"));
@@ -96,17 +96,17 @@ public class ServicesDaoimpl implements ServicesDao {
 	}
 
 	public double findPackage(int serviceId) {
-		String query = "select service_package from service_details where service_id='" + serviceId + "'";
+		String query = "select service_package from service_details where service_id=?";
 
 		Connection connection = null;
-		Statement statement = null;
+		PreparedStatement statement = null;
 		ResultSet resultSet = null;
 		double servicePackage = 0;
 		try {
 			connection = ConnectionUtil.getDbConnection();
-			statement = connection.createStatement();
-
-			resultSet = statement.executeQuery(query);
+			statement = connection.prepareStatement(query);
+			statement.setInt(1, serviceId);
+			resultSet = statement.executeQuery();
 
 			if (resultSet.next()) {
 				servicePackage = resultSet.getDouble("Service_package");
@@ -174,15 +174,16 @@ public class ServicesDaoimpl implements ServicesDao {
 	}
 
 	public int findServiceId(String serviceName) {
-		String findVenue = "select service_id from service_details where service_name='" + serviceName + "'";
+		String findVenue = "select service_id from service_details where service_name=?";
 		Connection connection = null;
 		int serviceId = 0;
-		Statement statement = null;
+		PreparedStatement statement = null;		
 		ResultSet resultSet = null;
 		try {
 			connection = ConnectionUtil.getDbConnection();
-			statement = connection.createStatement();
-			resultSet = statement.executeQuery(findVenue);
+			statement = connection.prepareStatement(findVenue);
+			statement.setString(1, serviceName);
+			resultSet = statement.executeQuery();
 			if (resultSet.next()) {
 				serviceId = resultSet.getInt("service_id");
 			}
@@ -218,18 +219,18 @@ public class ServicesDaoimpl implements ServicesDao {
 
 	public Services allService(String serviceName) {
 
-		String validateQuery = "select service_id,service_name,service_package,service_images,availability,service_type,service_description,service_type_images from service_details WHERE  service_name='"
-				+ serviceName + "'";
+		String validateQuery = "select service_id,service_name,service_package,service_images,availability,service_type,service_description,service_type_images from service_details WHERE  service_name=?";
 
 		Connection connection = null;
 		Services service = null;
-		Statement statement = null;
+		PreparedStatement statement = null;		
 
 		ResultSet resultSet = null;
 		try {
 			connection = ConnectionUtil.getDbConnection();
-			statement = connection.createStatement();
-			resultSet = statement.executeQuery(validateQuery);
+			statement = connection.prepareStatement(validateQuery);
+			statement.setString(1, serviceName);			
+			resultSet = statement.executeQuery();
 			while (resultSet.next()) {
 
 				service = new Services(resultSet.getString("Service_name"), resultSet.getDouble("Service_package"), resultSet.getString("Service_images"),
@@ -340,12 +341,12 @@ public class ServicesDaoimpl implements ServicesDao {
 		List<Services> serviceList = new ArrayList<>();
 		String viewQuery = "select distinct service_type,service_type_images from service_details where availability='yes'";
 		Connection connection = null;
-		Statement statement = null;
+		PreparedStatement statement = null;
 		ResultSet resultSet = null;
 		try {
 			connection = ConnectionUtil.getDbConnection();
-			statement = connection.createStatement();
-			resultSet = statement.executeQuery(viewQuery);
+			statement = connection.prepareStatement(viewQuery);
+			resultSet = statement.executeQuery();
 			while (resultSet.next()) {
 				Services service = new Services(resultSet.getString("Service_type"), resultSet.getString("Service_type_images"));
 				serviceList.add(service);

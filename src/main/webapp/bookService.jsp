@@ -10,7 +10,7 @@
 
 <style>
 body {
-	background-image: url("images/b3.jpg");
+	background-image: url("assets/images/b3.jpg");
 	background-size: cover;
 }
 
@@ -70,11 +70,11 @@ button a {
 	<form action="addToService" class="login-box" method="post">
     <h1>Book service</h1>
 		<label for="name">service Name:</label> 
-		<input type="text" id="name" name="servicename" value="${serviceName}" required>
-		<label for="venuePackage">service Package:</label> 
-		<input type="text" id="venuePackage" name="servicepackage" value="${servicePackage}" required> 
+		<input type="text" id="name" name="servicename" value="${serviceName}" pattern="[A-Za-z ]{3,}" readonly required>
+		<label for="servicePackage">service Package:</label> 
+		<input type="number" id="servicePackage" name="servicepackage" min="10000" max="100000" value="${servicePackage}" readonly required> 
 		<label for="advancePackage">Advance amount:</label> 
-		<input type="text" id="advancePackage" name="advancepackageService" value="${advanceServiceAmount}" required> 
+		<input type="number" id="advancePackage" name="advancepackageService" min="10000" max="100000" value="${advanceServiceAmount}" readonly required> 
 		<label for="datefield">Event date</label> 
 		<input type="date" name="datefield" id="datefield" required><br><br>
 		<a href="viewServices.jsp"><button class="button">Back</button></a>

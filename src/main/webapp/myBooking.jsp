@@ -22,7 +22,7 @@ table {
 }
 
 body {
-	background-image: url("images/b3.jpg");
+	background-image: url("assets/images/b3.jpg");
 	background-size: cover;
 }
 
@@ -169,11 +169,16 @@ button a {
 							pattern="yyyy-MM-dd" var="venueBookingDateShow" type="date" /> <fmt:formatDate
 							pattern="dd-MM-yyyy" value="${venueBookingDateShow}" /></td>
                     <td>${myBookingVenue.status}</td>
-					<c:if test="${myBookingVenue.status.equals('booked')}">
+                    <c:choose>
+					<c:when test="${myBookingVenue.status.equals('booked')}">
 						<td><a
 							href="cancelVenue?venueBookingIdView=${myBookingVenue.venueBookingId}"><button
 									class="button">cancel</button></a></td>
-					</c:if>
+					</c:when>
+					<c:otherwise>
+							<td>Already Cancelled</td>
+					</c:otherwise>
+					</c:choose>
 
 				</tr>
 			</c:forEach>

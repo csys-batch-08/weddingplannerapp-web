@@ -12,7 +12,7 @@
 </head>
 <style>
 body {
-	background-image: url("images/b3.jpg");
+	background-image: url("assets/images/b3.jpg");
 	background-size: 1400px 653px;
 }
 
@@ -76,7 +76,7 @@ button a {
 									<th id="tableHead"></th>
 									<td><a
 										href="ChooseServiceServlet?serviceName=${servicelist.serviceName }"><img
-											src="images/${servicelist.serviceImages}" alt="hall"
+											src="assets/images/${servicelist.serviceImages}" alt="hall"
 											height="250px" width="280px"></a> <span>${servicelist.serviceName}<br></span>
 										<span>package:${servicelist.servicePackage}</span></td>
 								</tr>

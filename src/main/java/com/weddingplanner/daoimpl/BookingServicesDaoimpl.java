@@ -52,17 +52,16 @@ public class BookingServicesDaoimpl implements BookingServiceDao {
 	}
 
 	public int totalPackage(int userId) {
-		String query = "select sum(service_package) from booking_services where user_id='" + userId
-				+ "'group by user_id";
+		String query = "select sum(service_package) from booking_services where user_id=? group by user_id";
 		Connection connection = null;
-		Statement statement = null;
+		PreparedStatement statement = null;
 		int totalPackage = 0;
 		ResultSet resultSet = null;
 		try {
 			connection = ConnectionUtil.getDbConnection();
-			statement = connection.createStatement();
-
-			resultSet = statement.executeQuery(query);
+			statement = connection.prepareStatement(query);
+			statement.setInt(1, userId);
+            resultSet = statement.executeQuery();
 
 			if (resultSet.next()) {
 				totalPackage = resultSet.getInt(1);
@@ -100,15 +99,15 @@ public class BookingServicesDaoimpl implements BookingServiceDao {
 
 	public List<BookingServices> myBooking(int userId) {
 		List<BookingServices> serviceList = new ArrayList<>();
-		String viewQuery = "select service_booking_id,user_id,service_id,service_name,booking_date,event_date,service_package,status from Booking_services where user_id='"
-				+ userId + "'order by booking_date desc";
+		String viewQuery = "select service_booking_id,user_id,service_id,service_name,booking_date,event_date,service_package,status from Booking_services where user_id=? order by booking_date desc";
 		Connection connection = null;
-		Statement statement = null;
+		PreparedStatement statement = null;
 		ResultSet resultSet = null;
 		try {
 			connection = ConnectionUtil.getDbConnection();
-			statement = connection.createStatement();
-			resultSet = statement.executeQuery(viewQuery);
+			statement = connection.prepareStatement(viewQuery);
+			statement.setInt(1, userId);			
+			resultSet = statement.executeQuery();
 			while (resultSet.next()) {
 				BookingServices service = new BookingServices(resultSet.getInt("USER_ID"),
 						resultSet.getInt("SERVICE_ID"), resultSet.getString("SERVICE_NAME"),resultSet.getDate("BOOKING_DATE").toLocalDate(),
@@ -145,16 +144,17 @@ public class BookingServicesDaoimpl implements BookingServiceDao {
 	}
 
 	public boolean checkDate(String servicename, LocalDate eventdate) {
-		String findVenue = "select service_booking_id,user_id,service_id,service_name,booking_date,event_date,service_package,status from booking_services where service_name='"
-				+ servicename + "'and to_char(event_date,'yyyy-mm-dd')='" + eventdate + "'";
+		String findVenue = "select service_booking_id,user_id,service_id,service_name,booking_date,event_date,service_package,status from booking_services where service_name=? and to_char(event_date,'yyyy-mm-dd')=?";
 		Connection connection = null;
 		boolean flag = true;
 		ResultSet resultSet = null;
-		Statement statement = null;
+		PreparedStatement statement = null;
 		try {
 			connection = ConnectionUtil.getDbConnection();
-			statement = connection.createStatement();
-			resultSet = statement.executeQuery(findVenue);
+			statement = connection.prepareStatement(findVenue);
+			statement.setString(1, servicename);
+			statement.setDate(2, java.sql.Date.valueOf(eventdate));
+			resultSet = statement.executeQuery();
 			if (resultSet.next()) {
 				new BookingServices(resultSet.getInt("USER_ID"), resultSet.getInt("SERVICE_ID"),
 						resultSet.getString("SERVICE_NAME"), resultSet.getDate("EVENT_DATE").toLocalDate(),
@@ -193,16 +193,17 @@ public class BookingServicesDaoimpl implements BookingServiceDao {
 	}
 
 	public boolean checkService(String servicename, int userId) {
-		String findVenue = "select service_booking_id,user_id,service_id,service_name,booking_date,event_date,service_package,status from booking_services where service_name='"
-				+ servicename + "'and user_id='" + userId + "'";
+		String findVenue = "select service_booking_id,user_id,service_id,service_name,booking_date,event_date,service_package,status from booking_services where service_name=? and user_id=?";
 		Connection connection = null;
 		boolean flag = true;
 		ResultSet resultSet = null;
-		Statement statement = null;
+		PreparedStatement statement = null;
 		try {
 			connection = ConnectionUtil.getDbConnection();
-			statement = connection.createStatement();
-			resultSet = statement.executeQuery(findVenue);
+			statement = connection.prepareStatement(findVenue);
+			statement.setString(1, servicename);
+			statement.setInt(2, userId);
+			resultSet = statement.executeQuery();
 			if (resultSet.next()) {
 				new BookingServices(resultSet.getInt("User_id"), resultSet.getInt("Service_id"),
 						resultSet.getString("Service_name"), resultSet.getDate("Event_date").toLocalDate(),
@@ -274,15 +275,16 @@ public class BookingServicesDaoimpl implements BookingServiceDao {
 	}
 
 	public LocalDate findBookingDate(int userId) {
-		String findVenue = "select booking_Date from booking_services where user_id='" + userId + "'";
+		String findVenue = "select booking_Date from booking_services where user_id=?";
 		Connection connection = null;
 		LocalDate bookDate = null;
-		Statement statement = null;
+		PreparedStatement statement = null;
 		ResultSet resultSet = null;
 		try {
 			connection = ConnectionUtil.getDbConnection();
-			statement = connection.createStatement();
-			resultSet = statement.executeQuery(findVenue);
+			statement = connection.prepareStatement(findVenue);
+			statement.setInt(1, userId);
+			resultSet = statement.executeQuery();
 			if (resultSet.next()) {
 				bookDate = resultSet.getDate("booking_Date").toLocalDate();
 			}
@@ -318,16 +320,17 @@ public class BookingServicesDaoimpl implements BookingServiceDao {
 	}
 
 	public String findStatus(String serviceName, LocalDate eventDate) {
-		String findVenue = "select status from booking_services where  service_name='" + serviceName
-				+ "' and to_char(event_date,'yyyy-mm-dd')='" + eventDate + "'";
+		String findVenue = "select status from booking_services where  service_name=? and to_char(event_date,'yyyy-mm-dd')=?";
 		Connection connection = null;
 		String status = null;
-		Statement statement = null;
+		PreparedStatement statement = null;
 		ResultSet resultSet = null;
 		try {
 			connection = ConnectionUtil.getDbConnection();
-			statement = connection.createStatement();
-			resultSet = statement.executeQuery(findVenue);
+			statement = connection.prepareStatement(findVenue);
+			statement.setString(1, serviceName);
+			statement.setDate(2, java.sql.Date.valueOf(eventDate));
+			resultSet = statement.executeQuery();
 			if (resultSet.next()) {
 				status = resultSet.getString("Status");
 			}
@@ -363,16 +366,16 @@ public class BookingServicesDaoimpl implements BookingServiceDao {
 	}
 
 	public int validateCancelBooking(int serviceBookingId) {
-		String findVenue = "select floor((event_date)- to_date(sysdate)) as no_of_days from booking_services where service_booking_id='"
-				+ serviceBookingId + "'";
+		String findVenue = "select floor((event_date)- to_date(sysdate)) as no_of_days from booking_services where service_booking_id=?";
 
 		Connection connection = null;
-		Statement statement = null;
+		PreparedStatement statement = null;
 		ResultSet resultSet = null;
 		try {
 			connection = ConnectionUtil.getDbConnection();
-			statement = connection.createStatement();
-			resultSet = statement.executeQuery(findVenue);
+			statement = connection.prepareStatement(findVenue);
+            statement.setInt(1, serviceBookingId);			
+            resultSet = statement.executeQuery();
 			if (resultSet.next()) {
 				resultSet.getInt(1);
 			}
@@ -452,16 +455,16 @@ public class BookingServicesDaoimpl implements BookingServiceDao {
 	}
 
 	public Boolean checkCancelServiceBooking(int serviceId) {
-		String findVenue = "select service_booking_id,user_id,service_id,service_name,booking_date,event_date,service_package,status from booking_services where status='cancelled' and service_booking_id='"
-				+ serviceId + "'";
+		String findVenue = "select service_booking_id,user_id,service_id,service_name,booking_date,event_date,service_package,status from booking_services where status='cancelled' and service_booking_id=?";
 		Connection connection = null;
 		boolean flag = true;
-		Statement statement = null;
+		PreparedStatement statement = null;
 		ResultSet resultSet = null;
 		try {
 			connection = ConnectionUtil.getDbConnection();
-			statement = connection.createStatement();
-			resultSet = statement.executeQuery(findVenue);
+			statement = connection.prepareStatement(findVenue);
+            statement.setInt(1, serviceId);				
+            resultSet = statement.executeQuery();
 			if (resultSet.next()) {
 				new BookingVenues(resultSet.getInt("User_id"), resultSet.getInt("Service_id"),
 						resultSet.getString("Service_name"), serviceId, resultSet.getDate("Event_date").toLocalDate(),
@@ -505,12 +508,12 @@ public class BookingServicesDaoimpl implements BookingServiceDao {
 		List<BookingServices> serviceList = new ArrayList<>();
 		String viewQuery = "select service_booking_id,user_id,service_id,service_name,booking_date,event_date,service_package,status from Booking_services";
 		Connection connection = null;
-		Statement statement = null;
+		PreparedStatement statement = null;
 		ResultSet resultSet = null;
 		try {
 			connection = ConnectionUtil.getDbConnection();
-			statement = connection.createStatement();
-			resultSet = statement.executeQuery(viewQuery);
+			statement = connection.prepareStatement(viewQuery);
+			resultSet = statement.executeQuery();
 			while (resultSet.next()) {
 				BookingServices service = new BookingServices(resultSet.getInt("user_id"), resultSet.getInt("service_id"),
 						resultSet.getString("service_name"), resultSet.getDate("booking_date").toLocalDate(), resultSet.getDate("event_date").toLocalDate(),
@@ -548,15 +551,15 @@ public class BookingServicesDaoimpl implements BookingServiceDao {
 
 	public List<BookingServices> filterByDate(LocalDate eventDate) {
 		List<BookingServices> serviceList = new ArrayList<>();
-		String viewQuery = "select service_booking_id,user_id,service_id,service_name,booking_date,event_date,service_package,status from Booking_services where  to_char(event_date,'yyyy-mm-dd')='"
-				+ eventDate + "'";
+		String viewQuery = "select service_booking_id,user_id,service_id,service_name,booking_date,event_date,service_package,status from Booking_services where  to_char(event_date,'dd-mm-yyyy')=?";
 		Connection connection = null;
-		Statement statement = null;
+		PreparedStatement statement = null;
 		ResultSet resultSet = null;
 		try {
 			connection = ConnectionUtil.getDbConnection();
-			statement = connection.createStatement();
-			resultSet = statement.executeQuery(viewQuery);
+			statement = connection.prepareStatement(viewQuery);
+			statement.setDate(1, java.sql.Date.valueOf(eventDate));
+            resultSet = statement.executeQuery();
 			while (resultSet.next()) {
 				BookingServices service = new BookingServices(resultSet.getInt("user_id"), resultSet.getInt("service_id"),
 						resultSet.getString("service_name"), resultSet.getDate("booking_date").toLocalDate(), resultSet.getDate("event_date").toLocalDate(),

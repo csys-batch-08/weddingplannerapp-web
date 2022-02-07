@@ -27,12 +27,12 @@ public class BookServiceServlet extends HttpServlet {
 			HttpSession session = request.getSession();
 			int userId = (int) session.getAttribute("id");
 			int serviceId = (int) session.getAttribute("serviceId");
-			String servicename = request.getParameter("servicename");
-			LocalDate eventDate = LocalDate.parse(request.getParameter("date"));
+			String serviceName = request.getParameter("servicename");
+			LocalDate eventDate = LocalDate.parse(request.getParameter("datefield"));
 			Double servicePackage = Double.parseDouble(request.getParameter("servicepackage"));
 			int advanceAmount = Integer.parseInt(request.getParameter("advancepackageService"));
 			BookingServicesDaoimpl book = new BookingServicesDaoimpl();
-			boolean flag = book.checkDate(servicename, eventDate);
+			boolean flag = book.checkDate(serviceName, eventDate);
 			if (!flag) {
 				UserDaoimpl userdao = new UserDaoimpl();
 				int walletBalance = 0;
@@ -42,7 +42,7 @@ public class BookServiceServlet extends HttpServlet {
 				session.setAttribute("servicePayBalance", payWallet);
 				if (advanceAmount <= walletBalance) {
 
-					BookingServices bookservice = new BookingServices(userId, serviceId, servicename, eventDate,
+					BookingServices bookservice = new BookingServices(userId, serviceId, serviceName, eventDate,
 							servicePackage);
 					book.bookService(bookservice);
 					userdao.updatewalletBalance(payWallet, userId);

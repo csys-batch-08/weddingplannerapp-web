@@ -9,7 +9,7 @@
 </head>
 <style>
 body{
-    background-image: url("images/login.jpeg");
+    background-image: url("assets/images/login.jpeg");
     background-size:1370px 653px;  
 }
 .signup-box{
