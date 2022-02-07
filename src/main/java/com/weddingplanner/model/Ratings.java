@@ -1,8 +1,9 @@
 package com.weddingplanner.model;
 
-import java.util.Objects;
+import java.io.Serializable;
 
-public class Ratings {
+public class Ratings implements Serializable{
+	private static final long serialVersionUID = 1L;
 	private int userId;
 	private String serviceName;
 	private int rating;

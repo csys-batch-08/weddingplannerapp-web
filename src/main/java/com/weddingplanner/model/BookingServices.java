@@ -1,10 +1,12 @@
 package com.weddingplanner.model;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Objects;
 
-public class BookingServices {
+public class BookingServices implements Serializable{
 
+	private static final long serialVersionUID = 1L;
 	private int userId;
 	private int serviceId;
 	private String serviceName;

@@ -66,15 +66,15 @@ button a{
 <body>
 <form action="updateService" method="post" class="login-box">
      <label for="serviceName">Service name</label>
-     <input type="text" name="serviceName" value="${serviceNameView}" id="serviceName" pattern="[A-Za-z ]{3,}" required>
+     <input type="text" name="serviceName"  id="serviceName" pattern="[A-Za-z ]{3,}" value="${serviceNameView}" required>
      <label for="servicePackage">Service Package</label>
-     <input type="number" name="servicePackage" value="${servicePackageView}"  min="10000" max="100000" id="servicePackage" required>
+     <input type="number" name="servicePackage"   min="10000" max="100000" id="servicePackage" value="${servicePackageView}" required>
      <label for="serviceImage">service Image</label>
      <input type="file" name="serviceImage" id="serviceImage" required>
      <label for="type">service type</label>  
-     <input type="text" name="type" value="${serviceTypeView}" id="type" pattern="[A-Za-z ]{3,}" required>
+     <input type="text" name="type"  id="type" pattern="[A-Za-z ]{3,}" value="${serviceTypeView}" required>
      <label for="description">service Description:</label>
-     <input type="text" name="description" value="${serviceDescriptionView}" id="description" pattern="[A-Za-z ]{3,}" required>
+     <input type="text" name="description"  id="description" pattern="[A-Za-z ]{3,}" value="${serviceDescriptionView}" required>
      <label for="serviceTypeImage">sevice type image</label>
      <input type="file" name="serviceTypeImage" id="serviceTypeImage" required><br><br><br>
      <a href="viewServicesAdmin.jsp"><button class="button">Back</button></a>

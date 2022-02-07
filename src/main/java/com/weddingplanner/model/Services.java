@@ -1,8 +1,10 @@
 package com.weddingplanner.model;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class Services {
+public class Services implements Serializable {
+	private static final long serialVersionUID = 1L;
 	private String serviceName;
 	private double servicePackage;
 	private String serviceImages;
