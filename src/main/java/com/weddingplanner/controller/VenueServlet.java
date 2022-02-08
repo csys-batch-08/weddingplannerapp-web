@@ -32,7 +32,7 @@ public class VenueServlet extends HttpServlet {
 					venuePackage, availability, venueImages, venueDescription);
 			boolean venueMsg = venueDao.insertVenue(venue);
 			if (venueMsg) {
-				response.sendRedirect("addVenue.jsp?infomsg=successfully added");
+				response.sendRedirect("ViewVenueAdminServlet");
 			} else {
 				response.sendRedirect("addVenue.jsp?error=can not be added! please try again");
 			}

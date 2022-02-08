@@ -112,8 +112,8 @@ public class BookingServicesDaoimpl implements BookingServiceDao {
 				BookingServices service = new BookingServices(resultSet.getInt("USER_ID"),
 						resultSet.getInt("SERVICE_ID"), resultSet.getString("SERVICE_NAME"),
 						resultSet.getDate("BOOKING_DATE").toLocalDate(), resultSet.getDate("EVENT_DATE").toLocalDate(),
-						resultSet.getDouble("SERVICE_PACKAGE"), resultSet.getString("Status"),
-						resultSet.getInt("service_booking_id"));
+						resultSet.getDouble("SERVICE_PACKAGE"), resultSet.getString("STATUS"),
+						resultSet.getInt("SERVICE_BOOKING_ID"));
 				serviceList.add(service);
 			}
 		} catch (SQLException e) {
