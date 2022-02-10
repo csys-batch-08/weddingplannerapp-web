@@ -27,12 +27,11 @@ public class ChooseServiceServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		String serviceName = request.getParameter("serviceName");
 		session.setAttribute("serviceName", serviceName);
-		int advanceService=1/2;
 		try {
 			Services service = serviceDaoImpl.allService(serviceName);
 			int serviceId = serviceDaoImpl.findServiceId(service.getServiceName());
 			double servicePackage = serviceDaoImpl.findPackage(serviceId);
-			int advanceServiceAmount = (int) (servicePackage * advanceService);
+			int advanceServiceAmount = (int) (servicePackage * 1/2);
 			session.setAttribute("serviceId", serviceId);
 			session.setAttribute("servicePackage", servicePackage);
 			session.setAttribute("advanceServiceAmount", advanceServiceAmount);

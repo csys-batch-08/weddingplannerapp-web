@@ -14,7 +14,7 @@ import com.weddingplanner.util.ConnectionUtil;
 public class VenuesDaoimpl implements VenuesDao {
 
 	public List<Venues> showVenue() {
-		List<Venues> venuelist = new ArrayList<>();
+		List<Venues> venueList = new ArrayList<>();
 		String showQuery = "select venue_id,venue_name,venue_area,venue_city,venue_type,venue_vendor_name,contact_number,venue_package,check_availability,venue_images,venue_description from venue_details where check_availability='yes'";
 		Connection connection = null;
 		ResultSet resultSet = null;
@@ -27,7 +27,7 @@ public class VenuesDaoimpl implements VenuesDao {
 				Venues venue = new Venues(resultSet.getString("Venue_name"), resultSet.getString("Venue_area"), resultSet.getString("Venue_city"),
 						resultSet.getString("Venue_type"), resultSet.getString("Venue_vendor_name"), resultSet.getLong("Contact_number"), resultSet.getDouble("Venue_Package"),
 						resultSet.getString("Check_availability"), resultSet.getString("Venue_images"),resultSet.getInt("Venue_id"),resultSet.getString("Venue_description"));
-				venuelist.add(venue);
+				venueList.add(venue);
 
 			}
 		} catch (SQLException e) {
@@ -55,7 +55,7 @@ public class VenuesDaoimpl implements VenuesDao {
 				}
 			}
 		}
-		return venuelist;
+		return venueList;
 
 	}
 
@@ -142,7 +142,7 @@ public class VenuesDaoimpl implements VenuesDao {
 		}
 	}
 
-	public void updatevenueAvalability(String availability) {
+	public void updateVenueAvalability(String availability) {
 		String updateQuery = "update venue_details set check_availability='No' where venue_name=?";
 		Connection connection = null;
 		PreparedStatement statement = null;
@@ -314,7 +314,7 @@ public class VenuesDaoimpl implements VenuesDao {
 	}
 
 	public List<Venues> findCity(String venueCity) {
-		List<Venues> venuelist = new ArrayList<>();
+		List<Venues> venueList = new ArrayList<>();
 		String venuecity="%"+venueCity+"%";
 		String query = "select venue_id,venue_name,venue_area,venue_city,venue_type,venue_vendor_name,contact_number,venue_package,check_availability,venue_images from venue_details where lower(venue_city)  like ? or upper(venue_city)  like ? or initcap(venue_city)  like ?  " ;
 		Connection connection = null;
@@ -332,7 +332,7 @@ public class VenuesDaoimpl implements VenuesDao {
 				venue = new Venues(resultSet.getString("venue_name"), resultSet.getString("venue_area"), venueCity, resultSet.getString("venue_type"),
 						resultSet.getString("venue_vendor_name"), resultSet.getLong("contact_number"), resultSet.getDouble("venue_package"), resultSet.getString("check_availability"),
 						resultSet.getString("venue_images"));
-				venuelist.add(venue);
+				venueList.add(venue);
 			}
 
 		} catch (SQLException e) {
@@ -361,7 +361,7 @@ public class VenuesDaoimpl implements VenuesDao {
 			}
 		}
 
-		return venuelist;
+		return venueList;
 	}
 
 	public boolean inactiveVenue(int venueId) {
@@ -399,7 +399,7 @@ public class VenuesDaoimpl implements VenuesDao {
 
 	}
 	public List<Venues> showVenueAdmin() {
-		List<Venues> venuelist = new ArrayList<>();
+		List<Venues> venueList = new ArrayList<>();
 		String showQuery = "select venue_id,venue_name,venue_area,venue_city,venue_type,venue_vendor_name,contact_number,venue_package,check_availability,venue_images,venue_description from venue_details";
 		Connection connection = null;
 		ResultSet resultSet = null;
@@ -412,7 +412,7 @@ public class VenuesDaoimpl implements VenuesDao {
 				Venues venue = new Venues(resultSet.getString("Venue_name"), resultSet.getString("Venue_area"), resultSet.getString("venue_city"),
 						resultSet.getString("Venue_type"), resultSet.getString("Venue_vendor_name"), resultSet.getLong("Contact_number"), resultSet.getDouble("Venue_package"),
 						resultSet.getString("Check_availability"), resultSet.getString("Venue_images"),resultSet.getInt("Venue_id"),resultSet.getString("Venue_description"));
-				venuelist.add(venue);
+				venueList.add(venue);
 
 			}
 		} catch (SQLException e) {
@@ -440,7 +440,7 @@ public class VenuesDaoimpl implements VenuesDao {
 				}
 			}
 		}
-		return venuelist;
+		return venueList;
 
 	}
 

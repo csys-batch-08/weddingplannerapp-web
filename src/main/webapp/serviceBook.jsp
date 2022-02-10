@@ -39,8 +39,8 @@ button a {
 </style>
 <body>
 	<div class="set">
-		Your Wallet Amount:${userWalletBalance }<br> Amount
-		deducted:${serviceAdvance}<br> After deduction Wallet
+		Your Wallet Amount:${userWalletBalance }
+		<br> After deduction Wallet
 		balance:${servicePayBalance}
 		<h2>${servicebooked }</h2>
 

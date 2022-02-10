@@ -48,7 +48,7 @@ public class BookVenueServlet extends HttpServlet {
 				int payWallet = (walletBalance - advanceAmount);
 				session.setAttribute("venuePayBalance", payWallet);
 				if (advanceAmount <= walletBalance) {
-					userdao.updatewalletBalance(payWallet, userId);
+					userdao.updateWalletBalance(payWallet, userId);
 					BookingVenues book = new BookingVenues(userId, venueId, venuename, noOfGuest, eventDate,
 							venuePackage, advanceAmount);
 					bookVenue.bookVenue(book);

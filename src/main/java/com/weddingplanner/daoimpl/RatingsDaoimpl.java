@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,8 +23,7 @@ public class RatingsDaoimpl implements RatingsDao {
 			statement.setString(2, rating.getServiceName());
 			statement.setInt(3, rating.getRating());
 			statement.setString(4, rating.getReview());
-
-			statement.executeUpdate();
+            statement.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {

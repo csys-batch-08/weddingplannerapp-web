@@ -31,7 +31,7 @@ public class BookServiceServlet extends HttpServlet {
 			LocalDate eventDate = LocalDate.parse(request.getParameter("datefield"));
 			Double servicePackage = Double.parseDouble(request.getParameter("servicepackage"));
 			int advanceAmount = Integer.parseInt(request.getParameter("advancepackageService"));
-			request.setAttribute("serviceAdvance", advanceAmount);
+			session.setAttribute("serviceAdvance", advanceAmount);
 			BookingServicesDaoimpl book = new BookingServicesDaoimpl();
 			boolean flag = book.checkDate(serviceName, eventDate);
 			if (!flag) {
@@ -45,7 +45,7 @@ public class BookServiceServlet extends HttpServlet {
 					BookingServices bookservice = new BookingServices(userId, serviceId, serviceName, eventDate,
 							servicePackage);
 					book.bookService(bookservice);
-					userdao.updatewalletBalance(payWallet, userId);
+					userdao.updateWalletBalance(payWallet, userId);
 					response.sendRedirect("serviceBook.jsp");
 					session.setAttribute("servicebooked", "Your services are successfully booked");
 				} else {

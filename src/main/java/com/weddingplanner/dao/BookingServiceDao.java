@@ -12,9 +12,9 @@ public interface BookingServiceDao {
 
 	public List<BookingServices> myBooking(int userId);
 
-	public boolean checkDate(String servicename, LocalDate eventdate);
+	public boolean checkDate(String serviceName, LocalDate eventDate);
 
-	public boolean checkService(String servicename, int userId);
+	public boolean checkService(String serviceName, int userId);
 
 	public void cancelServiceBooking(int serviceId);
 

@@ -24,7 +24,7 @@ public interface UserDao {
 
 	public int updatewallet(int amount, int userId);
 
-	public List<User> currentuserprofile(int userid);
+	public List<User> currentUserProfile(int userid);
 
 	public void inactiveUser(int userId);
 

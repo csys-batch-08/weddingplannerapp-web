@@ -145,8 +145,8 @@ public class BookingServicesDaoimpl implements BookingServiceDao {
 		return serviceList;
 	}
 
-	public boolean checkDate(String servicename, LocalDate eventdate) {
-		String findVenue = "select service_booking_id,user_id,service_id,service_name,booking_date,event_date,service_package,status from booking_services where service_name=? and to_char(event_date,'yyyy-mm-dd')=?";
+	public boolean checkDate(String serviceName, LocalDate eventDate) {
+		String findVenue = "select service_booking_id,user_id,service_id,service_name,booking_date,event_date,service_package,status from booking_services where service_name=? and to_char(event_date,'dd-mm-yyyy')=?";
 		Connection connection = null;
 		boolean flag = true;
 		ResultSet resultSet = null;
@@ -154,8 +154,8 @@ public class BookingServicesDaoimpl implements BookingServiceDao {
 		try {
 			connection = ConnectionUtil.getDbConnection();
 			statement = connection.prepareStatement(findVenue);
-			statement.setString(1, servicename);
-			statement.setDate(2, java.sql.Date.valueOf(eventdate));
+			statement.setString(1, serviceName);
+			statement.setDate(2, java.sql.Date.valueOf(eventDate));
 			resultSet = statement.executeQuery();
 			if (resultSet.next()) {
 				new BookingServices(resultSet.getInt("USER_ID"), resultSet.getInt("SERVICE_ID"),
@@ -194,7 +194,7 @@ public class BookingServicesDaoimpl implements BookingServiceDao {
 
 	}
 
-	public boolean checkService(String servicename, int userId) {
+	public boolean checkService(String serviceName, int userId) {
 		String findVenue = "select service_booking_id,user_id,service_id,service_name,booking_date,event_date,service_package,status from booking_services where service_name=? and user_id=?";
 		Connection connection = null;
 		boolean flag = true;
@@ -203,7 +203,7 @@ public class BookingServicesDaoimpl implements BookingServiceDao {
 		try {
 			connection = ConnectionUtil.getDbConnection();
 			statement = connection.prepareStatement(findVenue);
-			statement.setString(1, servicename);
+			statement.setString(1, serviceName);
 			statement.setInt(2, userId);
 			resultSet = statement.executeQuery();
 			if (resultSet.next()) {

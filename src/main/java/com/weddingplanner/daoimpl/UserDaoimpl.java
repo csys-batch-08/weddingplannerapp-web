@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -316,7 +315,7 @@ public class UserDaoimpl implements UserDao {
 		return res;
 	}
 
-	public int updatewalletBalance(int amount, int userId) {
+	public int updateWalletBalance(int amount, int userId) {
 		Connection connection = null;
 		String query = "update user_details set user_wallet = ? where user_id = ?";
 		PreparedStatement statement = null;
@@ -352,7 +351,7 @@ public class UserDaoimpl implements UserDao {
 		return res;
 	}
 
-	public List<User> currentuserprofile(int userid) {
+	public List<User> currentUserProfile(int userid) {
 		List<User> userList = new ArrayList<>();
 		String showQuery = "select user_name, mobile_number, city, email_id, password, user_wallet from user_details where user_id=?";
 		Connection connection = null;

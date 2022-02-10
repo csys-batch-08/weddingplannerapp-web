@@ -40,7 +40,6 @@ button a {
 			<li><a href="MyBookingServlet">My booking</a></li>
 		</ul>
 		<form action="filterCity" method="post">
-		<label for="search"></label>
 		<input type="text" name="search" class="search" id="search">
 		<button class="button">search</button>
 		</form>

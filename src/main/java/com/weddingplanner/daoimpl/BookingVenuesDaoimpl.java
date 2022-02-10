@@ -142,21 +142,25 @@ public class BookingVenuesDaoimpl implements BookingVenueDao {
 
 	public List<BookingVenues> myBooking(int userId) {
 		List<BookingVenues> venueList = new ArrayList<>();
-		String viewQuery = "select venue_booking_id,user_id,venue_id,venue_name,no_of_guest,booking_date,event_date,venue_package,status,advance_amount from Booking_venues  where user_id=? order by booking_date desc";
+		StringBuilder sql = new StringBuilder();
+		sql.append("select venue_booking_id,user_id,venue_id,venue_name,no_of_guest,booking_date,");
+		sql.append("event_date,venue_package,status,advance_amount from Booking_venues where user_id=?");
+	    sql.append("order by booking_date desc");
+        String query = sql.toString();
 		Connection connection = null;
 		PreparedStatement statement = null;
 		ResultSet resultSet = null;
 		try {
 			connection = ConnectionUtil.getDbConnection();
-			statement = connection.prepareStatement(viewQuery);
+			statement = connection.prepareStatement(query);
 			statement.setInt(1, userId);
 			resultSet = statement.executeQuery();
 			while (resultSet.next()) {
 				BookingVenues venue = new BookingVenues(resultSet.getInt("USER_ID"), resultSet.getInt("VENUE_ID"),
 						resultSet.getString("VENUE_NAME"), resultSet.getInt("NO_OF_GUEST"),
-						resultSet.getDate("Booking_Date").toLocalDate(), resultSet.getDate("Event_date").toLocalDate(),
-						resultSet.getDouble("VENUE_PACKAGE"), resultSet.getString("Status"),
-						resultSet.getInt("advance_amount"), resultSet.getInt("venue_booking_id"));
+						resultSet.getDate("BOOKING_DATE").toLocalDate(), resultSet.getDate("EVENT_DATE").toLocalDate(),
+						resultSet.getDouble("VENUE_PACKAGE"), resultSet.getString("STATUS"),
+						resultSet.getInt("ADVANCE_AMOUNT"), resultSet.getInt("VENUE_BOOKING_ID"));
 				venueList.add(venue);
 			}
 		} catch (SQLException e) {
@@ -372,7 +376,7 @@ public class BookingVenuesDaoimpl implements BookingVenueDao {
 
 	}
 
-	public Boolean checkCancelBooking(String venueName, LocalDate eventdate) {
+	public Boolean checkCancelBooking(String venueName, LocalDate eventDate) {
 		String findVenue = "select venue_booking_id,user_id,venue_id,venue_name,no_of_guest,booking_date,event_date,venue_package,status,advance_amount from booking_venues where status='cancelled' and venue_name=? and to_char(event_date,'yyyy-mm-dd')=?";
 		Connection connection = null;
 		boolean flag = true;
@@ -382,7 +386,7 @@ public class BookingVenuesDaoimpl implements BookingVenueDao {
 			connection = ConnectionUtil.getDbConnection();
 			statement = connection.prepareStatement(findVenue);
 			statement.setString(1, venueName);
-			statement.setDate(2, java.sql.Date.valueOf(eventdate));
+			statement.setDate(2, java.sql.Date.valueOf(eventDate));
 			resultSet = statement.executeQuery();
 			if (resultSet.next()) {
 				new BookingVenues(resultSet.getInt("User_id"), resultSet.getInt("Venue_id"),

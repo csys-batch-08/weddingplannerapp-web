@@ -32,10 +32,9 @@ public class CancelService extends HttpServlet
 			if (!flag) {
 				if (days > 0) {
 					int walletBalance = 0;
-					float deductAmount=(float) 0.2;
 					walletBalance = userdao.walletbal(userId);
 					session.setAttribute("cancelWallet", walletBalance);
-					int payWallet = (int) (walletBalance + (servicePackage - (servicePackage * deductAmount)));
+					int payWallet = (int) (walletBalance + (servicePackage - (servicePackage * 0.2)));
 					session.setAttribute("RefundBalance", payWallet);
 					book.cancelServiceBooking(bookingServiceid);
 					response.sendRedirect("serviceCancel.jsp");

@@ -22,14 +22,13 @@ public class ChooseVenueServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		try {
-			int advanceVenue=1/2;
 			String venuename = request.getParameter("venueName");
 			VenuesDaoimpl venueDaoImpl = new VenuesDaoimpl();
 			HttpSession session = request.getSession();
 			Venues venue = venueDaoImpl.allVenue(venuename);
 			int venueId = venueDaoImpl.findVenueId(venue.getVenueName());
 			double venuepackage = venueDaoImpl.findPackage(venueId);
-			int advanceAmount = (int) (venuepackage * advanceVenue);
+			int advanceAmount = (int) (venuepackage * 1/2);
 			session.setAttribute("venuename", venuename);
 			session.setAttribute("venueId", venueId);
 			session.setAttribute("venuepackage", venuepackage);
