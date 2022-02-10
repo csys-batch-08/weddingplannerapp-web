@@ -26,7 +26,7 @@ public class UserProfileServlet extends HttpServlet {
 		try {
 			int userId = (int) session.getAttribute("id");
 			UserDaoimpl userdao = new UserDaoimpl();
-			List<User> userList = userdao.currentuserprofile(userId);
+			List<User> userList = userdao.currentUserProfile(userId);
 			request.setAttribute("userProfile", userList);
 			RequestDispatcher requestDispatcher = request.getRequestDispatcher("userProfile.jsp");
 			requestDispatcher.forward(request, response);
